@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    defaultConfig {
+        applicationId rootProject.ext.android["applicationId"]
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation  rootProject.ext.dependencies["constraint-layout"]
+
+    //沉浸式
+    implementation rootProject.ext.dependencies["statusbar"]
+
+
+    //rxjava 系列
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+
+    //butterknife
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["buttonknife_compiler"]
+    //加载动画
+    implementation rootProject.ext.dependencies["avloading"]
+    //viewpager 辅助类
+    implementation rootProject.ext.dependencies["viewpager"]
+
+
+
+    //网络
+    implementation rootProject.ext.dependencies["retorfit"]
+    implementation rootProject.ext.dependencies["scalars"]
+    implementation rootProject.ext.dependencies["okio"]
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["okhttp-logging"]
+    implementation rootProject.ext.dependencies["rxretorfit-rxjava"]
+    implementation rootProject.ext.dependencies["cookiejar"]
+
+    //fastjson
+    implementation rootProject.ext.dependencies["converter-fastjson"]
+    implementation rootProject.ext.dependencies["fastjson"]
+
+    //glide
+    implementation rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glidecomliper"]
+
+    //rqcode
+    implementation rootProject.ext.dependencies["rqcode"]
+    //权限
+    implementation rootProject.ext.dependencies["permission"]
+    //recyclerview工具类
+    implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    //webview辅助工具类
+    implementation rootProject.ext.dependencies["webviewheper"]
+    //muldex
+    implementation rootProject.ext.dependencies["multidex"]
+    //ariesui
+    implementation rootProject.ext.dependencies["ariesui"]
+
+
+}

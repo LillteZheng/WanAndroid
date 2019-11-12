@@ -1,0 +1,88 @@
+ext {
+
+    android = [
+            compileSdkVersion       : 28,
+            buildToolsVersion       : "29.0.2",
+            applicationId           : "com.zhengsr.wanandroid",
+            minSdkVersion           : 19,
+            targetSdkVersion        : 28,
+            "versionCode"           : 1,
+            "versionName"           : "1.0"
+    ]
+
+
+    version = [
+            supportLibraryVersion   : "28.0.0",
+            glideVersion            : "4.9.0",
+            butterknifeversion      : "8.4.0",
+            retrofitversion         : "2.3.0",
+    ]
+
+    dependencies = [
+            //base
+            "appcompat"                         : "com.android.support:appcompat-v7:${version["supportLibraryVersion"]}",
+            "cardview"                          : "com.android.support:cardview-v7:${version["supportLibraryVersion"]}",
+            "support"                           : "com.android.support:support-v4:${version["supportLibraryVersion"]}",
+            "recyclerview"                      : "com.android.support:recyclerview-v7:${version["supportLibraryVersion"]}",
+            "design"                            : "com.android.support:design:${version["supportLibraryVersion"]}",
+            "constraint-layout"                 : "com.android.support.constraint:constraint-layout:1.1.3",
+            "fastjson"                          :  "com.alibaba:fastjson:1.1.71.android",
+            "converter-fastjson"                : "org.ligboy.retrofit2:converter-fastjson-android:2.1.0",
+            //activity 生命周期
+            "zlifecycler"                       :  "com.github.LillteZheng:ZlifeCycle:v1.0",
+
+            //rx系列
+            "rxjava"                            : "io.reactivex.rxjava2:rxjava:2.2.10",
+            "rxandroid"                         : "io.reactivex.rxjava2:rxandroid:2.1.1",
+            //fragment
+            "fragmentation"                     : "me.yokeyword:fragmentation:1.3.7",
+            //权限
+            "permission"                        : "com.github.dfqin:grantor:2.5",
+            //recycler
+            "recycleradapter"                      : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50",
+
+            //glide
+            "glide"                             : "com.github.bumptech.glide:glide:${version["glideVersion"]}",
+            "glidecomliper"                     : "com.github.bumptech.glide:compiler:${version["glideVersion"]}",
+
+            //更新
+            "zdload"                            : "com.github.LillteZheng:ZDownLoader:v2.1",
+            //viewpager 工具类
+            "viewpager"                         : "com.github.LillteZheng:ViewPagerHelper:v1.5",
+
+            //leakcanary
+            "leakcanary-android"                : "com.squareup.leakcanary:leakcanary-android:2.0-beta-3",
+
+            //butterknife
+            "butterknife"                       : "com.jakewharton:butterknife:${version["butterknifeversion"]}",
+            "buttonknife_compiler"              : "com.jakewharton:butterknife-compiler:${version["butterknifeversion"]}",
+
+            //加载动画
+            "avloading"                         :"com.wang.avi:library:2.1.3",
+
+            //viewpager
+            "viewpager"                         :"com.github.LillteZheng:ViewPagerHelper:v1.6",
+            //网络
+            "retorfit"                          : "com.squareup.retrofit2:retrofit:${version["retrofitversion"]}",
+            "scalars"                           : "com.squareup.retrofit2:converter-scalars:${version["retrofitversion"]}",
+            "okio"                              : "com.squareup.retrofit2:converter-scalars:2.3.0",
+            "okhttp"                            : "com.squareup.okhttp3:okhttp:3.8.1",
+            "okhttp-logging"                    : "com.squareup.okhttp3:logging-interceptor:3.4.1",
+            "rxretorfit-rxjava"                 : "com.squareup.retrofit2:adapter-rxjava2:${version["retrofitversion"]}",
+            "cookiejar"                         : "com.github.franmontiel:PersistentCookieJar:v1.0.1",
+
+            //rqcode
+            "rqcode"                            : "com.king.zxing:zxing-lite:1.1.3",
+            //recycyclerview工具类
+            "BaseRecyclerViewAdapterHelper"     : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50",
+            //状态栏
+            "statusbar"                         : "com.gyf.immersionbar:immersionbar:3.0.0",
+
+            //webview
+            "webviewheper"                      : "com.github.LillteZheng:ZWebHelper:v1.83",
+            //mul
+            "multidex"                          : "com.android.support:multidex:1.0.3",
+
+            "ariesui"                           : "com.github.LillteZheng:AriesUI:v1.06"
+    ]
+}
