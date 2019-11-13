@@ -94,7 +94,7 @@ public class MineFragment extends BaseNetFragment implements BaseQuickAdapter.On
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        useParentStart(LoginFragment.newInstance());
     }
 
     class MineBean{

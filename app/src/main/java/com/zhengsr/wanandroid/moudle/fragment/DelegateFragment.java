@@ -206,4 +206,8 @@ public abstract class DelegateFragment<T extends BasePresent> extends SupportFra
     public boolean firstLoadAnim(){
         return false;
     }
+
+    protected void useParentStart(SupportFragment fragment){
+        ((MainFragment)(getParentFragment())).start(fragment);
+    }
 }

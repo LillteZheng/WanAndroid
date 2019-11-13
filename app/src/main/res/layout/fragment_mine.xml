@@ -12,7 +12,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="260dp">
 
             <View
                 android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TableRow
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="25dp">
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

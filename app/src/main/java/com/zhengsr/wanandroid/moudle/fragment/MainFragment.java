@@ -60,7 +60,6 @@ public class MainFragment extends DelegateFragment implements CusBottomLayout.IB
 
     }
 
-
     @Override
     public void onBottomClick(View view, int curPosition, int prePosition) {
         if (curPosition != prePosition) {
