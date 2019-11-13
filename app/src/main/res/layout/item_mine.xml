@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:gravity="center_vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="1dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/item_mine_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        tools:src="@mipmap/ic_setting"
+        android:layout_marginStart="15dp"/>
+
+
+    <TextView
+        android:id="@+id/item_mine_tv"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        tools:text="订购服务"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        />
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@mipmap/gray_enter"
+        android:layout_marginEnd="10dp"/>
+
+
+</LinearLayout>

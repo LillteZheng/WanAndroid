@@ -18,6 +18,7 @@ ext {
             retrofitversion         : "2.3.0",
     ]
 
+
     dependencies = [
             //base
             "appcompat"                         : "com.android.support:appcompat-v7:${version["supportLibraryVersion"]}",

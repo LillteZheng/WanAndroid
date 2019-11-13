@@ -17,15 +17,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.google.android.gms:play-services-plus:16.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     implementation rootProject.ext.dependencies["appcompat"]
-    implementation  rootProject.ext.dependencies["constraint-layout"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["constraint-layout"]
+    implementation rootProject.ext.dependencies["cardview"]
 
     //沉浸式
     implementation rootProject.ext.dependencies["statusbar"]
@@ -42,7 +52,6 @@ dependencies {
     implementation rootProject.ext.dependencies["avloading"]
     //viewpager 辅助类
     implementation rootProject.ext.dependencies["viewpager"]
-
 
 
     //网络
@@ -74,6 +83,8 @@ dependencies {
     implementation rootProject.ext.dependencies["multidex"]
     //ariesui
     implementation rootProject.ext.dependencies["ariesui"]
+    //fragment
+    implementation rootProject.ext.dependencies["fragmentation"]
 
 
 }

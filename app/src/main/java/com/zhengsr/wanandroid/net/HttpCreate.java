@@ -4,7 +4,7 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.hht.hhtqixin.MainApplication;
+import com.zhengsr.wanandroid.MainApplication;
 
 import java.util.concurrent.TimeUnit;
 

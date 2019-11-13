@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.ContentFrameLayout
+        android:id="@+id/bottom_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+       >
+        <com.zhengsr.ariesuilib.wieght.bottom.CusBottomLayout
+            android:id="@+id/bottom_ly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.zhengsr.ariesuilib.wieght.bottom.CusBottomItemView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:cus_image_margin_top="@dimen/bottom_img_top"
+                app:cus_image_size="@dimen/bottom_img_size"
+                app:cus_img_normal="@mipmap/ic_bottom_bar_home"
+                app:cus_normal_text_color="@color/bottom_normal_color"
+                app:cus_selected_text_coclor="@color/main_color"
+                app:cus_text="@string/home"
+                app:cus_isChoose="true"
+                app:cus_text_margin_top="@dimen/bottom_text_top"
+                app:cus_text_size="@dimen/bottom_text_size"
+                app:cus_change_both="true"
+                />
+
+            <com.zhengsr.ariesuilib.wieght.bottom.CusBottomItemView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:cus_image_margin_top="@dimen/bottom_img_top"
+                app:cus_image_size="@dimen/bottom_img_size"
+                app:cus_img_normal="@mipmap/ic_bottom_bar_navi"
+                app:cus_normal_text_color="@color/bottom_normal_color"
+                app:cus_selected_text_coclor="@color/main_color"
+                app:cus_text="@string/system"
+                app:cus_text_margin_top="@dimen/bottom_text_top"
+                app:cus_text_size="@dimen/bottom_text_size"
+                app:cus_change_both="true"
+                />
+
+            <com.zhengsr.ariesuilib.wieght.bottom.CusBottomItemView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:cus_image_margin_top="@dimen/bottom_img_top"
+                app:cus_image_size="@dimen/bottom_img_size"
+                app:cus_img_normal="@mipmap/ic_bottom_bar_wechat"
+                app:cus_normal_text_color="@color/bottom_normal_color"
+                app:cus_selected_text_coclor="@color/main_color"
+                app:cus_text="@string/wechat"
+                app:cus_text_margin_top="@dimen/bottom_text_top"
+                app:cus_text_size="@dimen/bottom_text_size"
+                app:cus_change_both="true"
+                />
+
+            <com.zhengsr.ariesuilib.wieght.bottom.CusBottomItemView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:cus_image_margin_top="@dimen/bottom_img_top"
+                app:cus_image_size="@dimen/bottom_img_size"
+                app:cus_img_normal="@mipmap/ic_bottom_bar_project"
+                app:cus_normal_text_color="@color/bottom_normal_color"
+                app:cus_selected_text_coclor="@color/main_color"
+                app:cus_text="@string/project"
+                app:cus_text_margin_top="@dimen/bottom_text_top"
+                app:cus_text_size="@dimen/bottom_text_size"
+                app:cus_change_both="true"
+                />
+
+            <com.zhengsr.ariesuilib.wieght.bottom.CusBottomItemView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:cus_image_margin_top="@dimen/bottom_img_top"
+                app:cus_image_size="@dimen/bottom_img_size"
+                app:cus_img_normal="@mipmap/ic_bottom_bar_mine"
+                app:cus_normal_text_color="@color/bottom_normal_color"
+                app:cus_selected_text_coclor="@color/main_color"
+                app:cus_text="@string/mine"
+                app:cus_text_margin_top="@dimen/bottom_text_top"
+                app:cus_text_size="@dimen/bottom_text_size"
+                app:cus_change_both="true"
+                />
+
+        </com.zhengsr.ariesuilib.wieght.bottom.CusBottomLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
