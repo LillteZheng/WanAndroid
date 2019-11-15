@@ -62,7 +62,7 @@ ext {
             "avloading"                         :"com.wang.avi:library:2.1.3",
 
             //viewpager
-            "viewpager"                         :"com.github.LillteZheng:ViewPagerHelper:v1.6",
+            "viewpager"                         :"com.github.LillteZheng:ViewPagerHelper:v1.8",
             //网络
             "retorfit"                          : "com.squareup.retrofit2:retrofit:${version["retrofitversion"]}",
             "scalars"                           : "com.squareup.retrofit2:converter-scalars:${version["retrofitversion"]}",
@@ -84,6 +84,7 @@ ext {
             //mul
             "multidex"                          : "com.android.support:multidex:1.0.3",
 
-            "ariesui"                           : "com.github.LillteZheng:AriesUI:v1.06"
+            "ariesui"                           : "com.github.LillteZheng:AriesUI:v1.06",
+            "circleImage"                       : "de.hdodenhof:circleimageview:3.0.1"
     ]
 }

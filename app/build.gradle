@@ -85,6 +85,7 @@ dependencies {
     implementation rootProject.ext.dependencies["ariesui"]
     //fragment
     implementation rootProject.ext.dependencies["fragmentation"]
+    implementation rootProject.ext.dependencies["circleImage"]
 
 
 }
