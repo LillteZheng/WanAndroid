@@ -84,7 +84,7 @@ ext {
             //mul
             "multidex"                          : "com.android.support:multidex:1.0.3",
 
-            "ariesui"                           : "com.github.LillteZheng:AriesUI:v1.06",
+            "ariesui"                           : "com.github.LillteZheng:AriesUI:v1.08",
             "circleImage"                       : "de.hdodenhof:circleimageview:3.0.1"
     ]
 }
