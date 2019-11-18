@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author by  zhengshaorui on 2019/10/8
@@ -59,14 +60,6 @@ public class MineFragment extends BaseNetFragment implements BaseQuickAdapter.On
 
 
     @Override
-    public void initImmersionBar() {
-        super.initImmersionBar();
-        ImmersionBar.with(this)
-                .statusBarDarkFont(false)
-                .init();
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_mine;
     }
@@ -90,6 +83,11 @@ public class MineFragment extends BaseNetFragment implements BaseQuickAdapter.On
             mData.add(bean);
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    @OnClick(R.id.mine_user_ly)
+    public void onClick(View view){
+        useParentStart(LoginFragment.newInstance());
     }
 
     @Override

@@ -27,7 +27,7 @@ public class NagiFragment extends BaseNetFragment {
     }
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_navi;
     }
 
     @Override

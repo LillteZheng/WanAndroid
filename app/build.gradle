@@ -85,7 +85,8 @@ dependencies {
     implementation rootProject.ext.dependencies["ariesui"]
     //fragment
     implementation rootProject.ext.dependencies["fragmentation"]
-    implementation rootProject.ext.dependencies["circleImage"]
+    implementation rootProject.ext.dependencies["smartrefreshLayout"]
+    implementation rootProject.ext.dependencies["smartrefreshHeader"]
 
 
 }

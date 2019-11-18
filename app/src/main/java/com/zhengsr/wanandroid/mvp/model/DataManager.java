@@ -2,6 +2,7 @@ package com.zhengsr.wanandroid.mvp.model;
 
 
 
+import com.zhengsr.wanandroid.bean.ArticleListBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.net.HttpCreate;
@@ -32,13 +33,27 @@ public class DataManager {
 
     /**
      * 统一拿到json数据
+     * 测试数据
      */
     public Observable<String> getJson(String url){
         return mServerApi.getJson(url);
     }
 
-    public Observable<BaseResponse<List<BannerBean>>> getBanner(String url){
-        return mServerApi.getBanner(url);
+    /**
+     * 拿到banner
+     * @return
+     */
+    public Observable<BaseResponse<List<BannerBean>>> getBanner(){
+        return mServerApi.getBanner();
+    }
+
+    /**
+     * 拿到文章列表
+     * @param num
+     * @return
+     */
+    public Observable<BaseResponse<ArticleListBean>> getArticles(int num){
+        return mServerApi.getArticle(num);
     }
 
 }

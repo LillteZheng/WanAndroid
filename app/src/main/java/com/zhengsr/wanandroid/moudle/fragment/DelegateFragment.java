@@ -1,5 +1,6 @@
 package com.zhengsr.wanandroid.moudle.fragment;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -58,7 +59,9 @@ public abstract class DelegateFragment<T extends BasePresent> extends SupportFra
         //防止触摸穿透问题
         mParentView.setClickable(true);
         mParentView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-        mNormalView = inflater.inflate(getLayoutId(), container, false);
+        if (getLayoutId() != -1) {
+            mNormalView = inflater.inflate(getLayoutId(), container, false);
+        }
         mUnbinder = ButterKnife.bind(this, mNormalView);
         if (init()) {
             mParentView.addView(mNormalView);
@@ -93,8 +96,8 @@ public abstract class DelegateFragment<T extends BasePresent> extends SupportFra
         super.onViewCreated(view, savedInstanceState);
 
         if (setTitleBar() != -1) {
-            View titlebar = view.findViewById(setTitleBar());
-            ImmersionBar.setTitleBar(_mActivity, titlebar);
+            View titleBar = view.findViewById(setTitleBar());
+            ImmersionBar.setTitleBar(_mActivity, titleBar);
         }
     }
 
@@ -119,7 +122,7 @@ public abstract class DelegateFragment<T extends BasePresent> extends SupportFra
     }
 
     protected int setTitleBar() {
-        return -1;
+        return R.id.toolbar;
     }
 
 
@@ -132,16 +135,27 @@ public abstract class DelegateFragment<T extends BasePresent> extends SupportFra
         }
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        //旋转屏幕为什么要重新设置布局与状态栏重叠呢？因为旋转屏幕有可能使状态栏高度不一样，如果你是使用的静态方法修复的，所以要重新调用修复
+
+    }
+
     public void initImmersionBar() {
         ImmersionBar.with(this)
                 .keyboardEnable(true)
-                .statusBarDarkFont(true)
+                .statusBarDarkFont(false)
+                .fitsSystemWindows(true)
+                .statusBarColor(R.color.main_color)
                 .init();
     }
 
     private boolean isImmersionBarEnabled() {
         return true;
     }
+
+
 
     @Override
     public void onDestroy() {

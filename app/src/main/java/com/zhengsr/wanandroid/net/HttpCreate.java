@@ -24,7 +24,7 @@ public class HttpCreate {
     public static HttpServerApi getServer(){
         Retrofit retrofit = new Retrofit.Builder()
                 //这里采用这个，因为有多个baseurl
-                .baseUrl("https://api.github.com/")
+                .baseUrl("https://www.wanandroid.com")
                 //转字符串
                 .addConverterFactory(ScalarsConverterFactory.create())
                 //fastjson

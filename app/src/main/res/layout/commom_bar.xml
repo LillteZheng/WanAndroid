@@ -5,10 +5,14 @@
     android:layout_height="?attr/actionBarSize">
 
     <ImageView
+        android:id="@+id/bar_back"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
+        android:padding="3dp"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
         android:src="@mipmap/back"/>
 
 </FrameLayout>
