@@ -10,8 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/toolbar_common"/>
+       <include layout="@layout/toolbar_common"
+           android:layout_width="match_parent"
+           android:layout_height="?attr/actionBarSize"/>
+
     </android.support.design.widget.AppBarLayout>
+
+
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smartlayout"

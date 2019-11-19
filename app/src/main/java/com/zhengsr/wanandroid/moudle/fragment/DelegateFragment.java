@@ -95,16 +95,17 @@ public abstract class DelegateFragment<T extends BasePresent> extends SupportFra
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (setTitleBar() != -1) {
-            View titleBar = view.findViewById(setTitleBar());
-            ImmersionBar.setTitleBar(_mActivity, titleBar);
-        }
+
     }
 
     @Override
     public void onEnterAnimationEnd(Bundle savedInstanceState) {
         super.onEnterAnimationEnd(savedInstanceState);
         //这样能避免fragment 动画问题
+        if (setTitleBar() != -1) {
+            View titleBar = mNormalView.findViewById(setTitleBar());
+            ImmersionBar.setTitleBar(_mActivity, titleBar);
+        }
         onLayInitView();
     }
 
@@ -146,8 +147,6 @@ public abstract class DelegateFragment<T extends BasePresent> extends SupportFra
         ImmersionBar.with(this)
                 .keyboardEnable(true)
                 .statusBarDarkFont(false)
-                .fitsSystemWindows(true)
-                .statusBarColor(R.color.main_color)
                 .init();
     }
 

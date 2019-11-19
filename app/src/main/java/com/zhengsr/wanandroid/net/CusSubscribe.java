@@ -1,9 +1,11 @@
 package com.zhengsr.wanandroid.net;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 
 import com.zhengsr.wanandroid.mvp.base.IBaseView;
+import com.zhengsr.wanandroid.utils.Lgg;
 
 import io.reactivex.observers.ResourceObserver;
 
@@ -28,6 +30,7 @@ public abstract class CusSubscribe<T> extends ResourceObserver<T> {
 
     @Override
     public void onError(Throwable e) {
+        Lgg.d("error: "+e.toString());
         if (mView == null){
             return;
         }

@@ -51,29 +51,31 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
         if (showLoading){
             mView.showLoading();
         }
-        Observable<BaseResponse<List<BannerBean>>> banner = mDataManager.getBanner();
-        Observable<BaseResponse<ArticleListBean>> articles = mDataManager.getArticles(mCurNum);
+        Observable<BaseResponse<List<BannerBean>>> bannerObservable = mDataManager.getBanner();
+        Observable<BaseResponse<ArticleListBean>> articlesObservable = mDataManager.getArticles(mCurNum);
         /**
          * 通过zip，把 banner 和 主页的信息放到一个map中，这样可以一起返回给主页调用
          */
         addSubscribe(
-                Observable.zip(banner, articles, (BiFunction<BaseResponse<List<BannerBean>>,
-                        BaseResponse<ArticleListBean>, HashMap>) (banners, articles1) -> {
+                Observable.zip(bannerObservable, articlesObservable, (BiFunction<BaseResponse<List<BannerBean>>,
+                        BaseResponse<ArticleListBean>, HashMap>) (banners, articles) -> {
                     HashMap<String, Object> map = new HashMap<>();
+                    Lgg.d("haha: "+banners.getData()+" "+articles.getData());
                     map.put(Constant.BANNER, banners.getData());
-                    map.put(Constant.ARTICLE, articles1.getData());
+                    map.put(Constant.ARTICLE, articles.getData());
                     return map;
                 }).compose(RxUtils.rxScheduers())
                         .subscribeWith(new CusSubscribe<Map>(mView) {
                             @Override
                             public void onNext(Map map) {
-                                List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
+                               /* List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
                                 ArticleListBean articleListBean = cast(map.get(Constant.ARTICLE));
                                 mView.loadMainData(bannerBeans,articleListBean);
-                                mView.loadSuccess();
+                                mView.loadSuccess();*/
                             }
                         })
         );
+
     }
 
     /**

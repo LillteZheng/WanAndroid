@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -48,6 +49,8 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     RecyclerView mRecyclerView;
     @BindView(R.id.smartlayout)
     SmartRefreshLayout mSmartRefreshLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private HomePresent mHomePresent;
     private BannerView mBannerView;
     private HomeAdapter mHomeAdapter;
