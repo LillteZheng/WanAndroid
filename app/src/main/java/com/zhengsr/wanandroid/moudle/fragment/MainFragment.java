@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.zhengsr.ariesuilib.wieght.bottom.CusBottomLayout;
 import com.zhengsr.wanandroid.R;
+import com.zhengsr.wanandroid.moudle.fragment.base.BaseDelegateFragment;
+import com.zhengsr.wanandroid.moudle.fragment.mine.MineFragment;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -13,7 +15,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class MainFragment extends DelegateFragment implements CusBottomLayout.IBottomClickListener {
+public class MainFragment extends BaseDelegateFragment implements CusBottomLayout.IBottomClickListener {
 
     public static MainFragment newInstance() {
         

@@ -5,6 +5,9 @@ package com.zhengsr.wanandroid.mvp.model;
 import com.zhengsr.wanandroid.bean.ArticleListBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
+import com.zhengsr.wanandroid.bean.LoginBean;
+import com.zhengsr.wanandroid.bean.RankBean;
+import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.net.HttpCreate;
 import com.zhengsr.wanandroid.net.HttpServerApi;
 
@@ -54,6 +57,33 @@ public class DataManager {
      */
     public Observable<BaseResponse<ArticleListBean>> getArticles(int num){
         return mServerApi.getArticle(num);
+    }
+
+    /**
+     * 登录
+     * @param userName
+     * @param password
+     * @return
+     */
+    public Observable<BaseResponse<LoginBean>> login(String userName,String password){
+        return mServerApi.loginIn(userName,password);
+    }
+
+    /**
+     * 获取积分排行版
+     * @param page
+     * @return
+     */
+    public Observable<BaseResponse<RankListBean>> getRankInfo(int page){
+        return mServerApi.getRankInfo(page);
+    }
+
+    /**
+     * 获取个人积分
+     * @return
+     */
+    public Observable<BaseResponse<RankBean>> getUserRankInfo(){
+        return mServerApi.getUserRank();
     }
 
 }

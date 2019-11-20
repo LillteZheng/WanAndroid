@@ -1,14 +1,11 @@
 package com.zhengsr.wanandroid.moudle.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zhengsr.wanandroid.R;
+import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
 
 import butterknife.BindView;
 
@@ -16,7 +13,7 @@ import butterknife.BindView;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class WechatFragment extends BaseNetFragment {
+public class WechatFragment extends BaseMvpFragment {
 
     @BindView(R.id.title)
     TextView mTextView;

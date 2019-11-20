@@ -3,6 +3,8 @@ package com.zhengsr.wanandroid.mvp.contract;
 
 import com.zhengsr.wanandroid.bean.ArticleListBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
+import com.zhengsr.wanandroid.bean.LoginBean;
+import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.mvp.base.IBaseView;
 
 import java.util.List;
@@ -16,6 +18,13 @@ public interface IContractView {
     interface IHomeView extends IBaseView {
         void loadMainData(List<BannerBean> bannerBeans, ArticleListBean articleListBean);
         void loadArticle(ArticleListBean articleListBean);
+    }
+    interface ILoginView extends IBaseView{
+        void getUserInfo(LoginBean loginBean);
+    }
+
+    interface IRankInfoView extends IBaseView{
+        void rankInfo(RankListBean listBean);
     }
 
 }

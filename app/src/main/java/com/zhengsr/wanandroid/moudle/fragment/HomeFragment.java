@@ -6,23 +6,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.zhengsr.ariesuilib.utils.AriesUtils;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.ArticleListBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
+import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
+import com.zhengsr.wanandroid.moudle.fragment.mine.LoginFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.HomePresent;
-import com.zhengsr.wanandroid.utils.Lgg;
 import com.zhengsr.wanandroid.view.BannerView;
 
 import java.util.ArrayList;
@@ -34,7 +32,8 @@ import butterknife.BindView;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class HomeFragment extends BaseNetFragment<HomePresent> implements IContractView.IHomeView, BaseQuickAdapter.OnItemChildClickListener, BaseQuickAdapter.OnItemClickListener, BannerView.BannerItemClickListener {
+public class HomeFragment extends BaseNetFragment<HomePresent> implements IContractView.IHomeView, BaseQuickAdapter.OnItemChildClickListener,
+        BaseQuickAdapter.OnItemClickListener, BannerView.BannerItemClickListener {
 
 
     public static HomeFragment newInstance() {
@@ -45,9 +44,9 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         fragment.setArguments(args);
         return fragment;
     }
-    @BindView(R.id.home_recyclerview)
+    @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
-    @BindView(R.id.smartlayout)
+    @BindView(R.id.normal_view)
     SmartRefreshLayout mSmartRefreshLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -69,8 +68,7 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     @Override
     public void initView(View view) {
         super.initView(view);
-        mHomePresent.startLoad(true);
-
+        initRefreshlayout();
         LinearLayoutManager manager = new LinearLayoutManager(_mActivity);
         mRecyclerView.setLayoutManager(manager);
         mHomeAdapter = new HomeAdapter(R.layout.item_article_recy_layout, mArticleBeans);
@@ -79,10 +77,13 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         mRecyclerView.setAdapter(mHomeAdapter);
         mHomeAdapter.setOnItemChildClickListener(this);
         mHomeAdapter.setOnItemClickListener(this);
-
         mBannerView.setBannerItemClickListener(this);
+    }
 
-        initRefreshlayout();
+    @Override
+    public void initDataAndEvent() {
+        super.initDataAndEvent();
+        mHomePresent.startLoad(true);
     }
 
 
@@ -135,7 +136,16 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        switch (view.getId()){
+            case R.id.item_article_like:
+                //是否登录
+                boolean isLogin = isLogin();
+                if (!isLogin){
+                    useParentStart(LoginFragment.newInstance());
+                }
+                break;
+            default:break;
+        }
     }
 
     @Override

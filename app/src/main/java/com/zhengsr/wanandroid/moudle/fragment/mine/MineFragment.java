@@ -1,4 +1,4 @@
-package com.zhengsr.wanandroid.moudle.fragment;
+package com.zhengsr.wanandroid.moudle.fragment.mine;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,12 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.gyf.immersionbar.ImmersionBar;
 import com.zhengsr.wanandroid.R;
+import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ import butterknife.OnClick;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class MineFragment extends BaseNetFragment implements BaseQuickAdapter.OnItemClickListener {
+public class MineFragment extends BaseMvpFragment implements BaseQuickAdapter.OnItemClickListener {
 
 
     public static MineFragment newInstance() {
@@ -40,10 +39,10 @@ public class MineFragment extends BaseNetFragment implements BaseQuickAdapter.On
      * static
      */
     private static int[] RESID = new int[]{
-            R.mipmap.ic_share_article,R.mipmap.ic_collect,R.mipmap.ic_about,R.mipmap.ic_setting
+            R.mipmap.rank,R.mipmap.ic_share_article,R.mipmap.ic_collect,R.mipmap.ic_about,R.mipmap.ic_setting
     };
-    private static int[] TEXT = new int[]{
-           R.string.mine_share,R.string.mine_collect,R.string.about_me,R.string.mine_setting
+    private static String[] TEXT = new String[]{
+            "积分版","我的分享","我的收藏","关于我","设置"
     };
 
     /**
@@ -75,7 +74,8 @@ public class MineFragment extends BaseNetFragment implements BaseQuickAdapter.On
     }
 
     @Override
-    public void initData() {
+    public void initDataAndEvent() {
+        super.initDataAndEvent();
         for (int i = 0; i < TEXT.length; i++) {
             MineBean bean = new MineBean();
             bean.resId = RESID[i];
@@ -92,12 +92,16 @@ public class MineFragment extends BaseNetFragment implements BaseQuickAdapter.On
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        useParentStart(LoginFragment.newInstance());
+        if (position == 0){
+            useParentStart(RankFragment.newInstance());
+        }else {
+            useParentStart(LoginFragment.newInstance());
+        }
     }
 
     class MineBean{
         public int resId;
-        public int text;
+        public String text;
     }
 
     class MineAdapter extends BaseQuickAdapter<MineBean, BaseViewHolder> {

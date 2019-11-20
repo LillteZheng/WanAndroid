@@ -2,13 +2,12 @@ package com.zhengsr.wanandroid.moudle.adapter;
 
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
+import com.zhengsr.wanandroid.utils.Lgg;
 
 import java.util.List;
 
@@ -41,16 +40,17 @@ public class HomeAdapter extends BaseQuickAdapter<ArticleData, BaseViewHolder> {
         }else{
             msg = item.getChapterName();
         }
-        helper.setText(R.id.item_article_author,item.getShareUser())
+        String author = (item.getAuthor() != null && item.getAuthor().length() > 0) ? item.getAuthor():item.getShareUser();
+        helper.setText(R.id.item_article_author,author)
                 .setText(R.id.item_article_chapat, msg)
                 .setText(R.id.item_article_title,item.getTitle())
                 .setText(R.id.item_article_time,item.getNiceDate())
-                .addOnClickListener(R.id.item_article_lick);
+                .addOnClickListener(R.id.item_article_like);
 
-        if (item.getCollect() || isCollected) {
-            helper.setImageResource(R.id.item_article_lick, R.drawable.icon_like_article_select);
+        if (item.isCollect() || isCollected) {
+            helper.setImageResource(R.id.item_article_like, R.drawable.icon_like_article_select);
         } else {
-            helper.setImageResource(R.id.item_article_lick, R.drawable.icon_like_article_not_selected);
+            helper.setImageResource(R.id.item_article_like, R.drawable.icon_like_article_not_selected);
         }
 
     }

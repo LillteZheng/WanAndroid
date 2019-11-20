@@ -21,7 +21,7 @@
             app:banner_looptime="4000"
             app:banner_iscycle="true"
             android:clipChildren="false"
-            app:banner_transformer="depth"
+            app:banner_transformer="mz"
             app:banner_switchtime="600" />
 
         <com.zhengsr.viewpagerlib.indicator.TextIndicator

@@ -1,18 +1,15 @@
 package com.zhengsr.wanandroid;
 
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.Toast;
 
-import com.gyf.immersionbar.ImmersionBar;
-import com.zhengsr.wanandroid.moudle.activity.DelegateActivity;
+import com.zhengsr.wanandroid.moudle.activity.BaseDelegateActivity;
 import com.zhengsr.wanandroid.moudle.fragment.MainFragment;
 
-import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class MainActivity extends DelegateActivity {
+public class MainActivity extends BaseDelegateActivity {
 
 
     @Override
@@ -31,7 +28,7 @@ public class MainActivity extends DelegateActivity {
     @Override
     public FragmentAnimator onCreateFragmentAnimator() {
         // 设置横向(和安卓4.x动画相同)
-        return new DefaultHorizontalAnimator();
+        return new DefaultVerticalAnimator();
     }
 
     private long mTime = 0;

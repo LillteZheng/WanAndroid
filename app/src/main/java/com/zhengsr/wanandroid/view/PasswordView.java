@@ -3,6 +3,7 @@ package com.zhengsr.wanandroid.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.zhengsr.ariesuilib.InputView;
@@ -88,6 +89,9 @@ public class PasswordView extends InputView {
         int width =  getIntDpSize(22);
         int height =  getIntDpSize(22);
         return new int[]{width,height};
+    }
+    public EditText getEditText(){
+        return mEditText;
     }
 
 }

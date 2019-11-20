@@ -49,4 +49,9 @@ public abstract class CusSubscribe<T> extends ResourceObserver<T> {
     public void onComplete() {
 
     }
+
+    @Override
+    public void onNext(T t) {
+        mView.loadSuccess();
+    }
 }

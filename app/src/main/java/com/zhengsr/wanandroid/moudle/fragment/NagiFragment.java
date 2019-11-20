@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zhengsr.wanandroid.R;
+import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
 
 import butterknife.BindView;
 
@@ -12,7 +13,7 @@ import butterknife.BindView;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class NagiFragment extends BaseNetFragment {
+public class NagiFragment extends BaseMvpFragment {
 
     @BindView(R.id.title)
     TextView mTextView;
@@ -35,5 +36,7 @@ public class NagiFragment extends BaseNetFragment {
         super.initView(view);
         mTextView.setText("体系");
     }
+
+
 
 }

@@ -21,7 +21,7 @@ public class SpfUtils {
      * @param key
      * @param value
      */
-    public static <T> void put(String key,T value){
+    public static  void put(String key,Object value){
         SharedPreferences.Editor editor =
                 sContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE).edit();
         if (value instanceof String
@@ -45,16 +45,23 @@ public class SpfUtils {
      */
     public static <T> T get(String key,T defaultValue){
         SharedPreferences sp = sContext.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE);
-        if (defaultValue instanceof String
-                ||defaultValue instanceof Integer
-                || defaultValue instanceof Boolean
-                || defaultValue instanceof Float
-                || defaultValue instanceof Long
-                ||defaultValue instanceof Double) {
-            return (T) sp.getString(key, String.valueOf(defaultValue));
-        }else {
+        String value = sp.getString(key, String.valueOf(defaultValue));
+        if (defaultValue instanceof String){
+            return (T) value;
+        }if (defaultValue instanceof Integer){
+            return (T) Integer.valueOf(value);
+        }if (defaultValue instanceof Boolean){
+            return (T) Boolean.valueOf(value);
+        }if (defaultValue instanceof Float){
+            return (T) Float.valueOf(value);
+        }if (defaultValue instanceof Long){
+            return (T) Long.valueOf(value);
+        }if (defaultValue instanceof Double){
+            return (T) Double.valueOf(value);
+        }else{
             return (T) sp.getStringSet(key, (Set<String>) defaultValue);
         }
+
     }
 
     /**
