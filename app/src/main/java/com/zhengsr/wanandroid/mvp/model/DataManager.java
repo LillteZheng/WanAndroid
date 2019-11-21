@@ -8,6 +8,7 @@ import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
+import com.zhengsr.wanandroid.bean.RegisterBean;
 import com.zhengsr.wanandroid.net.HttpCreate;
 import com.zhengsr.wanandroid.net.HttpServerApi;
 
@@ -86,4 +87,19 @@ public class DataManager {
         return mServerApi.getUserRank();
     }
 
+    public  Observable<BaseResponse> logout(){
+        return mServerApi.logout();
+    }
+
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @param repassword
+     * @return
+     */
+    public  Observable<BaseResponse<RegisterBean>> register(String username,
+            String password,  String repassword){
+        return mServerApi.register(username,password,repassword);
+    }
 }

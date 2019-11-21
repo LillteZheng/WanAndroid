@@ -1,24 +1,18 @@
 package com.zhengsr.wanandroid.moudle.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.ArticleListBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
-import com.zhengsr.wanandroid.moudle.fragment.mine.LoginFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.HomePresent;
 import com.zhengsr.wanandroid.view.BannerView;
@@ -46,8 +40,6 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     }
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
-    @BindView(R.id.normal_view)
-    SmartRefreshLayout mSmartRefreshLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private HomePresent mHomePresent;
@@ -68,7 +60,6 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     @Override
     public void initView(View view) {
         super.initView(view);
-        initRefreshlayout();
         LinearLayoutManager manager = new LinearLayoutManager(_mActivity);
         mRecyclerView.setLayoutManager(manager);
         mHomeAdapter = new HomeAdapter(R.layout.item_article_recy_layout, mArticleBeans);
@@ -108,25 +99,7 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         }
     }
 
-    private void initRefreshlayout() {
-        mSmartRefreshLayout.setEnableLoadMore(true);
-        mSmartRefreshLayout.setEnableRefresh(true);
-        mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mHomePresent.onRefresh();
-                mSmartRefreshLayout.finishRefresh(1000);
 
-            }
-        });
-        mSmartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mHomePresent.loadMore();
-                mSmartRefreshLayout.finishLoadMore(1000);
-            }
-        });
-    }
 
     @Override
     public void reload() {
@@ -141,7 +114,7 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
                 //是否登录
                 boolean isLogin = isLogin();
                 if (!isLogin){
-                    useParentStart(LoginFragment.newInstance());
+                   // useParentStart(LoginActivity.newInstance());
                 }
                 break;
             default:break;
@@ -156,5 +129,17 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     @Override
     public void itemClick(View view, BannerBean bannerBean) {
 
+    }
+
+    @Override
+    public void reFreshMore() {
+        super.reFreshMore();
+        mHomePresent.onRefresh();
+    }
+
+    @Override
+    public void loadMore() {
+        super.loadMore();
+        mHomePresent.loadMore();
     }
 }

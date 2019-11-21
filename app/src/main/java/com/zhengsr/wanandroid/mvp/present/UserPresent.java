@@ -4,19 +4,13 @@ import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
+import com.zhengsr.wanandroid.bean.RegisterBean;
 import com.zhengsr.wanandroid.mvp.base.BasePresent;
 import com.zhengsr.wanandroid.mvp.base.IBaseView;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.model.DataManager;
 import com.zhengsr.wanandroid.net.CusSubscribe;
-import com.zhengsr.wanandroid.utils.Lgg;
 import com.zhengsr.wanandroid.utils.RxUtils;
-
-import java.util.HashMap;
-import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.functions.Function3;
 
 /**
  * @author by  zhengshaorui on 2019/10/8
@@ -34,31 +28,28 @@ public class UserPresent extends BasePresent<IBaseView> {
         mView = view;
     }
 
+    /**
+     * 登录
+     * @param userName
+     * @param password
+     */
     public void login(String userName,String password){
-        Observable<BaseResponse<LoginBean>> loginObservable = mDataManager.login(userName, password);
-        Observable<String> json = mDataManager.getJson("https://www.wanandroid.com//lg/coin/list/1/json");
-        Observable<BaseResponse<RankBean>> userRankInfo = mDataManager.getUserRankInfo();
         addSubscribe(
-                Observable.zip(loginObservable, json, userRankInfo,
-                        new Function3<BaseResponse<LoginBean>, String,
-                                BaseResponse<RankBean>, HashMap<String,Object>>() {
-                            @Override
-                            public HashMap<String, Object> apply(BaseResponse<LoginBean> loginBeanBaseResponse,
-                                                                 String s, BaseResponse<RankBean> rankBeanBaseResponse) throws Exception {
-                                HashMap<String, Object> map = new HashMap<>();
-                                Lgg.d("login: "+loginBeanBaseResponse.getData());
-                                Lgg.d("json: "+s);
-                                Lgg.d("rank: "+rankBeanBaseResponse.getData());
-                                return map;
-                            }
-                        }).compose(RxUtils.rxScheduers())
-                .subscribeWith(new CusSubscribe<HashMap<String, Object>>(mView) {
+                mDataManager.login(userName,password)
+                .compose(RxUtils.rxScheduers())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new CusSubscribe<LoginBean>(mView){
                     @Override
-                    public void onNext(HashMap<String, Object> stringObjectHashMap) {
-
+                    public void onNext(LoginBean bean) {
+                        super.onNext(bean);
+                        setLogin(true);
+                        setUserName(bean.getUsername());
+                        setPassword(bean.getPassword());
+                        if (mView instanceof IContractView.ILoginView){
+                            ((IContractView.ILoginView) mView).loginInfo(bean);
+                        }
                     }
                 })
-
         );
     }
 
@@ -86,4 +77,70 @@ public class UserPresent extends BasePresent<IBaseView> {
                 })
         );
     }
+
+    public void refreshRank() {
+        getRankInfo(false);
+    }
+
+
+    /**
+     * 拿到个人信息
+     */
+
+    public void getUserInfo(){
+        addSubscribe(
+                mDataManager.getUserRankInfo()
+                .compose(RxUtils.rxScheduers())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new CusSubscribe<RankBean>(mView){
+                    @Override
+                    public void onNext(RankBean rankBean) {
+                        super.onNext(rankBean);
+                        if (mView instanceof IContractView.IUserInfoView){
+                            ((IContractView.IUserInfoView) mView).getInfoUser(rankBean);
+                        }
+                    }
+                })
+        );
+    }
+
+    /**
+     * 退出登录
+     */
+    public void logout(){
+        addSubscribe(
+                mDataManager.logout()
+                .compose(RxUtils.rxScheduers())
+                .subscribeWith(new CusSubscribe<BaseResponse>(mView){
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        super.onNext(baseResponse);
+                        setLogin(false);
+                        setUserName("");
+                        setPassword("");
+                        if (mView instanceof IContractView.IUserInfoView){
+                            ((IContractView.IUserInfoView) mView).logoutSuccess();
+                        }
+                    }
+                })
+        );
+    }
+
+    public void register(String userName,String password,String rePassword){
+        addSubscribe(
+                mDataManager.register(userName,password,rePassword)
+                .compose(RxUtils.rxScheduers())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new CusSubscribe<RegisterBean>(mView){
+                    @Override
+                    public void onNext(RegisterBean registerBean) {
+                        super.onNext(registerBean);
+                        if (mView instanceof IContractView.ILoginView){
+                            ((IContractView.ILoginView) mView).registerInfo(registerBean);
+                        }
+                    }
+                })
+        );
+    }
+
 }

@@ -1,12 +1,13 @@
 package com.zhengsr.wanandroid.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class LoginBean {
+public class LoginBean implements Serializable {
     /**
      * admin : false
      * chapterTops : []

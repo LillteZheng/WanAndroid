@@ -35,6 +35,11 @@ public abstract class BaseDelegateActivity<T extends BasePresent> extends Suppor
         mUnbinder = ButterKnife.bind(this);
         //初始化沉浸式
         initImmersionBar();
+        //沉浸式，若不需要，可忽略
+        if (setTitleBar() != -1) {
+            View titleBar = findViewById(setTitleBar());
+            ImmersionBar.setTitleBar(this, titleBar);
+        }
         //mvp
         mPresent = getPresent();
         if (mPresent != null) {
@@ -58,6 +63,14 @@ public abstract class BaseDelegateActivity<T extends BasePresent> extends Suppor
             mPresent.detachView();
             mPresent = null;
         }
+    }
+    /**
+     * 是为了沉浸式
+     *
+     * @return
+     */
+    protected int setTitleBar() {
+        return R.id.toolbar;
     }
 
     public void initImmersionBar(){

@@ -12,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhengsr.wanandroid.Constant;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.moudle.fragment.MainFragment;
@@ -33,7 +37,7 @@ public abstract class BaseDelegateFragment extends SupportFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(getLayoutId(),container,false);
+        mView = inflater.inflate(getLayoutId(), container, false);
         mUnbinder = ButterKnife.bind(this, mView);
         //沉浸式，若不需要，可忽略
         if (setTitleBar() != -1) {
@@ -71,16 +75,17 @@ public abstract class BaseDelegateFragment extends SupportFragment {
         initImmersionBar();
     }
 
-    public void initImmersionBar(){
+    public void initImmersionBar() {
         ImmersionBar.with(this)
                 .keyboardEnable(true)
                 .statusBarDarkFont(false)
                 .init();
     }
 
-   
+
     /**
      * 是为了沉浸式
+     *
      * @return
      */
     protected int setTitleBar() {
@@ -90,60 +95,93 @@ public abstract class BaseDelegateFragment extends SupportFragment {
     /**
      * 初始化view可以放在这里，但不要做过多的数据操作或者网络操作
      */
-    public void initView(View view){
+    public void initView(View view) {
+        View normalview = view.findViewById(R.id.normal_view);
+        if (normalview instanceof SmartRefreshLayout) {
+            SmartRefreshLayout smartRefreshLayout = (SmartRefreshLayout)normalview;
+            smartRefreshLayout.setEnableLoadMore(true);
+            smartRefreshLayout.setEnableRefresh(true);
+            smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+                @Override
+                public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                    reFreshMore();
+                    smartRefreshLayout.finishRefresh(1000);
 
+                }
+            });
+            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                    loadMore();
+                    smartRefreshLayout.finishLoadMore(1000);
+                }
+            });
+        }
     }
 
     /**
      * 初始化数据和可以做一些耗时操作
      */
-    public void initDataAndEvent(){
+    public void initDataAndEvent() {
 
     }
 
     /**
      * 获取layoutid
+     *
      * @return
      */
     public abstract int getLayoutId();
 
+    public void loadMore() {
+    }
+
+    public void reFreshMore() {
+    }
+
     /**
      * 用父fragment 去启动，可以去掉底部导航栏
+     *
      * @param fragment
      */
-    protected void useParentStart(SupportFragment fragment){
-        ((MainFragment)(getParentFragment())).start(fragment);
+    protected void useParentStart(SupportFragment fragment) {
+        ((MainFragment) (getParentFragment())).start(fragment);
     }
 
     /**
      * 是否已经登录
+     *
      * @return
      */
-    public boolean isLogin(){
-        return SpfUtils.get(Constant.KEY_IS_LOGIN,false);
+    public boolean isLogin() {
+        return SpfUtils.get(Constant.KEY_IS_LOGIN, false);
     }
 
-    public void setLogin(boolean isLogin){
-        SpfUtils.put(Constant.KEY_IS_LOGIN,isLogin);
+    public void setLogin(boolean isLogin) {
+        SpfUtils.put(Constant.KEY_IS_LOGIN, isLogin);
     }
 
-    public boolean getUserName(){
-        return SpfUtils.get(Constant.KEY_USERNAME,null);
+    public String getUserName() {
+        return SpfUtils.get(Constant.KEY_USERNAME, "");
     }
-    public void setUserName(String userName){
-        SpfUtils.put(Constant.KEY_USERNAME,userName);
+
+    public void setUserName(String userName) {
+        SpfUtils.put(Constant.KEY_USERNAME, userName);
     }
-    public boolean getPassword(){
-        return SpfUtils.get(Constant.KEY_PASSWORD,null);
+
+    public String getPassword() {
+        return SpfUtils.get(Constant.KEY_PASSWORD, "");
     }
-    public void setPassword(String password){
-        SpfUtils.put(Constant.KEY_PASSWORD,password);
+
+    public void setPassword(String password) {
+        SpfUtils.put(Constant.KEY_PASSWORD, password);
     }
+
     /**
      * 改变toolbar
      */
-    public TextView getBarTitleView(){
-        if (mView != null){
+    public TextView getBarTitleView() {
+        if (mView != null) {
             TextView textView = mView.findViewById(R.id.toolbar_title_tv);
             return textView;
         }
@@ -152,10 +190,11 @@ public abstract class BaseDelegateFragment extends SupportFragment {
 
     /**
      * 获取toolbar 左边的icon
+     *
      * @return
      */
-    public ImageView getLeftIconView(){
-        if (mView != null){
+    public ImageView getLeftIconView() {
+        if (mView != null) {
             ImageView imageView = mView.findViewById(R.id.toolbar_left_iv);
             return imageView;
         }
@@ -164,10 +203,11 @@ public abstract class BaseDelegateFragment extends SupportFragment {
 
     /**
      * 获取toolbar 右边的icon
+     *
      * @return
      */
-    public ImageView getRightIconView(){
-        if (mView != null){
+    public ImageView getRightIconView() {
+        if (mView != null) {
             ImageView imageView = mView.findViewById(R.id.toolbar_right_iv);
             return imageView;
         }

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -77,12 +78,19 @@ public class RankFragment extends BaseNetFragment<UserPresent> implements IContr
         imageView.setPadding(10,10,10,10);
         imageView.setColorFilter(Color.WHITE);
         getRightIconView().setVisibility(View.GONE);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop();
+            }
+        });
     }
 
     @Override
     public void rankInfo(RankListBean listBean) {
         mRankBeans.clear();
         mRankBeans.addAll(listBean.getDatas());
+
         mRankAdapter.notifyDataSetChanged();
     }
 
@@ -94,9 +102,30 @@ public class RankFragment extends BaseNetFragment<UserPresent> implements IContr
 
         @Override
         protected void convert(@NonNull BaseViewHolder helper, RankBean item) {
-            helper.setText(R.id.item_rank_tv,item.getCoinCount()+"")
+            ImageView imageView = helper.getView(R.id.item_rank_iv);
+            imageView.setVisibility(View.VISIBLE);
+            helper.setText(R.id.item_rank_tv,item.getRank()+"")
                     .setText(R.id.item_author,item.getUsername())
                     .setText(R.id.item_coin,item.getCoinCount()+"");
+            int index = helper.getAdapterPosition()+1;
+            if (index == 1){
+                imageView.setImageResource(R.mipmap.ic_rank_1);
+            }else if (index == 2){
+                imageView.setImageResource(R.mipmap.ic_rank_2);
+            }else if (index == 3){
+                imageView.setImageResource(R.mipmap.ic_rank_3);
+            }else{
+                imageView.setVisibility(View.GONE);
+
+            }
         }
     }
+
+    @Override
+    public void reFreshMore() {
+        super.reFreshMore();
+        mPresent.refreshRank();
+    }
+
+
 }

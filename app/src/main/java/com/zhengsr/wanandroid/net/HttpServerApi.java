@@ -8,6 +8,7 @@ import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
+import com.zhengsr.wanandroid.bean.RegisterBean;
 
 import java.util.List;
 
@@ -54,7 +55,7 @@ public interface HttpServerApi {
      * @param password
      * @return
      */
-    @POST
+    @POST("https://www.wanandroid.com/user/login")
     @FormUrlEncoded
     Observable<BaseResponse<LoginBean>> loginIn(@Field("username") String username,
                                                 @Field("password") String password);
@@ -76,6 +77,25 @@ public interface HttpServerApi {
     @GET("lg/coin/userinfo/json")
     Observable<BaseResponse<RankBean>> getUserRank();
 
+    /**
+     * 退出登录
+     * https://www.wanandroid.com/user/logout/json
+     */
+    @GET("user/logout/json")
+    Observable<BaseResponse> logout();
 
+
+    /**
+     * 注册
+     * https://www.wanandroid.com/user/register
+     * @param username
+     * @param password
+     * @param repassword
+     * @return
+     */
+    @POST("user/register")
+    @FormUrlEncoded
+    Observable<BaseResponse<RegisterBean>> register(@Field("username") String username, @Field("password")
+            String password, @Field("repassword") String repassword);
 
 }
