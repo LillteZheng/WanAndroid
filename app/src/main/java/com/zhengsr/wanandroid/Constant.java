@@ -5,6 +5,7 @@ package com.zhengsr.wanandroid;
  * Describe:
  */
 public class Constant {
+    public static String LOGIN = "login";
     public static String BANNER = "banner";
     public static String ARTICLE = "article";
     public static final String KEY_IS_LOGIN = "KEY_IS_LOGIN";

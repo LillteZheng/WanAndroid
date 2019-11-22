@@ -14,4 +14,9 @@ public class Lgg {
             Log.d(TAG, "zsr - "+msg);
         }
     }
+    public static void e(String msg){
+        if (ENABLE){
+            Log.e(TAG, "zsr - "+msg );
+        }
+    }
 }

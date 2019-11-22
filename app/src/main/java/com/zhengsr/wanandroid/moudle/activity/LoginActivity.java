@@ -85,6 +85,7 @@ public class LoginActivity extends BaseDelegateActivity<UserPresent> implements 
         mLoginPassEt = passView.getEditText();
         mLoginUserEt.setText("zhengsr");
         mLoginPassEt.setText("17320220zsr");
+        mLoginUserEt.setSelection(mLoginUserEt.getText().length());
         /**
          * register
          */
@@ -98,6 +99,7 @@ public class LoginActivity extends BaseDelegateActivity<UserPresent> implements 
         mRegisterUserEt.setText("zhengsr_123sd");
         mRegisterPassEt.setText("12345678");
         mRegisterRePassEt.setText("12345678");
+        mRegisterUserEt.setSelection(mRegisterUserEt.getText().length());
 
 
     }
@@ -210,7 +212,7 @@ public class LoginActivity extends BaseDelegateActivity<UserPresent> implements 
     public void registerInfo(RegisterBean bean) {
         Lgg.d("register: "+bean);
         mDialog.updateMsg("注册成功，正在登录..");
-        mPresent.login(bean.getUsername(),bean.getPassword());
+        mPresent.login(bean.getUsername(),mRegisterPassEt.getText().toString().trim());
     }
 
     @Override

@@ -61,14 +61,14 @@ public class BasePresent<T> {
         SpfUtils.put(Constant.KEY_IS_LOGIN,isLogin);
     }
 
-    public boolean getUserName(){
-        return SpfUtils.get(Constant.KEY_USERNAME,null);
+    public String getUserName(){
+        return SpfUtils.get(Constant.KEY_USERNAME,"");
     }
     public void setUserName(String userName){
         SpfUtils.put(Constant.KEY_USERNAME,userName);
     }
-    public boolean getPassword(){
-        return SpfUtils.get(Constant.KEY_PASSWORD,null);
+    public String getPassword(){
+        return SpfUtils.get(Constant.KEY_PASSWORD,"");
     }
     public void setPassword(String password){
         SpfUtils.put(Constant.KEY_PASSWORD,password);

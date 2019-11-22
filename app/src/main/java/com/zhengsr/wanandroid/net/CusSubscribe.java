@@ -30,14 +30,14 @@ public abstract class CusSubscribe<T> extends ResourceObserver<T> {
 
     @Override
     public void onError(Throwable e) {
-        Lgg.d("error: "+e.toString());
+        Lgg.e("error: "+e.getMessage());
         if (mView == null){
             return;
         }
         if (!TextUtils.isEmpty(mErrorMsg)){
             mView.showErrorMsg(mErrorMsg);
         }else{
-            mView.showErrorMsg(e.toString());
+            mView.showErrorMsg(e.getMessage());
         }
         if (isShowError){
             mView.showError();

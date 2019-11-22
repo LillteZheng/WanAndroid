@@ -7,92 +7,128 @@ import java.util.List;
  * Describe:
  */
 public class RegisterBean {
-    private List chapterTops ;
 
-    private List collectIds ;
+    /**
+     * admin : false
+     * chapterTops : []
+     * collectIds : []
+     * email :
+     * icon :
+     * id : 35976
+     * nickname :
+     * password :
+     * publicName :
+     * token :
+     * type : 0
+     * username :
+     */
 
+    private boolean admin;
     private String email;
-
     private String icon;
-
     private int id;
-
+    private String nickname;
     private String password;
-
+    private String publicName;
     private String token;
-
     private int type;
-
     private String username;
+    private List<?> chapterTops;
+    private List<?> collectIds;
 
-    public void setChapterTops(List chapterTops){
-        this.chapterTops = chapterTops;
+    public boolean isAdmin() {
+        return admin;
     }
-    public List getChapterTops(){
-        return this.chapterTops;
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
-    public void setCollectIds(List collectIds){
-        this.collectIds = collectIds;
+
+    public String getEmail() {
+        return email;
     }
-    public List getCollectIds(){
-        return this.collectIds;
-    }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
-    public String getEmail(){
-        return this.email;
+
+    public String getIcon() {
+        return icon;
     }
-    public void setIcon(String icon){
+
+    public void setIcon(String icon) {
         this.icon = icon;
     }
-    public String getIcon(){
-        return this.icon;
+
+    public int getId() {
+        return id;
     }
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id = id;
     }
-    public int getId(){
-        return this.id;
+
+    public String getNickname() {
+        return nickname;
     }
-    public void setPassword(String password){
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
-    public String getPassword(){
-        return this.password;
+
+    public String getPublicName() {
+        return publicName;
     }
-    public void setToken(String token){
+
+    public void setPublicName(String publicName) {
+        this.publicName = publicName;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
         this.token = token;
     }
-    public String getToken(){
-        return this.token;
+
+    public int getType() {
+        return type;
     }
-    public void setType(int type){
+
+    public void setType(int type) {
         this.type = type;
     }
-    public int getType(){
-        return this.type;
+
+    public String getUsername() {
+        return username;
     }
-    public void setUsername(String username){
+
+    public void setUsername(String username) {
         this.username = username;
     }
-    public String getUsername(){
-        return this.username;
+
+    public List<?> getChapterTops() {
+        return chapterTops;
     }
 
+    public void setChapterTops(List<?> chapterTops) {
+        this.chapterTops = chapterTops;
+    }
 
-    @Override
-    public String toString() {
-        return "LogUpBean{" +
-                "chapterTops=" + chapterTops +
-                ", collectIds=" + collectIds +
-                ", email='" + email + '\'' +
-                ", icon='" + icon + '\'' +
-                ", id=" + id +
-                ", password='" + password + '\'' +
-                ", token='" + token + '\'' +
-                ", type=" + type +
-                ", username='" + username + '\'' +
-                '}';
+    public List<?> getCollectIds() {
+        return collectIds;
+    }
+
+    public void setCollectIds(List<?> collectIds) {
+        this.collectIds = collectIds;
     }
 }

@@ -8,6 +8,7 @@ import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.ArticleListBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
+import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.mvp.base.BasePresent;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.model.DataManager;
@@ -58,51 +59,48 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
 
         /**
          * 通过zip，把 banner 和 主页的信息放到一个map中，这样可以一起返回给主页调用
+         * 且每次，我们都是先登录试试
          */
+        Observable<BaseResponse<LoginBean>> loginObservable = mDataManager.login(getUserName(), getPassword());
         addSubscribe(
-                Observable.zip(mDataManager.getBanner(), mDataManager.getArticles(mCurNum), (BiFunction<BaseResponse<List<BannerBean>>,
-                        BaseResponse<ArticleListBean>, HashMap>) (banners, articles) -> {
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put(Constant.BANNER, banners.getData());
-                    map.put(Constant.ARTICLE, articles.getData());
-                    return map;
-                }).compose(RxUtils.rxScheduers())
-                        .subscribeWith(new CusSubscribe<Map>(mView) {
+                Observable.zip(loginObservable, mDataManager.getBanner(), mDataManager.getArticles(mCurNum),
+                        new Function3<BaseResponse<LoginBean>, BaseResponse<List<BannerBean>>,
+                                BaseResponse<ArticleListBean>, HashMap<String,Object>>() {
                             @Override
-                            public void onNext(Map map) {
-                                List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
-                                ArticleListBean articleListBean = cast(map.get(Constant.ARTICLE));
-                                mView.loadMainData(bannerBeans,articleListBean);
-                                mView.loadSuccess();
+                            public HashMap<String, Object> apply(BaseResponse<LoginBean> login, BaseResponse<List<BannerBean>> banners,
+                                                                 BaseResponse<ArticleListBean> articles) throws Exception {
+                                HashMap<String, Object> map = new HashMap<>();
+                                map.put(Constant.LOGIN, login);
+                                map.put(Constant.BANNER, banners.getData());
+                                map.put(Constant.ARTICLE, articles.getData());
+                                return map;
                             }
-                        })
-
+                        }).compose(RxUtils.rxScheduers())
+                .subscribeWith(new CusSubscribe<HashMap<String,Object>>(mView){
+                    @Override
+                    public void onNext(HashMap<String, Object> map) {
+                        super.onNext(map);
+                        BaseResponse<LoginBean> loginResponse = cast(map.get(Constant.LOGIN));
+                        if (loginResponse != null && loginResponse.getErrorCode() != BaseResponse.SUCCESS){
+                            setLogin(false);
+                            setUserName("");
+                            setPassword("");
+                        }else{
+                            setLogin(true);
+                            Lgg.d("自动登录成功: ");
+                        }
+                        List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
+                        ArticleListBean articleListBean = cast(map.get(Constant.ARTICLE));
+                        mView.loadMainData(bannerBeans,articleListBean);
+                    }
+                })
         );
 
     }
 
-    private Observable<Integer> getObservableInteger(){
-        return Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                emitter.onNext(1);
-                emitter.onNext(2);
-                emitter.onNext(3);
-                emitter.onNext(4);
-                emitter.onComplete();
-            }
-        });
-    }
 
-    private HashMap<String,Object> loadDataToMap(
-            List<BannerBean> bannerBeans,
-            List<ArticleData> articleBeans){
 
-        HashMap<String,Object> map = new HashMap<>();
-        map.put(Constant.BANNER,bannerBeans);
-        map.put(Constant.ARTICLE,articleBeans);
-        return map;
-    }
+
 
     /**
      * 重新加载

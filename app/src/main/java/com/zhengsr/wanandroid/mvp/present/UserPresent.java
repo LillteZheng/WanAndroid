@@ -33,7 +33,7 @@ public class UserPresent extends BasePresent<IBaseView> {
      * @param userName
      * @param password
      */
-    public void login(String userName,String password){
+    public void login(String userName,final String password){
         addSubscribe(
                 mDataManager.login(userName,password)
                 .compose(RxUtils.rxScheduers())
@@ -44,7 +44,7 @@ public class UserPresent extends BasePresent<IBaseView> {
                         super.onNext(bean);
                         setLogin(true);
                         setUserName(bean.getUsername());
-                        setPassword(bean.getPassword());
+                        setPassword(password);
                         if (mView instanceof IContractView.ILoginView){
                             ((IContractView.ILoginView) mView).loginInfo(bean);
                         }
@@ -126,6 +126,12 @@ public class UserPresent extends BasePresent<IBaseView> {
         );
     }
 
+    /**
+     * 注册
+     * @param userName
+     * @param password
+     * @param rePassword
+     */
     public void register(String userName,String password,String rePassword){
         addSubscribe(
                 mDataManager.register(userName,password,rePassword)

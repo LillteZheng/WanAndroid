@@ -26,7 +26,7 @@ public interface IContractView {
     }
 
     /**
-     * 是否登录
+     * 登录和注册
      */
     interface ILoginView extends IBaseView{
         void loginInfo(LoginBean loginBean);
@@ -39,6 +39,10 @@ public interface IContractView {
     interface IRankInfoView extends IBaseView{
         void rankInfo(RankListBean listBean);
     }
+
+    /**
+     * 用户信息
+     */
     interface IUserInfoView extends IBaseView{
         void getInfoUser(RankBean bean);
         void logoutSuccess();
