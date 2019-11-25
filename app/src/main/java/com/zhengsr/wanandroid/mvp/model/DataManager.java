@@ -127,7 +127,7 @@ public class DataManager {
      * 项目分类
      * @return
      */
-    public  Observable<BaseResponse<ProjectListBean>> getProjectSort(){
+    public  Observable<BaseResponse<List<ProjectListBean>>> getProjectSort(){
         return mServerApi.getProjectSort();
     }
 

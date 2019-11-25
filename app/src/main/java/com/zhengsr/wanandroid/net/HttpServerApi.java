@@ -120,7 +120,7 @@ public interface HttpServerApi {
      * @return
      */
     @GET("project/tree/json")
-    Observable<BaseResponse<ProjectListBean>> getProjectSort();
+    Observable<BaseResponse<List<ProjectListBean>>> getProjectSort();
 
     /**
      * 项目列表数据

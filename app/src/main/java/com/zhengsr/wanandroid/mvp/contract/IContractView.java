@@ -5,6 +5,7 @@ import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.LoginBean;
+import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
@@ -51,6 +52,11 @@ public interface IContractView {
     interface IUserInfoView extends IBaseView{
         void getInfoUser(RankBean bean);
         void logoutSuccess();
+    }
+
+    // 项目接口
+    interface IProjectListView extends IBaseView{
+        void getProjectList(List<ProjectListBean> projectListBeans);
     }
 
 }

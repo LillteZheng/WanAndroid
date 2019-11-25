@@ -12,21 +12,16 @@ import io.reactivex.observers.ResourceObserver;
 public abstract class CusSubscribe<T> extends ResourceObserver<T> {
     private IBaseView mView;
     private String mErrorMsg;
-    private boolean isShowError;
+    private boolean isShowSuccess = true;
     public CusSubscribe(IBaseView iview) {
         mView = iview;
     }
 
-    public CusSubscribe(IBaseView iview, String errormsg) {
+    public CusSubscribe(IBaseView iview, boolean showLoadSuccess) {
         mView = iview;
-        mErrorMsg = errormsg;
+        isShowSuccess = showLoadSuccess;
     }
 
-    public CusSubscribe(IBaseView iview, String errormsg, boolean showerror) {
-        mView = iview;
-        mErrorMsg = errormsg;
-        isShowError = showerror;
-    }
 
     @Override
     public void onError(Throwable e) {
@@ -39,9 +34,7 @@ public abstract class CusSubscribe<T> extends ResourceObserver<T> {
         }else{
             mView.showErrorMsg(e.getMessage());
         }
-        if (isShowError){
-            mView.showError();
-        }
+
 
     }
 
@@ -52,6 +45,8 @@ public abstract class CusSubscribe<T> extends ResourceObserver<T> {
 
     @Override
     public void onNext(T t) {
-        mView.loadSuccess();
+        if (isShowSuccess) {
+            mView.loadSuccess();
+        }
     }
 }
