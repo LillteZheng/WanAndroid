@@ -3,13 +3,12 @@ package com.zhengsr.wanandroid.moudle.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
-import com.zhengsr.wanandroid.bean.ArticleListBean;
+import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
@@ -40,8 +39,7 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     }
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
     private HomePresent mHomePresent;
     private BannerView mBannerView;
     private HomeAdapter mHomeAdapter;
@@ -79,20 +77,21 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
 
 
 
+
     @Override
-    public void loadMainData(List<BannerBean> bannerBeans, ArticleListBean articleListBean) {
+    public void loadMainData(List<BannerBean> bannerBeans, List<ArticleData> articles) {
         if (bannerBeans != null) {
             mBannerView.setData(bannerBeans);
         }
-        if (articleListBean != null){
+        if (articles != null){
             mArticleBeans.clear();
-            mArticleBeans.addAll(articleListBean.getDatas());
+            mArticleBeans.addAll(articles);
         }
         mHomeAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void loadArticle(ArticleListBean articleListBean) {
+    public void loadArticle(PageDataInfo articleListBean) {
         if (articleListBean != null) {
             mArticleBeans.addAll(articleListBean.getDatas());
             mHomeAdapter.notifyDataSetChanged();

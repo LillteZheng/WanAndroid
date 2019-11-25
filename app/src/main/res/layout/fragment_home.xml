@@ -17,15 +17,18 @@
     </android.support.design.widget.AppBarLayout>
 
 
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+    <include layout="@layout/recycler_smart_layout"/>
+    <!--<com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/normal_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        <com.scwang.smartrefresh.layout.header.BezierRadarHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/white"
+            app:srlPrimaryColor="@color/main_color"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
@@ -35,10 +38,10 @@
             />
 
 
-        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
 
 
 </android.support.design.widget.CoordinatorLayout>

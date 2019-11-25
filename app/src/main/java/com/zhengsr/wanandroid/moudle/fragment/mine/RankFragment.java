@@ -78,12 +78,7 @@ public class RankFragment extends BaseNetFragment<UserPresent> implements IContr
         imageView.setPadding(10,10,10,10);
         imageView.setColorFilter(Color.WHITE);
         getRightIconView().setVisibility(View.GONE);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pop();
-            }
-        });
+
     }
 
     @Override

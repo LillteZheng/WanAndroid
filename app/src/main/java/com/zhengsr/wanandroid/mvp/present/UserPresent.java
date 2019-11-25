@@ -1,5 +1,6 @@
 package com.zhengsr.wanandroid.mvp.present;
 
+import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.RankBean;
@@ -20,6 +21,8 @@ public class UserPresent extends BasePresent<IBaseView> {
     private DataManager mDataManager;
     private IBaseView mView;
     private int mRankPage = 0;
+    private int mCollectPage = 0;
+    private int mMaxCollectPage = -1;
     public static UserPresent create(IBaseView view){
         return new UserPresent(view);
     }
@@ -147,6 +150,54 @@ public class UserPresent extends BasePresent<IBaseView> {
                     }
                 })
         );
+    }
+
+    /**
+     * 获取收藏页面
+     */
+    private void getMyCollect(boolean showLoading,boolean isRefresh){
+        if (showLoading) {
+            mView.showLoading();
+        }
+        addSubscribe(
+                mDataManager.getMyCollect(mCollectPage)
+                .compose(RxUtils.rxScheduers())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new CusSubscribe<PageDataInfo>(mView){
+                    @Override
+                    public void onNext(PageDataInfo articleListBean) {
+                        super.onNext(articleListBean);
+                        mMaxCollectPage = articleListBean.getPageCount();
+                        if (mView instanceof IContractView.IArticleView){
+                            ((IContractView.IArticleView) mView).loadArticle(articleListBean.getDatas(),isRefresh);
+                        }
+                    }
+                })
+        );
+    }
+
+    public void getMyCollect(){
+        getMyCollect(true,true);
+    }
+
+    public void refreshCollect(){
+        mCollectPage = 0;
+        getMyCollect(false,true);
+    }
+    public void loadMoreCollect(){
+        mCollectPage ++;
+        getMyCollect(false,false);
+    }
+    public boolean isLastestPage(){
+        if (mMaxCollectPage != -1){
+            if (mCollectPage+1 >= mMaxCollectPage){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 
 }

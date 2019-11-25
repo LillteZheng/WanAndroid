@@ -2,7 +2,8 @@ package com.zhengsr.wanandroid.mvp.model;
 
 
 
-import com.zhengsr.wanandroid.bean.ArticleListBean;
+import com.zhengsr.wanandroid.bean.ArticleData;
+import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
@@ -56,8 +57,16 @@ public class DataManager {
      * @param num
      * @return
      */
-    public Observable<BaseResponse<ArticleListBean>> getArticles(int num){
+    public Observable<BaseResponse<PageDataInfo>> getArticles(int num){
         return mServerApi.getArticle(num);
+    }
+
+    /**
+     * 拿到置顶文章
+     * @return
+     */
+    public Observable<BaseResponse<List<ArticleData>>> getTopArticle(){
+        return mServerApi.getTopArticle();
     }
 
     /**
@@ -101,5 +110,9 @@ public class DataManager {
     public  Observable<BaseResponse<RegisterBean>> register(String username,
             String password,  String repassword){
         return mServerApi.register(username,password,repassword);
+    }
+
+    public  Observable<BaseResponse<PageDataInfo>> getMyCollect(int page){
+        return mServerApi.getMyCollect(page);
     }
 }

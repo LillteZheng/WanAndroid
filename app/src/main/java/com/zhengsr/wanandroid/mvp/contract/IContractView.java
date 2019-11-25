@@ -1,7 +1,8 @@
 package com.zhengsr.wanandroid.mvp.contract;
 
 
-import com.zhengsr.wanandroid.bean.ArticleListBean;
+import com.zhengsr.wanandroid.bean.ArticleData;
+import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.RankBean;
@@ -21,8 +22,12 @@ public interface IContractView {
      * 获取首页banner和文章内容
      */
     interface IHomeView extends IBaseView {
-        void loadMainData(List<BannerBean> bannerBeans, ArticleListBean articleListBean);
-        void loadArticle(ArticleListBean articleListBean);
+        void loadMainData(List<BannerBean> bannerBeans, List<ArticleData> articles);
+        void loadArticle(PageDataInfo articleListBean);
+    }
+
+    interface IArticleView extends IBaseView{
+        void loadArticle(List<ArticleData> articleData,boolean isRefresh);
     }
 
     /**

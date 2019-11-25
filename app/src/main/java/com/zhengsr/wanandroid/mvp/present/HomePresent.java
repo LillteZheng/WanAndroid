@@ -2,10 +2,9 @@ package com.zhengsr.wanandroid.mvp.present;
 
 import android.annotation.SuppressLint;
 
-import com.zhengsr.ariesuilib.utils.AriesUtils;
 import com.zhengsr.wanandroid.Constant;
 import com.zhengsr.wanandroid.bean.ArticleData;
-import com.zhengsr.wanandroid.bean.ArticleListBean;
+import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
@@ -16,16 +15,12 @@ import com.zhengsr.wanandroid.net.CusSubscribe;
 import com.zhengsr.wanandroid.utils.Lgg;
 import com.zhengsr.wanandroid.utils.RxUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Function3;
+import io.reactivex.functions.Function4;
 
 /**
  * @author by  zhengshaorui on 2019/10/8
@@ -63,37 +58,44 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
          */
         Observable<BaseResponse<LoginBean>> loginObservable = mDataManager.login(getUserName(), getPassword());
         addSubscribe(
-                Observable.zip(loginObservable, mDataManager.getBanner(), mDataManager.getArticles(mCurNum),
-                        new Function3<BaseResponse<LoginBean>, BaseResponse<List<BannerBean>>,
-                                BaseResponse<ArticleListBean>, HashMap<String,Object>>() {
+                Observable.zip(loginObservable, mDataManager.getBanner(), mDataManager.getTopArticle(), mDataManager.getArticles(mCurNum),
+                        new Function4<BaseResponse<LoginBean>, BaseResponse<List<BannerBean>>,
+                                BaseResponse<List<ArticleData>>,
+                                BaseResponse<PageDataInfo>, HashMap<String,Object>>() {
                             @Override
                             public HashMap<String, Object> apply(BaseResponse<LoginBean> login, BaseResponse<List<BannerBean>> banners,
-                                                                 BaseResponse<ArticleListBean> articles) throws Exception {
+                                                                 BaseResponse<List<ArticleData>> topArticles,
+                                                                 BaseResponse<PageDataInfo> articles) throws Exception {
                                 HashMap<String, Object> map = new HashMap<>();
                                 map.put(Constant.LOGIN, login);
                                 map.put(Constant.BANNER, banners.getData());
+                                map.put(Constant.TOPARTICLE, topArticles.getData());
                                 map.put(Constant.ARTICLE, articles.getData());
                                 return map;
                             }
                         }).compose(RxUtils.rxScheduers())
-                .subscribeWith(new CusSubscribe<HashMap<String,Object>>(mView){
-                    @Override
-                    public void onNext(HashMap<String, Object> map) {
-                        super.onNext(map);
-                        BaseResponse<LoginBean> loginResponse = cast(map.get(Constant.LOGIN));
-                        if (loginResponse != null && loginResponse.getErrorCode() != BaseResponse.SUCCESS){
-                            setLogin(false);
-                            setUserName("");
-                            setPassword("");
-                        }else{
-                            setLogin(true);
-                            Lgg.d("自动登录成功: ");
-                        }
-                        List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
-                        ArticleListBean articleListBean = cast(map.get(Constant.ARTICLE));
-                        mView.loadMainData(bannerBeans,articleListBean);
-                    }
-                })
+                        .subscribeWith(new CusSubscribe<HashMap<String,Object>>(mView){
+                            @Override
+                            public void onNext(HashMap<String, Object> map) {
+                                super.onNext(map);
+                                BaseResponse<LoginBean> loginResponse = cast(map.get(Constant.LOGIN));
+                                if (loginResponse != null && loginResponse.getErrorCode() != BaseResponse.SUCCESS){
+                                    setLogin(false);
+                                    setUserName("");
+                                    setPassword("");
+                                }else{
+                                    setLogin(true);
+                                    Lgg.d("自动登录成功: ");
+                                }
+                                List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
+                                List<ArticleData> articleData = new ArrayList<>();
+                                PageDataInfo articleListBean = cast(map.get(Constant.ARTICLE));
+                                articleData.addAll(cast(map.get(Constant.TOPARTICLE)));
+                                articleData.addAll(articleListBean.getDatas());
+                                mView.loadMainData(bannerBeans,articleData);
+                            }
+                        })
+
         );
 
     }
@@ -119,9 +121,9 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
                 mDataManager.getArticles(mCurNum)
                 .compose(RxUtils.rxScheduers())
                 .compose(RxUtils.handleResult())
-                .subscribeWith(new CusSubscribe<ArticleListBean>(mView) {
+                .subscribeWith(new CusSubscribe<PageDataInfo>(mView) {
                     @Override
-                    public void onNext(ArticleListBean articleListBean) {
+                    public void onNext(PageDataInfo articleListBean) {
                         mView.loadArticle(articleListBean);
                     }
                 })

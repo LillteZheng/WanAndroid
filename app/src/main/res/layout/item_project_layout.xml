@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:padding="12dp"
+        android:layout_height="180dp">
+
+        <ImageView
+            android:id="@+id/item_project_icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintLeft_toLeftOf="@+id/content"
+            android:contentDescription="@null"
+            android:src="@mipmap/ic_rank_1" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/item_project_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/item_project_icon"
+            android:layout_marginStart="20dp"
+            tools:text="一个仿企业FM界面sfdsafdasjdfkljlkjasdfkjk"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/wechat"
+            android:textSize="18sp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/item_project_describe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/item_project_icon"
+            app:layout_constraintTop_toBottomOf="@id/item_project_title"
+            android:layout_marginStart="20dp"
+            tools:text="一个仿企业FM界面sfdsafdasjdfkljlkjasdfkjk"
+            android:maxLines="4"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:textSize="14sp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/item_project_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/item_project_icon"
+            app:layout_constraintBottom_toBottomOf="@id/content"
+            android:layout_marginStart="20dp"
+            tools:text="2019-11-07"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/wechat"
+            android:textSize="14sp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/item_project_time"
+            app:layout_constraintBottom_toBottomOf="@id/content"
+            android:layout_marginStart="5dp"
+            tools:text="zhengsr"
+            android:maxLines="4"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:ellipsize="end"
+            android:textColor="@color/wechat"
+            android:textSize="14sp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>

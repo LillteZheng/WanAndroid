@@ -117,6 +117,16 @@ public abstract class BaseDelegateFragment extends SupportFragment {
                 }
             });
         }
+        //back
+        ImageView imageView = mView.findViewById(R.id.toolbar_left_iv);
+        if (imageView != null) {
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pop();
+                }
+            });
+        }
     }
 
     /**
@@ -213,4 +223,5 @@ public abstract class BaseDelegateFragment extends SupportFragment {
         }
         return null;
     }
+
 }

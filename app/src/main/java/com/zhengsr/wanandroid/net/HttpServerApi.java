@@ -2,7 +2,8 @@ package com.zhengsr.wanandroid.net;
 
 
 
-import com.zhengsr.wanandroid.bean.ArticleListBean;
+import com.zhengsr.wanandroid.bean.ArticleData;
+import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
@@ -16,10 +17,8 @@ import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 /**
@@ -46,7 +45,15 @@ public interface HttpServerApi {
      * @return
      */
     @GET("article/list/{num}/json")
-    Observable<BaseResponse<ArticleListBean>> getArticle(@Path("num") int num);
+    Observable<BaseResponse<PageDataInfo>> getArticle(@Path("num") int num);
+
+    /**
+     * 获取置顶文章
+     * https://www.wanandroid.com/article/top/json
+     * @return
+     */
+    @GET("article/top/json")
+    Observable<BaseResponse<List<ArticleData>>> getTopArticle();
 
     /**
      * 登录
@@ -55,7 +62,7 @@ public interface HttpServerApi {
      * @param password
      * @return
      */
-    @POST("https://www.wanandroid.com/user/login")
+    @POST("user/login")
     @FormUrlEncoded
     Observable<BaseResponse<LoginBean>> loginIn(@Field("username") String username,
                                                 @Field("password") String password);
@@ -97,5 +104,12 @@ public interface HttpServerApi {
     @FormUrlEncoded
     Observable<BaseResponse<RegisterBean>> register(@Field("username") String username, @Field("password")
             String password, @Field("repassword") String repassword);
+
+    /**
+     * https://www.wanandroid.com/lg/collect/list/0/json
+     * @return
+     */
+    @GET("lg/collect/list/{page}/json")
+    Observable<BaseResponse<PageDataInfo>> getMyCollect(@Path("page") int page);
 
 }

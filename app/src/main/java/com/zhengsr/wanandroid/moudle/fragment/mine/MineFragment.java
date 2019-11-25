@@ -146,7 +146,17 @@ public class MineFragment extends BaseMvpFragment<UserPresent> implements BaseQu
         if (position == 0){
             useParentStart(RankFragment.newInstance());
         }else {
-            MineFragment.this.startActivityForResult(new Intent(_mActivity, LoginActivity.class),LOGIN);
+            if (isLogin()){
+                switch (position){
+
+                    case 2:
+                        useParentStart(ArticleFragment.newInstance());
+                        break;
+                        default:break;
+                }
+            }else {
+                MineFragment.this.startActivityForResult(new Intent(_mActivity, LoginActivity.class), LOGIN);
+            }
         }
     }
 
