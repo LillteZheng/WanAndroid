@@ -76,6 +76,7 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
         getBarTitleView().setText("我的收藏");
         ImageView imageView = getLeftIconView();
         imageView.setImageResource(R.mipmap.back);
+        imageView.setTag(TAG_BACK);
         imageView.setPadding(10,10,10,10);
         imageView.setColorFilter(Color.WHITE);
         getRightIconView().setVisibility(View.GONE);

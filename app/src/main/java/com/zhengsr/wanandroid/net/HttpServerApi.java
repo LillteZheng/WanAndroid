@@ -7,6 +7,8 @@ import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
+import com.zhengsr.wanandroid.bean.ProjectBean;
+import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
@@ -112,4 +114,19 @@ public interface HttpServerApi {
     @GET("lg/collect/list/{page}/json")
     Observable<BaseResponse<PageDataInfo>> getMyCollect(@Path("page") int page);
 
+    /**
+     * 项目分类
+     * https://www.wanandroid.com/project/tree/json
+     * @return
+     */
+    @GET("project/tree/json")
+    Observable<BaseResponse<ProjectListBean>> getProjectSort();
+
+    /**
+     * 项目列表数据
+     * https://www.wanandroid.com/project/list/1/json?cid=294
+     * @return
+     */
+    @GET("project/list/{page}/json?cid={cid}")
+    Observable<BaseResponse<PageDataInfo>> getProjectInfo(@Path("page") int page,@Path("cid") int cid);
 }

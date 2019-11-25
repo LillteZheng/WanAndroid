@@ -75,6 +75,7 @@ public class RankFragment extends BaseNetFragment<UserPresent> implements IContr
         getBarTitleView().setText("积分版");
         ImageView imageView = getLeftIconView();
         imageView.setImageResource(R.mipmap.back);
+        imageView.setTag(TAG_BACK);
         imageView.setPadding(10,10,10,10);
         imageView.setColorFilter(Color.WHITE);
         getRightIconView().setVisibility(View.GONE);

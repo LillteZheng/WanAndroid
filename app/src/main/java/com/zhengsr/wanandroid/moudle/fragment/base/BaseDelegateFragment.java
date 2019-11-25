@@ -31,6 +31,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 public abstract class BaseDelegateFragment extends SupportFragment {
     private static final String TAG = "BaseDelegateFragment";
+    protected static final String TAG_BACK = "TAG_BACK";
     protected Unbinder mUnbinder;
     private View mView;
 
@@ -117,9 +118,16 @@ public abstract class BaseDelegateFragment extends SupportFragment {
                 }
             });
         }
-        //back
+
+    }
+
+    /**
+     * 初始化数据和可以做一些耗时操作
+     */
+    public void initDataAndEvent() {
+        //可以在initview 中去配置是否坐这边的图片是作为返回的
         ImageView imageView = mView.findViewById(R.id.toolbar_left_iv);
-        if (imageView != null) {
+        if (imageView != null && TAG_BACK.equals(imageView.getTag())) {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -127,13 +135,6 @@ public abstract class BaseDelegateFragment extends SupportFragment {
                 }
             });
         }
-    }
-
-    /**
-     * 初始化数据和可以做一些耗时操作
-     */
-    public void initDataAndEvent() {
-
     }
 
     /**

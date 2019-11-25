@@ -7,6 +7,7 @@ import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
+import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
@@ -16,6 +17,7 @@ import com.zhengsr.wanandroid.net.HttpServerApi;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Path;
 
 /**
  * @author by  zhengshaorui on 2019/10/9
@@ -112,7 +114,30 @@ public class DataManager {
         return mServerApi.register(username,password,repassword);
     }
 
+    /**
+     * 拿到收藏列表
+     * @param page
+     * @return
+     */
     public  Observable<BaseResponse<PageDataInfo>> getMyCollect(int page){
         return mServerApi.getMyCollect(page);
+    }
+
+    /**
+     * 项目分类
+     * @return
+     */
+    public  Observable<BaseResponse<ProjectListBean>> getProjectSort(){
+        return mServerApi.getProjectSort();
+    }
+
+    /**
+     * 获取项目数据
+     * @param page
+     * @param cid
+     * @return
+     */
+    public Observable<BaseResponse<PageDataInfo>> getProjectInfo(int page, int cid){
+        return mServerApi.getProjectInfo(page,cid);
     }
 }
