@@ -59,11 +59,12 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
         Observable<BaseResponse<LoginBean>> loginObservable = mDataManager.login(getUserName(), getPassword());
         addSubscribe(
 
+
                 Observable.zip(loginObservable, mDataManager.getBanner(), mDataManager.getTopArticle(),
                         mDataManager.getArticles(mCurNum), new Function4<BaseResponse<LoginBean>, BaseResponse<List<BannerBean>>,
-                                BaseResponse<List<ArticleData>>, BaseResponse<PageDataInfo<List<ArticleData>>>, Object>() {
+                                BaseResponse<List<ArticleData>>, BaseResponse<PageDataInfo<List<ArticleData>>>, HashMap<String,Object>>() {
                             @Override
-                            public Object apply(BaseResponse<LoginBean> login, BaseResponse<List<BannerBean>> banners,
+                            public HashMap<String,Object> apply(BaseResponse<LoginBean> login, BaseResponse<List<BannerBean>> banners,
                                                 BaseResponse<List<ArticleData>> topArticles, BaseResponse<PageDataInfo<List<ArticleData>>> articles) throws Exception {
                                 HashMap<String, Object> map = new HashMap<>();
                                 map.put(Constant.LOGIN, login);
@@ -88,10 +89,9 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
                                 }
                                 List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
                                 List<ArticleData> articleData = new ArrayList<>();
-                                PageDataInfo articleListBean = cast(map.get(Constant.ARTICLE));
-                                articleListBean.getDatas();
+                                PageDataInfo<List<ArticleData>> articleListBean = cast(map.get(Constant.ARTICLE));
                                 articleData.addAll(cast(map.get(Constant.TOPARTICLE)));
-                              //  articleData.addAll();
+                                articleData.addAll(articleListBean.getDatas());
                                 mView.loadMainData(bannerBeans,articleData);
                             }
                         })

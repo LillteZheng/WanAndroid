@@ -21,6 +21,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 /**
@@ -127,6 +128,6 @@ public interface HttpServerApi {
      * https://www.wanandroid.com/project/list/1/json?cid=294
      * @return
      */
-    @GET("project/list/{page}/json?cid={cid}")
-    Observable<BaseResponse<PageDataInfo<List<ProjectBean>>>> getProjectInfo(@Path("page") int page,@Path("cid") int cid);
+    @GET("project/list/{page}/json")
+    Observable<BaseResponse<PageDataInfo<List<ProjectBean>>>> getProjectInfo(@Path("page") int page,@Query("cid") int cid);
 }

@@ -49,7 +49,13 @@ public class ProjectPresent extends BasePresent {
     }
 
     public void getDetailProject(int page,int cid){
-        mView.showLoading();
+         getDetailProject(page,cid,true);
+    }
+
+    private void getDetailProject(int page,int cid,boolean isRefresh){
+        if (isRefresh) {
+            mView.showLoading();
+        }
         addSubscribe(
                 mDataManager.getProjectInfo(page,cid)
                 .compose(RxUtils.rxScheduers())
@@ -60,11 +66,15 @@ public class ProjectPresent extends BasePresent {
                         super.onNext(info);
                         if (mView instanceof IContractView.IProjectDetailView){
                             ((IContractView.IProjectDetailView) mView)
-                                    .getProjectDetail(info.getDatas(),info.getCurPage());
+                                    .getProjectDetail(info.getDatas(),info.getPageCount(),isRefresh);
                         }
                     }
                 })
         );
+    }
+
+    public void loadMore(int page,int cid){
+        getDetailProject(page,cid,false);
     }
 
 }

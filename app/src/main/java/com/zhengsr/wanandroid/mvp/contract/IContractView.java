@@ -60,7 +60,7 @@ public interface IContractView {
         void getProjectList(List<ProjectListBean> projectListBeans);
     }
     interface IProjectDetailView extends IBaseView{
-        void getProjectDetail(List<ProjectBean> beans, int maxPage);
+        void getProjectDetail(List<ProjectBean> beans, int maxPage,boolean isRefresh);
     }
 
 }
