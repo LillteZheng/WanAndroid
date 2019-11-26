@@ -1,5 +1,6 @@
 package com.zhengsr.wanandroid.mvp.present;
 
+import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
@@ -12,6 +13,8 @@ import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.model.DataManager;
 import com.zhengsr.wanandroid.net.CusSubscribe;
 import com.zhengsr.wanandroid.utils.RxUtils;
+
+import java.util.List;
 
 /**
  * @author by  zhengshaorui on 2019/10/8
@@ -163,16 +166,19 @@ public class UserPresent extends BasePresent<IBaseView> {
                 mDataManager.getMyCollect(mCollectPage)
                 .compose(RxUtils.rxScheduers())
                 .compose(RxUtils.handleResult())
-                .subscribeWith(new CusSubscribe<PageDataInfo>(mView){
+                .subscribeWith(new CusSubscribe<PageDataInfo<List<ArticleData>>>(mView){
                     @Override
                     public void onNext(PageDataInfo articleListBean) {
                         super.onNext(articleListBean);
                         mMaxCollectPage = articleListBean.getPageCount();
                         if (mView instanceof IContractView.IArticleView){
-                            ((IContractView.IArticleView) mView).loadArticle(articleListBean.getDatas(),isRefresh);
+                            articleListBean.getDatas();
+                           // ((IContractView.IArticleView) mView).loadArticle(articleListBean.getDatas(),isRefresh);
                         }
                     }
                 })
+
+
         );
     }
 

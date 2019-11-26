@@ -47,7 +47,7 @@ public interface HttpServerApi {
      * @return
      */
     @GET("article/list/{num}/json")
-    Observable<BaseResponse<PageDataInfo>> getArticle(@Path("num") int num);
+    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getArticle(@Path("num") int num);
 
     /**
      * 获取置顶文章
@@ -112,7 +112,7 @@ public interface HttpServerApi {
      * @return
      */
     @GET("lg/collect/list/{page}/json")
-    Observable<BaseResponse<PageDataInfo>> getMyCollect(@Path("page") int page);
+    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getMyCollect(@Path("page") int page);
 
     /**
      * 项目分类
@@ -128,5 +128,5 @@ public interface HttpServerApi {
      * @return
      */
     @GET("project/list/{page}/json?cid={cid}")
-    Observable<BaseResponse<PageDataInfo>> getProjectInfo(@Path("page") int page,@Path("cid") int cid);
+    Observable<BaseResponse<PageDataInfo<List<ProjectBean>>>> getProjectInfo(@Path("page") int page,@Path("cid") int cid);
 }

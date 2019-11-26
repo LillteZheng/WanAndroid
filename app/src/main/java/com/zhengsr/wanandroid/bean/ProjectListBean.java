@@ -1,12 +1,13 @@
 package com.zhengsr.wanandroid.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class ProjectListBean {
+public class ProjectListBean implements Serializable {
 
     /**
      * children : []

@@ -58,14 +58,13 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
          */
         Observable<BaseResponse<LoginBean>> loginObservable = mDataManager.login(getUserName(), getPassword());
         addSubscribe(
-                Observable.zip(loginObservable, mDataManager.getBanner(), mDataManager.getTopArticle(), mDataManager.getArticles(mCurNum),
-                        new Function4<BaseResponse<LoginBean>, BaseResponse<List<BannerBean>>,
-                                BaseResponse<List<ArticleData>>,
-                                BaseResponse<PageDataInfo>, HashMap<String,Object>>() {
+
+                Observable.zip(loginObservable, mDataManager.getBanner(), mDataManager.getTopArticle(),
+                        mDataManager.getArticles(mCurNum), new Function4<BaseResponse<LoginBean>, BaseResponse<List<BannerBean>>,
+                                BaseResponse<List<ArticleData>>, BaseResponse<PageDataInfo<List<ArticleData>>>, Object>() {
                             @Override
-                            public HashMap<String, Object> apply(BaseResponse<LoginBean> login, BaseResponse<List<BannerBean>> banners,
-                                                                 BaseResponse<List<ArticleData>> topArticles,
-                                                                 BaseResponse<PageDataInfo> articles) throws Exception {
+                            public Object apply(BaseResponse<LoginBean> login, BaseResponse<List<BannerBean>> banners,
+                                                BaseResponse<List<ArticleData>> topArticles, BaseResponse<PageDataInfo<List<ArticleData>>> articles) throws Exception {
                                 HashMap<String, Object> map = new HashMap<>();
                                 map.put(Constant.LOGIN, login);
                                 map.put(Constant.BANNER, banners.getData());
@@ -90,11 +89,14 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
                                 List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
                                 List<ArticleData> articleData = new ArrayList<>();
                                 PageDataInfo articleListBean = cast(map.get(Constant.ARTICLE));
+                                articleListBean.getDatas();
                                 articleData.addAll(cast(map.get(Constant.TOPARTICLE)));
-                                articleData.addAll(articleListBean.getDatas());
+                              //  articleData.addAll();
                                 mView.loadMainData(bannerBeans,articleData);
                             }
                         })
+
+
 
         );
 
@@ -121,10 +123,10 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
                 mDataManager.getArticles(mCurNum)
                 .compose(RxUtils.rxScheduers())
                 .compose(RxUtils.handleResult())
-                .subscribeWith(new CusSubscribe<PageDataInfo>(mView) {
+                .subscribeWith(new CusSubscribe<PageDataInfo<List<ArticleData>>>(mView) {
                     @Override
-                    public void onNext(PageDataInfo articleListBean) {
-                        mView.loadArticle(articleListBean);
+                    public void onNext(PageDataInfo<List<ArticleData>> articleListBean) {
+                        mView.loadArticle(articleListBean.getDatas());
                     }
                 })
         );

@@ -7,6 +7,7 @@ import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
+import com.zhengsr.wanandroid.bean.ProjectBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
@@ -59,7 +60,7 @@ public class DataManager {
      * @param num
      * @return
      */
-    public Observable<BaseResponse<PageDataInfo>> getArticles(int num){
+    public Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getArticles(int num){
         return mServerApi.getArticle(num);
     }
 
@@ -119,7 +120,7 @@ public class DataManager {
      * @param page
      * @return
      */
-    public  Observable<BaseResponse<PageDataInfo>> getMyCollect(int page){
+    public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getMyCollect(int page){
         return mServerApi.getMyCollect(page);
     }
 
@@ -137,7 +138,10 @@ public class DataManager {
      * @param cid
      * @return
      */
-    public Observable<BaseResponse<PageDataInfo>> getProjectInfo(int page, int cid){
+    /*public Observable<BaseResponse<PageDataInfo<ProjectBean>>> getProjectInfo(int page, int cid){
+        return mServerApi.getProjectInfo(page,cid);
+    }*/
+    public Observable<BaseResponse<PageDataInfo<List<ProjectBean>>>> getProjectInfo(int page, int cid){
         return mServerApi.getProjectInfo(page,cid);
     }
 }

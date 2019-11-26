@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WanAndroid</string>
+    <string name="app_name">玩Android</string>
     <string name="error_tips">不妙！加载失败了ヽ(≧Д≦)ノ\n 告诉大佬一些可能的原因：\n1.网络出小差啦，请检查网络\n 2.服务器大哥的不定期抽风~</string>
     <string name="loading">正在加载...</string>
     <string name="home">首页</string>

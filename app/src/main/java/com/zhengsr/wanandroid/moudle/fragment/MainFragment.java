@@ -8,6 +8,7 @@ import com.zhengsr.ariesuilib.wieght.bottom.CusBottomLayout;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseDelegateFragment;
 import com.zhengsr.wanandroid.moudle.fragment.mine.MineFragment;
+import com.zhengsr.wanandroid.moudle.fragment.project.ProjectFragment;
 
 import me.yokeyword.fragmentation.SupportFragment;
 

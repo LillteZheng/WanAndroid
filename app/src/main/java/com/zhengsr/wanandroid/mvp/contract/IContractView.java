@@ -5,6 +5,7 @@ import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.LoginBean;
+import com.zhengsr.wanandroid.bean.ProjectBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
@@ -24,7 +25,7 @@ public interface IContractView {
      */
     interface IHomeView extends IBaseView {
         void loadMainData(List<BannerBean> bannerBeans, List<ArticleData> articles);
-        void loadArticle(PageDataInfo articleListBean);
+        void loadArticle(List<ArticleData> articles);
     }
 
     interface IArticleView extends IBaseView{
@@ -57,6 +58,9 @@ public interface IContractView {
     // 项目接口
     interface IProjectListView extends IBaseView{
         void getProjectList(List<ProjectListBean> projectListBeans);
+    }
+    interface IProjectDetailView extends IBaseView{
+        void getProjectDetail(List<ProjectBean> beans, int maxPage);
     }
 
 }

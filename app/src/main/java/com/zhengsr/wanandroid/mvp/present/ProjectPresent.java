@@ -1,5 +1,7 @@
 package com.zhengsr.wanandroid.mvp.present;
 
+import com.zhengsr.wanandroid.bean.PageDataInfo;
+import com.zhengsr.wanandroid.bean.ProjectBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.mvp.base.BasePresent;
 import com.zhengsr.wanandroid.mvp.base.IBaseView;
@@ -40,6 +42,25 @@ public class ProjectPresent extends BasePresent {
                         super.onNext(projectListBeans);
                         if (mView instanceof IContractView.IProjectListView){
                             ((IContractView.IProjectListView) mView).getProjectList(projectListBeans);
+                        }
+                    }
+                })
+        );
+    }
+
+    public void getDetailProject(int page,int cid){
+        mView.showLoading();
+        addSubscribe(
+                mDataManager.getProjectInfo(page,cid)
+                .compose(RxUtils.rxScheduers())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new CusSubscribe<PageDataInfo<List<ProjectBean>>>(mView){
+                    @Override
+                    public void onNext(PageDataInfo<List<ProjectBean>> info) {
+                        super.onNext(info);
+                        if (mView instanceof IContractView.IProjectDetailView){
+                            ((IContractView.IProjectDetailView) mView)
+                                    .getProjectDetail(info.getDatas(),info.getCurPage());
                         }
                     }
                 })

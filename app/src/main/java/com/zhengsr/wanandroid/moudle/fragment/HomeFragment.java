@@ -91,9 +91,9 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     }
 
     @Override
-    public void loadArticle(PageDataInfo articleListBean) {
-        if (articleListBean != null) {
-            mArticleBeans.addAll(articleListBean.getDatas());
+    public void loadArticle(List<ArticleData> articles) {
+        if (articles != null) {
+            mArticleBeans.addAll(articles);
             mHomeAdapter.notifyDataSetChanged();
         }
     }
