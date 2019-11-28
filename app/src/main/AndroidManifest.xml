@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".moudle.activity.LoginActivity"/>
+        <activity android:name=".moudle.activity.WebViewActivity"/>
     </application>
 
 </manifest>

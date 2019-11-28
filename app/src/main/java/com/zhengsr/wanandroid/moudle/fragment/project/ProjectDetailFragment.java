@@ -1,5 +1,6 @@
 package com.zhengsr.wanandroid.moudle.fragment.project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +16,10 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ProjectBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
+import com.zhengsr.wanandroid.bean.WebBean;
+import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
 import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
+import com.zhengsr.wanandroid.moudle.fragment.HomeFragment;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
@@ -32,7 +36,7 @@ import butterknife.BindView;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class ProjectDetailFragment extends BaseNetFragment<ProjectPresent> implements IContractView.IProjectDetailView {
+public class ProjectDetailFragment extends BaseNetFragment<ProjectPresent> implements IContractView.IProjectDetailView, BaseQuickAdapter.OnItemClickListener {
     private int mCurPage = 1;
     private ProjectAdapter mAdapter;
     private ProjectListBean mBean;
@@ -69,6 +73,7 @@ public class ProjectDetailFragment extends BaseNetFragment<ProjectPresent> imple
         mRecyclerView.setLayoutManager(manager);
         mAdapter = new ProjectAdapter(R.layout.item_project_layout, mData);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -89,6 +94,20 @@ public class ProjectDetailFragment extends BaseNetFragment<ProjectPresent> imple
         }
         mData.addAll(beans);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        ProjectBean bean = mData.get(position);
+
+        WebBean webBean = new WebBean();
+        webBean.id = bean.getId();
+        webBean.title = bean.getTitle();
+        webBean.url = bean.getLink();
+        webBean.isShowIcon = false;
+        Intent intent = new Intent(_mActivity, WebViewActivity.class);
+        intent.putExtra("bean",webBean);
+        ProjectDetailFragment.this.startActivity(intent);
     }
 
     class ProjectAdapter extends BaseQuickAdapter<ProjectBean, BaseViewHolder> {

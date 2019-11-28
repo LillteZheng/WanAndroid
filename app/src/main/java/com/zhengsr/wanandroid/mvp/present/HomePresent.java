@@ -40,7 +40,6 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
         mView = view;
         mDataManager = DataManager.getInstance();
         mCurNum = 0;
-
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.zhengsr.wanandroid.moudle.fragment.mine;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,9 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
+import com.zhengsr.wanandroid.bean.WebBean;
+import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
+import com.zhengsr.wanandroid.moudle.fragment.HomeFragment;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.UserPresent;
@@ -29,7 +33,7 @@ import butterknife.BindView;
  * Describe:
  */
 public class ArticleFragment extends BaseNetFragment<UserPresent> implements BaseQuickAdapter.OnItemChildClickListener,
-        BaseQuickAdapter.OnItemClickListener, IContractView.IArticleView {
+        BaseQuickAdapter.OnItemClickListener, IContractView.IArticleView<CollectBean> {
 
     public static ArticleFragment newInstance() {
 
@@ -43,7 +47,7 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
     RecyclerView mRecyclerView;
 
     private CollectAdapter mAdapter;
-    private List<CollectBean> mArticleBeans = new ArrayList<>();
+    private List<CollectBean> mCollectBeans = new ArrayList<>();
 
     @Override
     public int getLayoutId() {
@@ -61,7 +65,7 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
         super.initView(view);
         LinearLayoutManager manager = new LinearLayoutManager(_mActivity);
         mRecyclerView.setLayoutManager(manager);
-        mAdapter = new CollectAdapter(R.layout.item_article_recy_layout, mArticleBeans);
+        mAdapter = new CollectAdapter(R.layout.item_article_recy_layout, mCollectBeans);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter.setOnItemChildClickListener(this);
@@ -89,7 +93,7 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         switch (view.getId()){
             case R.id.item_article_like:
-                CollectBean data = mArticleBeans.get(position);
+                CollectBean data = mCollectBeans.get(position);
 
                 mPresent.removeArticle(position,data.getOriginId());
 
@@ -100,15 +104,39 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        CollectBean bean = mCollectBeans.get(position);
+        WebBean webBean = new WebBean();
+        webBean.id = bean.getId();
+        webBean.title = bean.getTitle();
+        webBean.isCollect = true;
+        webBean.position = position;
+        webBean.url = bean.getLink();
+        Intent intent = new Intent(_mActivity, WebViewActivity.class);
+        intent.putExtra("bean",webBean);
+        ArticleFragment.this.startActivityForResult(intent,1);
+    }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+            if (data != null){
+                WebBean bean = (WebBean) data.getSerializableExtra("bean");
+                if (bean != null) {
+                    mCollectBeans.remove(bean.position);
+                    mAdapter.notifyItemRemoved(bean.position);
+                }
+            }
+        }
     }
 
     @Override
     public void loadArticle(List<CollectBean> CollectBeans, boolean isRefresh) {
         if (isRefresh) {
-            mArticleBeans.clear();
+            mCollectBeans.clear();
         }
-        mArticleBeans.addAll(CollectBeans);
+        mCollectBeans.addAll(CollectBeans);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -128,14 +156,16 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
         }
     }
 
+
+
     @Override
-    public void addArticleSuccess(int position, ArticleData data) {
+    public void addArticleSuccess(int position, CollectBean data) {
 
     }
 
     @Override
-    public void removeArticleSuccess(int position, ArticleData data) {
-        mArticleBeans.remove(position);
+    public void removeArticleSuccess(int position, CollectBean data) {
+        mCollectBeans.remove(position);
         mAdapter.notifyItemRemoved(position);
     }
 
@@ -160,7 +190,6 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
             helper.setImageResource(R.id.item_article_like, R.drawable.icon_like_article_select);
 
         }
-
 
     }
 

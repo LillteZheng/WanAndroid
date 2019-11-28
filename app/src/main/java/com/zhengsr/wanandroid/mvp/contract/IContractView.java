@@ -3,7 +3,6 @@ package com.zhengsr.wanandroid.mvp.contract;
 
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
-import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.ProjectBean;
@@ -24,7 +23,7 @@ public interface IContractView {
     /**
      * 获取首页banner和文章内容
      */
-    interface IHomeView extends IArticleStatus {
+    interface IHomeView<T> extends IAddOrCancelArticleView<T> {
         void loadMainData(List<BannerBean> bannerBeans, List<ArticleData> articles);
         void loadArticle(List<ArticleData> articles);
     }
@@ -32,12 +31,12 @@ public interface IContractView {
     /**
      * 文章收藏与否
      */
-    interface IArticleStatus extends IBaseView{
-        void addArticleSuccess(int position,ArticleData data);
-        void removeArticleSuccess(int position,ArticleData data);
+    interface IAddOrCancelArticleView<T> extends IBaseView{
+        void addArticleSuccess(int position,T data);
+        void removeArticleSuccess(int position,T data);
     }
 
-    interface IArticleView extends IArticleStatus{
+    interface IArticleView<T> extends IAddOrCancelArticleView<T> {
         void loadArticle(List<CollectBean> collectBeans, boolean isRefresh);
     }
 

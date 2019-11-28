@@ -72,7 +72,8 @@ public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements 
         List<String> titles = new ArrayList<>();
         List<Fragment> fragments = new ArrayList<>();
         for (ProjectListBean bean : projectListBeans) {
-            titles.add(bean.getName());
+            String title = bean.getName().replaceAll("&amp;","和");
+            titles.add(title);
             fragments.add(ProjectDetailFragment.newInstance(bean));
         }
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),fragments));

@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.zhengsr.wanandroid.R;
@@ -26,7 +28,7 @@ public abstract class BaseDelegateActivity<T extends BasePresent> extends Suppor
 
 
     protected Unbinder mUnbinder;
-    private T mPresent;
+    protected T mPresent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,5 +115,34 @@ public abstract class BaseDelegateActivity<T extends BasePresent> extends Suppor
     @Override
     public void showErrorMsg(String msg) {
 
+    }
+
+    /**
+     * 改变toolbar
+     */
+    public TextView getBarTitleView() {
+        TextView textView = findViewById(R.id.toolbar_title_tv);
+        return textView;
+
+    }
+
+    /**
+     * 获取toolbar 左边的icon
+     *
+     * @return
+     */
+    public ImageView getLeftIconView() {
+        ImageView imageView = findViewById(R.id.toolbar_left_iv);
+        return imageView;
+    }
+
+    /**
+     * 获取toolbar 右边的icon
+     *
+     * @return
+     */
+    public ImageView getRightIconView() {
+        ImageView imageView = findViewById(R.id.toolbar_right_iv);
+        return imageView;
     }
 }

@@ -10,9 +10,10 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
-import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
+import com.zhengsr.wanandroid.bean.WebBean;
 import com.zhengsr.wanandroid.moudle.activity.LoginActivity;
+import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
 import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
@@ -28,7 +29,7 @@ import butterknife.BindView;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class HomeFragment extends BaseNetFragment<HomePresent> implements IContractView.IHomeView, BaseQuickAdapter.OnItemChildClickListener,
+public class HomeFragment extends BaseNetFragment<HomePresent> implements IContractView.IHomeView<ArticleData>, BaseQuickAdapter.OnItemChildClickListener,
         BaseQuickAdapter.OnItemClickListener, BannerView.BannerItemClickListener {
 
 
@@ -129,14 +130,48 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         }
     }
 
+
+
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ArticleData bean = mArticleBeans.get(position);
+        WebBean webBean = new WebBean();
+        webBean.id = bean.getId();
+        webBean.title = bean.getTitle();
+        webBean.isCollect = bean.isCollect();
+        webBean.position = position;
+        webBean.url = bean.getLink();
+        Intent intent = new Intent(_mActivity, WebViewActivity.class);
+        intent.putExtra("bean",webBean);
+        HomeFragment.this.startActivityForResult(intent,1);
     }
 
     @Override
-    public void itemClick(View view, BannerBean bannerBean) {
-        
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+            if (data != null){
+                WebBean bean = (WebBean) data.getSerializableExtra("bean");
+                if (bean != null) {
+                    ArticleData articleData = mArticleBeans.get(bean.position);
+                    articleData.setCollect(bean.isCollect);
+                    mHomeAdapter.setData(bean.position,articleData);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void itemClick(View view, BannerBean bean) {
+
+        WebBean webBean = new WebBean();
+        webBean.id = bean.getId();
+        webBean.title = bean.getTitle();
+        webBean.url = bean.getUrl();
+        webBean.isShowIcon = false;
+        Intent intent = new Intent(_mActivity, WebViewActivity.class);
+        intent.putExtra("bean",webBean);
+        HomeFragment.this.startActivity(intent);
     }
 
     @Override
