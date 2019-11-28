@@ -4,6 +4,10 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/main_color"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:contentInsetEnd="0dp"
+    app:contentInsetRight="0dp"
     app:layout_scrollFlags="scroll|enterAlways|snap"
     android:layout_height="?attr/actionBarSize">
 
@@ -13,15 +17,17 @@
         android:orientation="horizontal">
 
 
-      <ImageView
-          android:id="@+id/toolbar_left_iv"
-          android:layout_width="25dp"
-          android:layout_height="25dp"
-          android:clickable="true"
-          android:background="?android:attr/selectableItemBackground"
-          app:layout_constraintTop_toTopOf="@id/toolbar_title_tv"
-          app:layout_constraintBottom_toBottomOf="@id/toolbar_title_tv"
-          android:src="@mipmap/net"/>
+        <ImageView
+            android:id="@+id/toolbar_left_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:src="@mipmap/net"
+            android:layout_marginStart="18dp"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar_title_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbar_title_tv" />
 
         <TextView
             android:id="@+id/toolbar_title_tv"

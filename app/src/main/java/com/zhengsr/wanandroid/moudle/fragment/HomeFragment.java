@@ -1,15 +1,18 @@
 package com.zhengsr.wanandroid.moudle.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
+import com.zhengsr.wanandroid.moudle.activity.LoginActivity;
 import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
@@ -40,14 +43,13 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
-    private HomePresent mHomePresent;
     private BannerView mBannerView;
     private HomeAdapter mHomeAdapter;
     private List<ArticleData> mArticleBeans = new ArrayList<>();
     @Override
     public HomePresent getPresent() {
-        mHomePresent = HomePresent.create(this);
-        return mHomePresent;
+        mPresent = HomePresent.create(this);
+        return mPresent;
     }
 
     @Override
@@ -72,7 +74,7 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     @Override
     public void initDataAndEvent() {
         super.initDataAndEvent();
-        mHomePresent.startLoad(true);
+        mPresent.startLoad(true);
     }
 
 
@@ -99,11 +101,10 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     }
 
 
-
     @Override
     public void reload() {
         super.reload();
-        mHomePresent.startLoad(true);
+        mPresent.startLoad(true);
     }
 
     @Override
@@ -113,7 +114,15 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
                 //是否登录
                 boolean isLogin = isLogin();
                 if (!isLogin){
-                   // useParentStart(LoginActivity.newInstance());
+                    HomeFragment.this.startActivity(new Intent(_mActivity,LoginActivity.class));
+                }else{
+                    ArticleData data = mArticleBeans.get(position);
+                    if (data.isCollect()){
+                        mPresent.removeArticle(position,data);
+                    }else{
+                        mPresent.addArticle(position,data);
+                    }
+
                 }
                 break;
             default:break;
@@ -127,18 +136,30 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
 
     @Override
     public void itemClick(View view, BannerBean bannerBean) {
-
+        
     }
 
     @Override
     public void reFreshMore() {
         super.reFreshMore();
-        mHomePresent.onRefresh();
+        mPresent.onRefresh();
     }
 
     @Override
     public void loadMore() {
         super.loadMore();
-        mHomePresent.loadMore();
+        mPresent.loadMore();
+    }
+
+    @Override
+    public void addArticleSuccess(int position, ArticleData data) {
+        mHomeAdapter.setData(position,data);
+        Toast.makeText(_mActivity, "收藏成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void removeArticleSuccess(int position, ArticleData data) {
+        mHomeAdapter.setData(position,data);
+        Toast.makeText(_mActivity, "已取消收藏", Toast.LENGTH_SHORT).show();
     }
 }

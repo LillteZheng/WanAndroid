@@ -3,6 +3,7 @@ package com.zhengsr.wanandroid.mvp.model;
 
 
 import com.zhengsr.wanandroid.bean.ArticleData;
+import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
@@ -120,7 +121,7 @@ public class DataManager {
      * @param page
      * @return
      */
-    public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getMyCollect(int page){
+    public  Observable<BaseResponse<PageDataInfo<List<CollectBean>>>> getMyCollect(int page){
         return mServerApi.getMyCollect(page);
     }
 
@@ -138,10 +139,26 @@ public class DataManager {
      * @param cid
      * @return
      */
-    /*public Observable<BaseResponse<PageDataInfo<ProjectBean>>> getProjectInfo(int page, int cid){
-        return mServerApi.getProjectInfo(page,cid);
-    }*/
+
     public Observable<BaseResponse<PageDataInfo<List<ProjectBean>>>> getProjectInfo(int page, int cid){
         return mServerApi.getProjectInfo(page,cid);
+    }
+
+    /**
+     * 添加收藏
+     * @param id
+     * @return
+     */
+    public Observable<BaseResponse> addArticle(int id){
+        return mServerApi.addArticle(id);
+    }
+
+    /**
+     * 取消收藏
+     * @param id
+     * @return
+     */
+    public Observable<BaseResponse> removeArticle(int id){
+        return mServerApi.removeArticle(id);
     }
 }

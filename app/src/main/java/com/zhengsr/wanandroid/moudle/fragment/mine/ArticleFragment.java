@@ -2,6 +2,8 @@ package com.zhengsr.wanandroid.moudle.fragment.mine;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,14 +11,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
-import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
+import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
-import com.zhengsr.wanandroid.mvp.present.HomePresent;
 import com.zhengsr.wanandroid.mvp.present.UserPresent;
-import com.zhengsr.wanandroid.view.BannerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +42,8 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
-    private HomeAdapter mHomeAdapter;
-    private List<ArticleData> mArticleBeans = new ArrayList<>();
+    private CollectAdapter mAdapter;
+    private List<CollectBean> mArticleBeans = new ArrayList<>();
 
     @Override
     public int getLayoutId() {
@@ -60,10 +61,11 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
         super.initView(view);
         LinearLayoutManager manager = new LinearLayoutManager(_mActivity);
         mRecyclerView.setLayoutManager(manager);
-        mHomeAdapter = new HomeAdapter(R.layout.item_article_recy_layout, mArticleBeans);
-        mRecyclerView.setAdapter(mHomeAdapter);
-        mHomeAdapter.setOnItemChildClickListener(this);
-        mHomeAdapter.setOnItemClickListener(this);
+        mAdapter = new CollectAdapter(R.layout.item_article_recy_layout, mArticleBeans);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mAdapter.setOnItemChildClickListener(this);
+        mAdapter.setOnItemClickListener(this);
         initToolbar();
     }
 
@@ -85,7 +87,15 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        switch (view.getId()){
+            case R.id.item_article_like:
+                CollectBean data = mArticleBeans.get(position);
 
+                mPresent.removeArticle(position,data.getOriginId());
+
+                break;
+            default:break;
+        }
     }
 
     @Override
@@ -94,12 +104,12 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
     }
 
     @Override
-    public void loadArticle(List<ArticleData> articleData,boolean isRefresh) {
+    public void loadArticle(List<CollectBean> CollectBeans, boolean isRefresh) {
         if (isRefresh) {
             mArticleBeans.clear();
         }
-        mArticleBeans.addAll(articleData);
-        mHomeAdapter.notifyDataSetChanged();
+        mArticleBeans.addAll(CollectBeans);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -117,4 +127,41 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
             mPresent.loadMoreCollect();
         }
     }
+
+    @Override
+    public void addArticleSuccess(int position, ArticleData data) {
+
+    }
+
+    @Override
+    public void removeArticleSuccess(int position, ArticleData data) {
+        mArticleBeans.remove(position);
+        mAdapter.notifyItemRemoved(position);
+    }
+
+    class CollectAdapter extends BaseQuickAdapter<CollectBean, BaseViewHolder> {
+
+
+        public CollectAdapter(int layoutResId, @Nullable List<CollectBean> data) {
+            super(layoutResId, data);
+        }
+
+
+
+        @Override
+        protected void convert(BaseViewHolder helper, CollectBean item) {
+
+            helper.setText(R.id.item_article_author, item.getAuthor())
+                    .setText(R.id.item_article_chapat, item.getChapterName())
+                    .setText(R.id.item_article_title, item.getTitle())
+                    .setText(R.id.item_article_time, item.getNiceDate())
+                    .addOnClickListener(R.id.item_article_like);
+
+            helper.setImageResource(R.id.item_article_like, R.drawable.icon_like_article_select);
+
+        }
+
+
+    }
+
 }

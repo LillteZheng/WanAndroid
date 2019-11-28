@@ -30,9 +30,10 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/item_project_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.72"
             app:layout_constraintLeft_toRightOf="@id/item_project_icon"
             android:layout_marginStart="20dp"
             tools:text="一个仿企业FM界面sfdsafdasjdfkljlkjasdfkjk"
@@ -43,14 +44,14 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/item_project_describe"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.72"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@id/item_project_icon"
             app:layout_constraintTop_toBottomOf="@id/item_project_title"
             android:layout_marginStart="20dp"
             tools:text="一个仿企业FM界面sfdsafdasjdfkljlkjasdfkjk"
             android:maxLines="4"
-            android:gravity="center"
             android:layout_marginTop="15dp"
             android:ellipsize="end"
             android:textSize="14sp"/>
@@ -82,7 +83,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:ellipsize="end"
-            android:textColor="@color/wechat"
+            android:textColor="@color/main_color"
             android:textSize="14sp"/>
 
     </android.support.constraint.ConstraintLayout>

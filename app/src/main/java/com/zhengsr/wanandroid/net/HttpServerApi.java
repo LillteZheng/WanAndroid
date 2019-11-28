@@ -3,6 +3,7 @@ package com.zhengsr.wanandroid.net;
 
 
 import com.zhengsr.wanandroid.bean.ArticleData;
+import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
@@ -109,11 +110,12 @@ public interface HttpServerApi {
             String password, @Field("repassword") String repassword);
 
     /**
+     * 我的收藏
      * https://www.wanandroid.com/lg/collect/list/0/json
      * @return
      */
     @GET("lg/collect/list/{page}/json")
-    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getMyCollect(@Path("page") int page);
+    Observable<BaseResponse<PageDataInfo<List<CollectBean>>>> getMyCollect(@Path("page") int page);
 
     /**
      * 项目分类
@@ -130,4 +132,17 @@ public interface HttpServerApi {
      */
     @GET("project/list/{page}/json")
     Observable<BaseResponse<PageDataInfo<List<ProjectBean>>>> getProjectInfo(@Path("page") int page,@Query("cid") int cid);
+
+    /**
+     * 添加收藏
+     * https://www.wanandroid.com/lg/collect/1165/json
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<BaseResponse> addArticle(@Path("id") int id);
+    /**
+     * 添加收藏
+     * https://www.wanandroid.com/lg/uncollect_originId/2333/json
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<BaseResponse> removeArticle(@Path("id") int id);
 }

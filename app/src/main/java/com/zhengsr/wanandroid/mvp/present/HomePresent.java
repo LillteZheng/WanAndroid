@@ -1,6 +1,7 @@
 package com.zhengsr.wanandroid.mvp.present;
 
 import android.annotation.SuppressLint;
+import android.support.v7.view.menu.MenuAdapter;
 
 import com.zhengsr.wanandroid.Constant;
 import com.zhengsr.wanandroid.bean.ArticleData;
@@ -145,4 +146,32 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
     }
 
 
+    public void addArticle(int position,ArticleData data){
+        addSubscribe(
+                mDataManager.addArticle(data.getId())
+                .compose(RxUtils.rxScheduers())
+                .subscribeWith(new CusSubscribe<BaseResponse>(mView){
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        super.onNext(baseResponse);
+                        data.setCollect(true);
+                        mView.addArticleSuccess(position,data);
+                    }
+                })
+        );
+    }
+    public void removeArticle(int position,ArticleData data){
+        addSubscribe(
+                mDataManager.removeArticle(data.getId())
+                        .compose(RxUtils.rxScheduers())
+                        .subscribeWith(new CusSubscribe<BaseResponse>(mView){
+                            @Override
+                            public void onNext(BaseResponse baseResponse) {
+                                super.onNext(baseResponse);
+                                data.setCollect(false);
+                                mView.removeArticleSuccess(position,data);
+                            }
+                        })
+        );
+    }
 }

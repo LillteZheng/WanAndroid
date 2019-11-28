@@ -1,6 +1,7 @@
 package com.zhengsr.wanandroid.mvp.present;
 
 import com.zhengsr.wanandroid.bean.ArticleData;
+import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.LoginBean;
@@ -12,6 +13,7 @@ import com.zhengsr.wanandroid.mvp.base.IBaseView;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.model.DataManager;
 import com.zhengsr.wanandroid.net.CusSubscribe;
+import com.zhengsr.wanandroid.utils.Lgg;
 import com.zhengsr.wanandroid.utils.RxUtils;
 
 import java.util.List;
@@ -163,17 +165,16 @@ public class UserPresent extends BasePresent<IBaseView> {
             mView.showLoading();
         }
         addSubscribe(
+
                 mDataManager.getMyCollect(mCollectPage)
                 .compose(RxUtils.rxScheduers())
                 .compose(RxUtils.handleResult())
-                .subscribeWith(new CusSubscribe<PageDataInfo<List<ArticleData>>>(mView){
+                .subscribeWith(new CusSubscribe<PageDataInfo<List<CollectBean>>>(mView){
                     @Override
-                    public void onNext(PageDataInfo articleListBean) {
-                        super.onNext(articleListBean);
-                        mMaxCollectPage = articleListBean.getPageCount();
+                    public void onNext(PageDataInfo<List<CollectBean>> listPageDataInfo) {
+                        super.onNext(listPageDataInfo);
                         if (mView instanceof IContractView.IArticleView){
-                            articleListBean.getDatas();
-                           // ((IContractView.IArticleView) mView).loadArticle(articleListBean.getDatas(),isRefresh);
+                            ((IContractView.IArticleView) mView).loadArticle(listPageDataInfo.getDatas(),isRefresh);
                         }
                     }
                 })
@@ -204,6 +205,23 @@ public class UserPresent extends BasePresent<IBaseView> {
         }else{
             return false;
         }
+    }
+
+
+    public void removeArticle(int position,int id){
+        addSubscribe(
+                mDataManager.removeArticle(id)
+                        .compose(RxUtils.rxScheduers())
+                        .subscribeWith(new CusSubscribe<BaseResponse>(mView){
+                            @Override
+                            public void onNext(BaseResponse baseResponse) {
+                                super.onNext(baseResponse);
+                                if (mView instanceof IContractView.IArticleView) {
+                                    ((IContractView.IArticleView) mView).removeArticleSuccess(position,null);
+                                }
+                            }
+                        })
+        );
     }
 
 }

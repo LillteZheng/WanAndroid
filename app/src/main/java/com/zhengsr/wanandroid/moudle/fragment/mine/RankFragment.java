@@ -117,11 +117,7 @@ public class RankFragment extends BaseNetFragment<UserPresent> implements IContr
         }
     }
 
-    @Override
-    public void reFreshMore() {
-        super.reFreshMore();
-        mPresent.refreshRank();
-    }
+
 
 
 }

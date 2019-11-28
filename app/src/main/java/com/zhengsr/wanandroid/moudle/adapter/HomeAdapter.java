@@ -28,9 +28,7 @@ public class HomeAdapter extends BaseQuickAdapter<ArticleData, BaseViewHolder> {
         isCollected = collected;
     }
 
-    public void notifyItem(int position, ArticleData item){
 
-    }
 
     @Override
     protected void convert(BaseViewHolder helper, ArticleData item) {

@@ -59,7 +59,7 @@ public class ProjectDetailFragment extends BaseNetFragment<ProjectPresent> imple
 
     @Override
     public int getLayoutId() {
-        return R.layout.recycler_smart_layout;
+        return R.layout.fragment_project_detail;
     }
 
     @Override
@@ -102,6 +102,7 @@ public class ProjectDetailFragment extends BaseNetFragment<ProjectPresent> imple
             ImageView imageView = helper.getView(R.id.item_project_icon);
             Glide.with(_mActivity)
                     .load(item.getEnvelopePic())
+                    .placeholder(R.mipmap.loading)
                     .into(imageView);
             helper.setText(R.id.item_project_title, item.getTitle())
                     .setText(R.id.item_project_describe, item.getDesc())
