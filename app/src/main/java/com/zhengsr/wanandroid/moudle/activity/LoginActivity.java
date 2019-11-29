@@ -64,7 +64,7 @@ public class LoginActivity extends BaseDelegateActivity<UserPresent> implements 
 
     @Override
     public UserPresent getPresent() {
-        mPresent = UserPresent.create(this);
+        mPresent = new UserPresent(this);
         return mPresent;
     }
 

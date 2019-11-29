@@ -1,17 +1,24 @@
-package com.zhengsr.wanandroid.moudle.fragment.project;
+package com.zhengsr.wanandroid.moudle.fragment.navi;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.zhengsr.viewpagerlib.indicator.TabIndicator;
 import com.zhengsr.wanandroid.R;
+import com.zhengsr.wanandroid.bean.NaviBean;
+import com.zhengsr.wanandroid.bean.NaviChildrenBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
+import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
+import com.zhengsr.wanandroid.moudle.fragment.project.ProjectDetailFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
+import com.zhengsr.wanandroid.mvp.present.NaviPresent;
 import com.zhengsr.wanandroid.mvp.present.ProjectPresent;
 
 import java.util.ArrayList;
@@ -23,28 +30,26 @@ import butterknife.BindView;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements IContractView.IProjectListView {
+public class NaviTabFragment extends BaseMvpFragment  {
 
 
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
     @BindView(R.id.tabindicator)
     TabIndicator mTabIndicator;
-    public static ProjectFragment newInstance() {
+    private NaviBean mBean;
+
+    public static NaviTabFragment newInstance(NaviBean bean) {
         
         Bundle args = new Bundle();
-        
-        ProjectFragment fragment = new ProjectFragment();
+        args.putSerializable("bean",bean);
+        NaviTabFragment fragment = new NaviTabFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
 
-    @Override
-    public ProjectPresent getPresent() {
-        mPresent = new ProjectPresent(this);
-        return mPresent;
-    }
+
 
     @Override
     public int getLayoutId() {
@@ -56,24 +61,33 @@ public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements 
         super.initView(view);
         getBarTitleView().setText("项目");
         mTabIndicator.setViewPagerSwitchSpeed(mViewPager,600);
+        initToolbar();
+    }
+
+    private void initToolbar() {
+        ImageView imageView = getLeftIconView();
+        imageView.setImageResource(R.mipmap.back);
+        imageView.setTag(TAG_BACK);
+        imageView.setPadding(10,10,10,10);
+        imageView.setColorFilter(Color.WHITE);
+        getRightIconView().setVisibility(View.GONE);
 
     }
 
     @Override
     public void initDataAndEvent() {
         super.initDataAndEvent();
-        mPresent.startLoad();
-
-    }
-
-    @Override
-    public void getProjectList(List<ProjectListBean> projectListBeans) {
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+        }
+        mBean = (NaviBean) arguments.getSerializable("bean");
+        getBarTitleView().setText(mBean.getName());
         List<String> titles = new ArrayList<>();
         List<Fragment> fragments = new ArrayList<>();
-        for (ProjectListBean bean : projectListBeans) {
-            String title = bean.getName().replaceAll("&amp;","和");
+        for (NaviChildrenBean child : mBean.getChildren()) {
+            String title = child.getName().replaceAll("&amp;","和");
             titles.add(title);
-            fragments.add(ProjectDetailFragment.newInstance(bean));
+            fragments.add(NaviRecyFragment.newInstance(child));
         }
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),fragments));
         mTabIndicator.setTabData(mViewPager, titles, new TabIndicator.TabClickListener() {
@@ -82,7 +96,9 @@ public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements 
                 mViewPager.setCurrentItem(position);
             }
         });
+
     }
+
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         List<Fragment> fragments;

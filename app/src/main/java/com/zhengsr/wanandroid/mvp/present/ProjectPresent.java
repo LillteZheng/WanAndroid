@@ -16,19 +16,12 @@ import java.util.List;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class ProjectPresent extends BasePresent {
-    private DataManager mDataManager;
-    private IBaseView mView;
-    public static ProjectPresent create(IBaseView view){
-        return new ProjectPresent(view);
+public class ProjectPresent extends BasePresent<IBaseView> {
+
+
+    public ProjectPresent(IBaseView view) {
+        super(view);
     }
-    private ProjectPresent(IBaseView view){
-        mDataManager = DataManager.getInstance();
-        mView = view;
-    }
-
-
-
 
     public void startLoad(){
         mView.showLoading();

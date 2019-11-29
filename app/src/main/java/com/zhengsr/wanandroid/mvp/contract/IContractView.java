@@ -5,6 +5,7 @@ import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.LoginBean;
+import com.zhengsr.wanandroid.bean.NaviBean;
 import com.zhengsr.wanandroid.bean.ProjectBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
@@ -69,6 +70,12 @@ public interface IContractView {
     }
     interface IProjectDetailView extends IBaseView{
         void getProjectDetail(List<ProjectBean> beans, int maxPage,boolean isRefresh);
+    }
+    interface INaviView extends IBaseView{
+        void getTreeKnowledge(List<NaviBean> beans);
+    }
+    interface INaviDetailView<T> extends IAddOrCancelArticleView<T>{
+        void getNaviDetail(int maxPage,List<ArticleData> datas,boolean isRefresh);
     }
 
 }

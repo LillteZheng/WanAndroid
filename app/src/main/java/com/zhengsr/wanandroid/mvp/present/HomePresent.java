@@ -28,19 +28,12 @@ import io.reactivex.functions.Function4;
  * Describe:
  */
 public class HomePresent extends BasePresent<IContractView.IHomeView> {
-    private DataManager mDataManager;
-    private int mCurNum;
-    private IContractView.IHomeView mView;
+    private int mCurNum = 0;
 
-    public static HomePresent create(IContractView.IHomeView view) {
-        return new HomePresent(view);
+    public HomePresent(IContractView.IHomeView view) {
+        super(view);
     }
 
-    private HomePresent(IContractView.IHomeView view) {
-        mView = view;
-        mDataManager = DataManager.getInstance();
-        mCurNum = 0;
-    }
 
     /**
      * 开始加载数据

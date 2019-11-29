@@ -56,7 +56,7 @@ public class ArticleFragment extends BaseNetFragment<UserPresent> implements Bas
 
     @Override
     public UserPresent getPresent() {
-        mPresent = UserPresent.create(this);
+        mPresent = new UserPresent(this);
         return mPresent;
     }
 

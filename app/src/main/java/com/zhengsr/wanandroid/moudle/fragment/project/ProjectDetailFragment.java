@@ -18,9 +18,6 @@ import com.zhengsr.wanandroid.bean.ProjectBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.WebBean;
 import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
-import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
-import com.zhengsr.wanandroid.moudle.fragment.HomeFragment;
-import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.ProjectPresent;
@@ -57,13 +54,13 @@ public class ProjectDetailFragment extends BaseNetFragment<ProjectPresent> imple
 
     @Override
     public ProjectPresent getPresent() {
-        mPresent = ProjectPresent.create(this);
+        mPresent = new ProjectPresent(this);
         return mPresent;
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_project_detail;
+        return R.layout.fragment_viewpager_detail;
     }
 
     @Override

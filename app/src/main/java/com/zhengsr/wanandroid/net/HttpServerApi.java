@@ -4,6 +4,7 @@ package com.zhengsr.wanandroid.net;
 
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
+import com.zhengsr.wanandroid.bean.NaviBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
@@ -145,4 +146,17 @@ public interface HttpServerApi {
      */
     @POST("lg/uncollect_originId/{id}/json")
     Observable<BaseResponse> removeArticle(@Path("id") int id);
+
+    /**
+     * https://www.wanandroid.com/tree/json
+     */
+    @GET("tree/json")
+    Observable<BaseResponse<List<NaviBean>>> getTreeKnowledge();
+
+    /**
+     * https://www.wanandroid.com/article/list/0/json?cid=60
+     *
+     */
+    @GET("article/list/{page}/json")
+    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getNaviDetail(@Path("page") int page,@Query("cid") int cid);
 }

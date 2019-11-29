@@ -4,6 +4,7 @@ package com.zhengsr.wanandroid.mvp.model;
 
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
+import com.zhengsr.wanandroid.bean.NaviBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * @author by  zhengshaorui on 2019/10/9
@@ -159,6 +161,25 @@ public class DataManager {
      * @return
      */
     public Observable<BaseResponse> removeArticle(int id){
+
         return mServerApi.removeArticle(id);
+    }
+
+    /**
+     * 获取知识体系
+     * @return
+     */
+    public Observable<BaseResponse<List<NaviBean>>> getTreeKnowledge(){
+        return mServerApi.getTreeKnowledge();
+    }
+
+    /**
+     * 获取知识体系下具体的文章
+     * @param page
+     * @param cid
+     * @return
+     */
+    public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getNaviDetail(int page, int cid){
+        return mServerApi.getNaviDetail(page,cid);
     }
 }

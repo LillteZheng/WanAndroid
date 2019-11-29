@@ -15,18 +15,11 @@ import com.zhengsr.wanandroid.utils.RxUtils;
  * Describe:
  */
 public class ArticlePresent extends BasePresent<IContractView.IAddOrCancelArticleView> {
-    private DataManager mDataManager;
-    private IContractView.IAddOrCancelArticleView mView;
 
-    public static ArticlePresent create(IContractView.IAddOrCancelArticleView view) {
-        return new ArticlePresent(view);
+
+    public ArticlePresent(IContractView.IAddOrCancelArticleView view) {
+        super(view);
     }
-
-    private ArticlePresent(IContractView.IAddOrCancelArticleView view) {
-        mView = view;
-        mDataManager = DataManager.getInstance();
-    }
-
 
     public void addArticle(int position, WebBean data) {
         addSubscribe(

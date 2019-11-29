@@ -49,7 +49,7 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
     private List<ArticleData> mArticleBeans = new ArrayList<>();
     @Override
     public HomePresent getPresent() {
-        mPresent = HomePresent.create(this);
+        mPresent = new HomePresent(this);
         return mPresent;
     }
 

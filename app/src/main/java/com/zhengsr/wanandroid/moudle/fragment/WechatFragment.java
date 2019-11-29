@@ -28,7 +28,7 @@ public class WechatFragment extends BaseMvpFragment {
     }
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_navi;
+        return R.layout.fragment_wechat;
     }
 
     @Override

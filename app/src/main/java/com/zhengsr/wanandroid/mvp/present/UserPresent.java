@@ -23,18 +23,15 @@ import java.util.List;
  * Describe: 登录，注册等复用present
  */
 public class UserPresent extends BasePresent<IBaseView> {
-    private DataManager mDataManager;
-    private IBaseView mView;
+
     private int mRankPage = 0;
     private int mCollectPage = 0;
     private int mMaxCollectPage = -1;
-    public static UserPresent create(IBaseView view){
-        return new UserPresent(view);
+
+    public UserPresent(IBaseView view) {
+        super(view);
     }
-    private UserPresent(IBaseView view){
-        mDataManager = DataManager.getInstance();
-        mView = view;
-    }
+
 
     /**
      * 登录

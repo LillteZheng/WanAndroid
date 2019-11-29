@@ -91,7 +91,7 @@ public class MineFragment extends BaseMvpFragment<UserPresent> implements BaseQu
 
     @Override
     public UserPresent getPresent() {
-        mPresent = UserPresent.create(this);
+        mPresent = new UserPresent(this);
         return mPresent;
 
     }

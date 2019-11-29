@@ -1,6 +1,9 @@
 package com.zhengsr.wanandroid.mvp.base;
 
+import android.view.View;
+
 import com.zhengsr.wanandroid.Constant;
+import com.zhengsr.wanandroid.mvp.model.DataManager;
 import com.zhengsr.wanandroid.utils.SpfUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -10,7 +13,15 @@ import io.reactivex.disposables.Disposable;
  * @author by  zhengshaorui on 2019/10/9
  * Describe:公用present
  */
-public class BasePresent<T> {
+public class BasePresent<T extends IBaseView> {
+
+    protected DataManager mDataManager;
+    protected T mView;
+
+    public BasePresent(T view){
+        mView = view;
+        mDataManager = DataManager.getInstance();
+    }
 
     /**
      * 防止 rxjava 内存泄漏问题，即程序退出了还在执行网络操作

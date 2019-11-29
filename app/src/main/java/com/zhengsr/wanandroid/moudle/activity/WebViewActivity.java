@@ -35,7 +35,7 @@ public class WebViewActivity extends BaseDelegateActivity<ArticlePresent> implem
 
     @Override
     public ArticlePresent getPresent() {
-        mPresent = ArticlePresent.create(this);
+        mPresent = new ArticlePresent(this);
         return mPresent;
     }
 
