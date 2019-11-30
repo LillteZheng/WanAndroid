@@ -14,6 +14,7 @@ import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
+import com.zhengsr.wanandroid.bean.WechatBean;
 
 import java.util.List;
 
@@ -148,15 +149,40 @@ public interface HttpServerApi {
     Observable<BaseResponse> removeArticle(@Path("id") int id);
 
     /**
+     * 获取体系
      * https://www.wanandroid.com/tree/json
      */
     @GET("tree/json")
     Observable<BaseResponse<List<NaviBean>>> getTreeKnowledge();
 
     /**
+     * 获取系列的具体内容
      * https://www.wanandroid.com/article/list/0/json?cid=60
      *
      */
     @GET("article/list/{page}/json")
     Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getNaviDetail(@Path("page") int page,@Query("cid") int cid);
+
+
+    /**
+     * 获取公众号
+     * https://wanandroid.com/wxarticle/chapters/json
+     */
+    @GET("wxarticle/chapters/json")
+    Observable<BaseResponse<List<WechatBean>>> getWechatList();
+
+    /**
+     * 获取某个公众号的具体内容
+     * https://wanandroid.com/wxarticle/list/408/1/json
+     */
+    @GET("wxarticle/list/{id}/{page}/json ")
+    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getWechatAuthor(@Path("id") int id,@Path("page") int page);
+
+    /**
+     * https://wanandroid.com/wxarticle/list/408/1/json?k=Java
+     */
+    @GET("wxarticle/list/{id}/{page}/json")
+    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchWechatBykey(@Path("id") int id,
+                                                                                @Path("page") int page,
+                                                                                @Query("k") String keyMsg);
 }

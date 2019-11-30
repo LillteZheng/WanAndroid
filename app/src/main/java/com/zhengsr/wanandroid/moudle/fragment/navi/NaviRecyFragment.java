@@ -149,6 +149,7 @@ public class NaviRecyFragment extends BaseNetFragment<NaviPresent> implements IC
     @Override
     public void reFreshMore() {
         super.reFreshMore();
+        mCurPage = 0;
         mPresent.getDetailNavi(mCurPage,mNaviChildBean);
     }
 
@@ -158,6 +159,7 @@ public class NaviRecyFragment extends BaseNetFragment<NaviPresent> implements IC
         if (mCurPage >= mMaxPage){
             Toast.makeText(_mActivity, "已经到底啦", Toast.LENGTH_SHORT).show();
         }
+        mCurPage ++;
         mPresent.loadMore(mCurPage,mNaviChildBean);
     }
 }

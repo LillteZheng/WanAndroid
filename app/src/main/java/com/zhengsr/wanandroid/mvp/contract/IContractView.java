@@ -11,6 +11,7 @@ import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
+import com.zhengsr.wanandroid.bean.WechatBean;
 import com.zhengsr.wanandroid.mvp.base.IBaseView;
 
 import java.util.List;
@@ -71,11 +72,24 @@ public interface IContractView {
     interface IProjectDetailView extends IBaseView{
         void getProjectDetail(List<ProjectBean> beans, int maxPage,boolean isRefresh);
     }
+
+    /**
+     * 知识体系
+     */
     interface INaviView extends IBaseView{
         void getTreeKnowledge(List<NaviBean> beans);
     }
     interface INaviDetailView<T> extends IAddOrCancelArticleView<T>{
         void getNaviDetail(int maxPage,List<ArticleData> datas,boolean isRefresh);
+    }
+
+    interface IWechatView extends IBaseView{
+        void getWechatList(List<WechatBean> beans);
+    }
+
+    interface IWechatDetailView<T> extends IAddOrCancelArticleView<T>{
+        void getWechatArticle(int maxPage,List<ArticleData> datas,boolean isRefresh);
+        void getSearchArticle(int maxPage,List<ArticleData> datas,boolean isRefresh);
     }
 
 }

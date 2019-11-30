@@ -10,6 +10,7 @@ import com.zhengsr.wanandroid.moudle.fragment.base.BaseDelegateFragment;
 import com.zhengsr.wanandroid.moudle.fragment.mine.MineFragment;
 import com.zhengsr.wanandroid.moudle.fragment.navi.NaviFragment;
 import com.zhengsr.wanandroid.moudle.fragment.project.ProjectFragment;
+import com.zhengsr.wanandroid.moudle.fragment.wechat.WechatFragment;
 
 import me.yokeyword.fragmentation.SupportFragment;
 

@@ -14,6 +14,7 @@ import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
+import com.zhengsr.wanandroid.bean.WechatBean;
 import com.zhengsr.wanandroid.net.HttpCreate;
 import com.zhengsr.wanandroid.net.HttpServerApi;
 
@@ -181,5 +182,29 @@ public class DataManager {
      */
     public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getNaviDetail(int page, int cid){
         return mServerApi.getNaviDetail(page,cid);
+    }
+
+    /**
+     * 获取微信公众号列表
+     * @return
+     */
+    public Observable<BaseResponse<List<WechatBean>>> getWechatList(){
+        return mServerApi.getWechatList();
+    }
+
+    /**
+     * 获取某个公众号的具体文章
+     * @param id
+     * @param page
+     * @return
+     */
+    public Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getWechatAuthor(int id, int page){
+        return mServerApi.getWechatAuthor(id,page);
+    }
+
+    public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchWechatBykey(int id,
+                                                                                        int page,
+                                                                                        String keyMsg){
+        return mServerApi.searchWechatBykey(id,page,keyMsg);
     }
 }
