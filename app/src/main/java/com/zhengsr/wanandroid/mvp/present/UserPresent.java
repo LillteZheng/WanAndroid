@@ -1,5 +1,7 @@
 package com.zhengsr.wanandroid.mvp.present;
 
+import android.net.MacAddress;
+
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
@@ -8,6 +10,7 @@ import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
+import com.zhengsr.wanandroid.bean.ShareBean;
 import com.zhengsr.wanandroid.mvp.base.BasePresent;
 import com.zhengsr.wanandroid.mvp.base.IBaseView;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
@@ -221,4 +224,66 @@ public class UserPresent extends BasePresent<IBaseView> {
         );
     }
 
+    /**
+     * 分享
+     */
+
+    public void getMyShareData(int page,boolean showLoading,boolean isRefresh){
+        if (showLoading){
+            mView.showLoading();
+        }
+        addSubscribe(
+                mDataManager.getMyShareData(page)
+                .compose(RxUtils.rxScheduers())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new CusSubscribe<ShareBean>(mView){
+                    @Override
+                    public void onNext(ShareBean shareBean) {
+                        super.onNext(shareBean);
+                        if (mView instanceof IContractView.IShareView){
+                            ShareBean.CoinInfoBean coinInfo = shareBean.getCoinInfo();
+                            ShareBean.ShareArticlesBean shareArticles = shareBean.getShareArticles();
+                            ((IContractView.IShareView) mView).getShareData(shareArticles.getPageCount(),
+                                    shareArticles.getDatas(),isRefresh);
+                        }
+                    }
+                })
+        );
+    }
+
+    public void deleteShare(int position,int id){
+        addSubscribe(
+                mDataManager.deleteMyShare(id)
+                .compose(RxUtils.rxScheduers())
+                .subscribeWith(new CusSubscribe<BaseResponse>(mView){
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        super.onNext(baseResponse);
+                        if (mView instanceof IContractView.IShareView){
+                            ((IContractView.IShareView) mView).deleteSuccess(position);
+                        }
+                    }
+                })
+        );
+    }
+
+    public void shareArticle(String title,String link){
+        addSubscribe(
+                mDataManager.shareArticle(title,link)
+                .compose(RxUtils.rxScheduers())
+                .subscribeWith(new CusSubscribe<BaseResponse>(mView){
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        super.onNext(baseResponse);
+                        if (mView instanceof IContractView.IShareView){
+                            if (baseResponse.getErrorCode() == 0) {
+                                ((IContractView.IShareView) mView).shareSuccess();
+                            }else{
+                                mView.showErrorMsg(baseResponse.getErrorMsg());
+                            }
+                        }
+                    }
+                })
+        );
+    }
 }

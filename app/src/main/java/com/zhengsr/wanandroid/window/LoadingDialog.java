@@ -16,7 +16,7 @@ public class LoadingDialog {
     public LoadingDialog(Context context,String msg) {
         mDialog = new CusDialog.Builder()
                 .setContext(context)
-                .setLayoutId(R.layout.loading_white_layout)
+                .setLayoutId(R.layout.dialog_loaing)
                 .setWidth(DpUtils.getIntDpSize(context,200))
                 .setHeight(DpUtils.getIntDpSize(context,120))
                 .setOutSideDimiss(false)

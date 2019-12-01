@@ -6,6 +6,7 @@ import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.NaviBean;
+import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.ProjectBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
@@ -90,6 +91,17 @@ public interface IContractView {
     interface IWechatDetailView<T> extends IAddOrCancelArticleView<T>{
         void getWechatArticle(int maxPage,List<ArticleData> datas,boolean isRefresh);
         void getSearchArticle(int maxPage,List<ArticleData> datas,boolean isRefresh);
+    }
+
+    interface ISquareView<T> extends IAddOrCancelArticleView<T>{
+        void getSquareData(int maxPage,List<ArticleData> datas,boolean isRefresh);
+        void getShareData(int maxPage,List<ArticleData> datas,boolean isRefresh);
+    }
+
+    interface IShareView extends IBaseView{
+        void getShareData(int maxPage,List<ArticleData> datas,boolean isRefresh);
+        void deleteSuccess(int position);
+        void shareSuccess();
     }
 
 }

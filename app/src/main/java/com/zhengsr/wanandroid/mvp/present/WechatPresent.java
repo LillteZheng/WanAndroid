@@ -41,11 +41,11 @@ public class WechatPresent extends BasePresent<IBaseView> {
     }
 
     public void getWechatAuthor(int page, WechatBean bean) {
-        getWechatAuthor(page,bean,true);
+        getWechatAuthor(page,bean,true,true);
     }
 
-    private void getWechatAuthor(int page,WechatBean bean,boolean isRefresh){
-        if (isRefresh){
+    private void getWechatAuthor(int page,WechatBean bean,boolean showLoading,boolean isRefresh){
+        if (showLoading){
             mView.showLoading();
         }
         addSubscribe(
@@ -64,8 +64,12 @@ public class WechatPresent extends BasePresent<IBaseView> {
         );
     }
 
+    public void refresh(int page,WechatBean bean){
+        getWechatAuthor(page,bean,false,true);
+    }
+
     public void loadMore(int page, WechatBean bean){
-        getWechatAuthor(page,bean,false);
+        getWechatAuthor(page,bean,false,false);
     }
 
     public void addArticle(int position, ArticleData data){

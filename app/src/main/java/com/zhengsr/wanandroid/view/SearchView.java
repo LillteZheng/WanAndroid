@@ -44,9 +44,9 @@ public class SearchView extends InputView {
 
     @Override
     public int[] getLeftImgSize() {
-        int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,18,getResources().getDisplayMetrics());
-        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,18,getResources().getDisplayMetrics());
-        return new int[]{width,height};
+        int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, getResources().getDisplayMetrics());
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, getResources().getDisplayMetrics());
+        return new int[]{width, height};
     }
 
     @Override
@@ -54,19 +54,25 @@ public class SearchView extends InputView {
         return new ImageView[0];
     }
 
-    public String getMsg(){
+    public String getMsg() {
         return mEditText.getText().toString().trim();
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        mListener.isEmpty(s.length() <= 0);
+        if (mListener != null) {
+            mListener.isEmpty(s.length() <= 0);
+
+        }
     }
+
     private TextChangeListener mListener;
-    public void setListener(TextChangeListener listener){
+
+    public void setListener(TextChangeListener listener) {
         mListener = listener;
     }
-    public interface TextChangeListener{
+
+    public interface TextChangeListener {
         void isEmpty(boolean isEmpty);
     }
 }

@@ -19,6 +19,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhengsr.wanandroid.Constant;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.moudle.fragment.MainFragment;
+import com.zhengsr.wanandroid.moudle.fragment.SquareFragment;
 import com.zhengsr.wanandroid.utils.SpfUtils;
 
 import butterknife.ButterKnife;
@@ -127,11 +128,15 @@ public abstract class BaseDelegateFragment extends SupportFragment {
     public void initDataAndEvent() {
         //可以在initview 中去配置是否坐这边的图片是作为返回的
         ImageView imageView = mView.findViewById(R.id.toolbar_left_iv);
-        if (imageView != null && TAG_BACK.equals(imageView.getTag())) {
+        if (imageView != null) {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pop();
+                    if (TAG_BACK.equals(imageView.getTag())) {
+                        pop();
+                    }else{
+                        useParentStart(SquareFragment.newInstance(null));
+                    }
                 }
             });
         }

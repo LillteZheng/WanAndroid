@@ -60,7 +60,6 @@ public class WechatDetailFragment extends BaseNetFragment<WechatPresent> impleme
     private int mMaxPage;
     private int mSearchMaxPage;
     private List<ArticleData> mArticleBeans = new ArrayList<>();
-    private List<ArticleData> mCacheArticles = new ArrayList<>();
 
     @Override
     public int getLayoutId() {
@@ -96,22 +95,13 @@ public class WechatDetailFragment extends BaseNetFragment<WechatPresent> impleme
             mPresent.getWechatAuthor(mCurPage, mBean);
         }
 
-        mSearchView.setListener(new SearchView.TextChangeListener() {
-            @Override
-            public void isEmpty(boolean isEmpty) {
-                if (isEmpty && !mCacheArticles.isEmpty()) {
-                    mArticleBeans.clear();
-                    mArticleBeans.addAll(mCacheArticles);
-                    mAdapter.notifyDataSetChanged();
-                    isSearchLogic = false;
-                }
-            }
-        });
+
     }
 
     @Override
     public void getWechatArticle(int maxPage, List<ArticleData> datas, boolean isRefresh) {
         mMaxPage = maxPage;
+        isSearchLogic = false;
         if (isRefresh) {
             mArticleBeans.clear();
         }
@@ -119,8 +109,6 @@ public class WechatDetailFragment extends BaseNetFragment<WechatPresent> impleme
         mAdapter.notifyDataSetChanged();
         View emptyView = LayoutInflater.from(_mActivity).inflate(R.layout.nothing_layout, null);
         mAdapter.setEmptyView(emptyView);
-        mCacheArticles.clear();
-        mCacheArticles.addAll(mArticleBeans);
     }
 
     @Override
@@ -204,14 +192,10 @@ public class WechatDetailFragment extends BaseNetFragment<WechatPresent> impleme
     @Override
     public void reFreshMore() {
         super.reFreshMore();
-        if (!isSearchLogic) {
-            mCurPage = 1;
-            mPresent.getWechatAuthor(mCurPage, mBean);
-        } else {
-            mSearchPage = 1;
-            String msg = mSearchView.getMsg();
-            mPresent.searchKeyMsg(mSearchPage, mBean.getId(), msg, true);
-        }
+
+        mCurPage = 1;
+        mPresent.refresh(mCurPage,mBean);
+
     }
 
     @Override

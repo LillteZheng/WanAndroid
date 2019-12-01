@@ -14,6 +14,7 @@ import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
+import com.zhengsr.wanandroid.bean.ShareBean;
 import com.zhengsr.wanandroid.bean.WechatBean;
 
 import java.util.List;
@@ -112,6 +113,27 @@ public interface HttpServerApi {
             String password, @Field("repassword") String repassword);
 
     /**
+     * 我的分享
+     * https://wanandroid.com/user/lg/private_articles/1/json
+     */
+    @GET("user/lg/private_articles/{page}/json")
+    Observable<BaseResponse<ShareBean>> getMyShareData(@Path("page") int page);
+    /**
+     * 删除分享文章
+     * https://wanandroid.com/lg/user_article/delete/9475/json
+     */
+    @POST("lg/user_article/delete/{id}/json")
+    Observable<BaseResponse> deleteMyShare(@Path("id") int id);
+
+    /**
+     * 分享文章
+     * https://www.wanandroid.com/lg/user_article/add/json
+     */
+    @POST("lg/user_article/add/json")
+    @FormUrlEncoded
+    Observable<BaseResponse> shareArticle(@Field("title") String title,@Field("link") String link);
+
+    /**
      * 我的收藏
      * https://www.wanandroid.com/lg/collect/list/0/json
      * @return
@@ -185,4 +207,19 @@ public interface HttpServerApi {
     Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchWechatBykey(@Path("id") int id,
                                                                                 @Path("page") int page,
                                                                                 @Query("k") String keyMsg);
+
+    /**
+     * https://wanandroid.com/user_article/list/页码/json
+     * 从0开始
+     * @return
+     */
+    @GET("user_article/list/{page}/json")
+    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getSquareDatas(@Path("page") int page);
+
+    /**
+     * https://www.wanandroid.com/user/2/share_articles/页码/json
+     * 获取分享人的分享文章列表
+     */
+    @GET("user/{id}/share_articles/{page}/json")
+    Observable<BaseResponse<ShareBean>> getUserShareData(@Path("id") int id, @Path("page") int page);
 }

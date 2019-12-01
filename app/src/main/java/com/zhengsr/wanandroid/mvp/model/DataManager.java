@@ -14,6 +14,7 @@ import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
+import com.zhengsr.wanandroid.bean.ShareBean;
 import com.zhengsr.wanandroid.bean.WechatBean;
 import com.zhengsr.wanandroid.net.HttpCreate;
 import com.zhengsr.wanandroid.net.HttpServerApi;
@@ -202,9 +203,64 @@ public class DataManager {
         return mServerApi.getWechatAuthor(id,page);
     }
 
+    /**
+     * 搜索公众号关键字
+     * @param id
+     * @param page
+     * @param keyMsg
+     * @return
+     */
     public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchWechatBykey(int id,
                                                                                         int page,
                                                                                         String keyMsg){
         return mServerApi.searchWechatBykey(id,page,keyMsg);
     }
+
+    /**
+     * 拿到广场数据
+     * @param page
+     * @return
+     */
+    public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getSquareDatas(int page){
+        return mServerApi.getSquareDatas(page);
+    }
+
+    /**
+     * 拿到某个id分享的列表
+     * @param id
+     * @param page
+     * @return
+     */
+    public Observable<BaseResponse<ShareBean>> getUserShareData(int id, int page){
+        return mServerApi.getUserShareData(id,page);
+    }
+
+    /**
+     * 拿到我的分享
+     * @param page
+     * @return
+     */
+    public Observable<BaseResponse<ShareBean>> getMyShareData( int page){
+        return mServerApi.getMyShareData(page);
+    }
+
+    /**
+     * 删除分享
+     * @param id
+     * @return
+     */
+    public  Observable<BaseResponse> deleteMyShare( int id){
+        return mServerApi.deleteMyShare(id);
+    }
+
+    /**
+     * 添加分享
+     * @param title
+     * @param link
+     * @return
+     */
+    public Observable<BaseResponse> shareArticle( String title, String link){
+        return mServerApi.shareArticle(title,link);
+    }
+
 }

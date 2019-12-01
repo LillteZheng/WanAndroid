@@ -103,6 +103,7 @@ public class MineFragment extends BaseMvpFragment<UserPresent> implements BaseQu
         mAdapter = new MineAdapter(R.layout.item_mine,mData);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -148,7 +149,9 @@ public class MineFragment extends BaseMvpFragment<UserPresent> implements BaseQu
         }else {
             if (isLogin()){
                 switch (position){
-
+                    case 1:
+                        useParentStart(ShareFragment.newInstance());
+                        break;
                     case 2:
                         useParentStart(ArticleFragment.newInstance());
                         break;

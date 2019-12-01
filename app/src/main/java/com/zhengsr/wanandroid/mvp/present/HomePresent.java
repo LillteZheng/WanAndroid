@@ -78,7 +78,7 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
                                     setPassword("");
                                 }else{
                                     setLogin(true);
-                                    Lgg.d("自动登录成功: ");
+                                   // Lgg.d("自动登录成功: ");
                                 }
                                 List<BannerBean> bannerBeans = cast(map.get(Constant.BANNER));
                                 List<ArticleData> articleData = new ArrayList<>();
