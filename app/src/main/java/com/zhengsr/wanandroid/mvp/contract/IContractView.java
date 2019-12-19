@@ -4,6 +4,7 @@ package com.zhengsr.wanandroid.mvp.contract;
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.BannerBean;
+import com.zhengsr.wanandroid.bean.HotKeyBean;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.NaviBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
@@ -102,6 +103,10 @@ public interface IContractView {
         void getShareData(int maxPage,List<ArticleData> datas,boolean isRefresh);
         void deleteSuccess(int position);
         void shareSuccess();
+    }
+
+    interface ISearchView extends IBaseView{
+        void getHotkeyData(List<HotKeyBean> datas);
     }
 
 }

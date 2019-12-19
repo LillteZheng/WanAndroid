@@ -1,5 +1,7 @@
 package com.zhengsr.wanandroid;
 
+import android.graphics.Color;
+
 /**
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
@@ -12,4 +14,18 @@ public class Constant {
     public static final String KEY_IS_LOGIN = "KEY_IS_LOGIN";
     public static final String KEY_USERNAME = "KEY_USERNAME";
     public static final String KEY_PASSWORD = "KEY_PASSWORD";
+
+    /**
+     * Tab colors
+     */
+    public static final int[] TAB_COLORS = new int[]{
+            Color.parseColor("#90C5F0"),
+            Color.parseColor("#91CED5"),
+            Color.parseColor("#F88F55"),
+            Color.parseColor("#C0AFD0"),
+            Color.parseColor("#E78F8F"),
+            Color.parseColor("#67CCB7"),
+            Color.parseColor("#F6BC7E"),
+            Color.parseColor("#3399ff")
+    };
 }

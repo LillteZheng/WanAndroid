@@ -4,6 +4,7 @@ package com.zhengsr.wanandroid.mvp.model;
 
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
+import com.zhengsr.wanandroid.bean.HotKeyBean;
 import com.zhengsr.wanandroid.bean.NaviBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
@@ -261,6 +262,10 @@ public class DataManager {
      */
     public Observable<BaseResponse> shareArticle( String title, String link){
         return mServerApi.shareArticle(title,link);
+    }
+
+    public Observable<BaseResponse<List<HotKeyBean>>> getHotkeyBean(){
+        return mServerApi.getHotkeyBean();
     }
 
 }

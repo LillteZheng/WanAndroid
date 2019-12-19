@@ -2,11 +2,13 @@ package com.zhengsr.wanandroid.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
 import com.zhengsr.ariesuilib.InputView;
 import com.zhengsr.wanandroid.R;
+import com.zhengsr.wanandroid.utils.Lgg;
 
 /**
  * @auther by zhengshaorui on 2019/11/30
@@ -31,6 +33,7 @@ public class SearchView extends InputView {
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageResource(R.mipmap.search);
         imageView.setColorFilter(getResources().getColor(R.color.wechat));
+
         return new ImageView[]{imageView};
     }
 
@@ -38,6 +41,7 @@ public class SearchView extends InputView {
     public void config() {
         super.config();
         mEditText.setHint("请输入关键字");
+
 
     }
 

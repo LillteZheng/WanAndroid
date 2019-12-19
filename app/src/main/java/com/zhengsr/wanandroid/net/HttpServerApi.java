@@ -4,6 +4,7 @@ package com.zhengsr.wanandroid.net;
 
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
+import com.zhengsr.wanandroid.bean.HotKeyBean;
 import com.zhengsr.wanandroid.bean.NaviBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
@@ -222,4 +223,19 @@ public interface HttpServerApi {
      */
     @GET("user/{id}/share_articles/{page}/json")
     Observable<BaseResponse<ShareBean>> getUserShareData(@Path("id") int id, @Path("page") int page);
+
+
+    /**
+     * 获取热搜
+     * http://www.wanandroid.com/hotkey/json
+     */
+    @GET("hotkey/json")
+    Observable<BaseResponse<List<HotKeyBean>>> getHotkeyBean();
+
+    /**
+     * 搜索关键字
+     * https://www.wanandroid.com/article/query/0/json
+     */
+    @POST("article/query/{page}/json")
+    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchArticleByKeyWord(@Path("page") int page,@Field("k") String word);
 }

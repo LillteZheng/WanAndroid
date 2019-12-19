@@ -6,6 +6,7 @@
     <color name="main_color">#3399ff</color>
     <color name="bottom_normal_color">#808080</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_ff">#D3FFFFFF</color>
     <color name="black">#000000</color>
     <color name="wechat">#323232</color>
     <color name="black_ff">#b01a1a1a</color>
