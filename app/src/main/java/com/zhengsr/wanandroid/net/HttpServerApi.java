@@ -135,6 +135,17 @@ public interface HttpServerApi {
     Observable<BaseResponse> shareArticle(@Field("title") String title,@Field("link") String link);
 
     /**
+     * 收藏站外文章
+     * https://www.wanandroid.com/lg/collect/add/json
+     * post
+     */
+    @POST("lg/collect/add/json")
+    @FormUrlEncoded
+    Observable<BaseResponse<CollectBean>> addLinkArticle(@Field("title") String title,
+                                        @Field("author") String author,
+                                        @Field("link") String link);
+
+    /**
      * 我的收藏
      * https://www.wanandroid.com/lg/collect/list/0/json
      * @return
@@ -237,5 +248,6 @@ public interface HttpServerApi {
      * https://www.wanandroid.com/article/query/0/json
      */
     @POST("article/query/{page}/json")
-    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchArticleByKeyWord(@Path("page") int page,@Field("k") String word);
+    Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchArticleByKeyWord(@Path("page") int page,
+                                                                                     @Query("k") String word);
 }

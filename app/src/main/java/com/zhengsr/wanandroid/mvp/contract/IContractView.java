@@ -42,6 +42,7 @@ public interface IContractView {
 
     interface IArticleView<T> extends IAddOrCancelArticleView<T> {
         void loadArticle(List<CollectBean> collectBeans, boolean isRefresh);
+        void addSuccess();
     }
 
     /**
@@ -105,8 +106,14 @@ public interface IContractView {
         void shareSuccess();
     }
 
-    interface ISearchView extends IBaseView{
+    interface IHotKeyView extends IBaseView{
         void getHotkeyData(List<HotKeyBean> datas);
+
     }
+
+    interface ISearchView extends IAddOrCancelArticleView<ArticleData>{
+        void getSearchData(int maxPage, List<ArticleData> datas, boolean isRefresh);
+    }
+
 
 }

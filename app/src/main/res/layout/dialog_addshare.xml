@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:minHeight="200dp"
+    android:minHeight="210dp"
     android:background="@drawable/round_white_shape"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -42,8 +42,9 @@
         android:layout_marginTop="10dp"
         android:textSize="14sp"
         />
+
     <EditText
-        android:id="@+id/dialog_share_link"
+        android:id="@+id/dialog_share_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -52,7 +53,22 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        android:hint="文章链接"
+        android:visibility="gone"
+        android:hint="请输入作者"
+        android:textSize="14sp"
+        />
+
+    <EditText
+        android:id="@+id/dialog_share_link"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_share_author"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="文章链接(请以http或https开头)"
         android:textSize="14sp"
         />
 
@@ -66,8 +82,10 @@
         android:gravity="center"
         android:background="@drawable/round_maincolor_shape"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:clickable="true"
         android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_share_link"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

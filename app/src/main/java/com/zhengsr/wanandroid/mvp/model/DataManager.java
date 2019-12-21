@@ -130,6 +130,10 @@ public class DataManager {
         return mServerApi.getMyCollect(page);
     }
 
+    public Observable<BaseResponse<CollectBean>> addLinkArticle(String title,String author,String link){
+        return mServerApi.addLinkArticle(title,author,link);
+    }
+
     /**
      * 项目分类
      * @return
@@ -264,8 +268,22 @@ public class DataManager {
         return mServerApi.shareArticle(title,link);
     }
 
+    /**
+     * 拿到搜索热刺
+     * @return
+     */
     public Observable<BaseResponse<List<HotKeyBean>>> getHotkeyBean(){
         return mServerApi.getHotkeyBean();
+    }
+
+    /**
+     * 搜索关键字，以空格隔开
+     * @param page
+     * @param keyWord
+     * @return
+     */
+    public Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchArticleByKeyWord(int page,String keyWord){
+        return mServerApi.searchArticleByKeyWord(page,keyWord);
     }
 
 }

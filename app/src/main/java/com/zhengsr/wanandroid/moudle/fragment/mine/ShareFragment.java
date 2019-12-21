@@ -22,7 +22,7 @@ import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.UserPresent;
-import com.zhengsr.wanandroid.window.AddShareDialog;
+import com.zhengsr.wanandroid.window.AddDialog;
 import com.zhengsr.wanandroid.window.LoadingDialog;
 
 import java.util.ArrayList;
@@ -42,7 +42,6 @@ public class ShareFragment extends BaseNetFragment<UserPresent> implements BaseQ
     public static ShareFragment newInstance() {
 
         Bundle args = new Bundle();
-
         ShareFragment fragment = new ShareFragment();
         fragment.setArguments(args);
         return fragment;
@@ -51,7 +50,7 @@ public class ShareFragment extends BaseNetFragment<UserPresent> implements BaseQ
     RecyclerView mRecyclerView;
     private int mCurPage = 1;
     private int mMaxPage ;
-
+    private boolean isNotShare;
     private CollectAdapter mAdapter;
     private List<ArticleData> mArticleDatas = new ArrayList<>();
 
@@ -71,13 +70,15 @@ public class ShareFragment extends BaseNetFragment<UserPresent> implements BaseQ
         super.initView(view);
         LinearLayoutManager manager = new LinearLayoutManager(_mActivity);
         mRecyclerView.setLayoutManager(manager);
-        mAdapter = new CollectAdapter(R.layout.item_article_recy_layout, mArticleDatas);
+        mAdapter = new CollectAdapter(R.layout.item_article_recy_layout,mArticleDatas );
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter.setOnItemChildClickListener(this);
         mAdapter.setOnItemClickListener(this);
         initToolbar();
     }
+
+
 
     @Override
     public void initDataAndEvent() {
@@ -87,6 +88,7 @@ public class ShareFragment extends BaseNetFragment<UserPresent> implements BaseQ
         mAdapter.setEmptyView(view);
     }
     private void initToolbar() {
+
         getBarTitleView().setText("我的分享");
         ImageView imageView = getLeftIconView();
         imageView.setImageResource(R.mipmap.back);
@@ -94,13 +96,14 @@ public class ShareFragment extends BaseNetFragment<UserPresent> implements BaseQ
         imageView.setPadding(10,10,10,10);
         imageView.setColorFilter(Color.WHITE);
         getRightIconView().setImageResource(R.mipmap.add);
-
+        getRightIconView().setTag(TAG_ADD);
         getRightIconView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AddShareDialog(_mActivity).setListener(new AddShareDialog.ShareListener() {
+                new AddDialog(_mActivity).listener(new AddDialog.AddListenerAdapter(){
                     @Override
-                    public void getShare(String title, String link) {
+                    public void onMsg(String title, String link) {
+                        super.onMsg(title, link);
                         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(link)){
                             mPresent.shareArticle(title,link);
                             mDialog = new LoadingDialog(_mActivity, "正在上传...");
@@ -133,7 +136,6 @@ public class ShareFragment extends BaseNetFragment<UserPresent> implements BaseQ
         webBean.title = bean.getTitle();
         webBean.isCollect = true;
         webBean.position = position;
-        webBean.isShowIcon = false;
         webBean.url = bean.getLink();
         Intent intent = new Intent(_mActivity, WebViewActivity.class);
         intent.putExtra("bean",webBean);

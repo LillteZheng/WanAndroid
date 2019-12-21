@@ -153,7 +153,7 @@ public class MineFragment extends BaseMvpFragment<UserPresent> implements BaseQu
                         useParentStart(ShareFragment.newInstance());
                         break;
                     case 2:
-                        useParentStart(ArticleFragment.newInstance());
+                        useParentStart(MyCollectArticleFragment.newInstance());
                         break;
                         default:break;
                 }

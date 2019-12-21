@@ -33,6 +33,7 @@ import me.yokeyword.fragmentation.SupportFragment;
 public abstract class BaseDelegateFragment extends SupportFragment {
     private static final String TAG = "BaseDelegateFragment";
     protected static final String TAG_BACK = "TAG_BACK";
+    protected static final String TAG_ADD = "TAG_ADD";
     protected Unbinder mUnbinder;
     private View mView;
 
@@ -142,7 +143,7 @@ public abstract class BaseDelegateFragment extends SupportFragment {
         }
 
         ImageView rightImg = mView.findViewById(R.id.toolbar_right_iv);
-        if (rightImg != null) {
+        if (rightImg != null && !TAG_ADD.equals(rightImg.getTag())) {
             rightImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

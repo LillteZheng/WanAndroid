@@ -24,10 +24,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@+id/content"
-            app:layout_constraintLeft_toLeftOf="@+id/content"
+            app:layout_constraintStart_toStartOf="@+id/content"
+            app:layout_constraintEnd_toEndOf="@id/content"
             android:layout_marginTop="5dp"
             android:layout_marginStart="8dp"
-            android:gravity="center"
+            android:gravity="left"
             android:textColor="@color/main_color"
             tools:text="Carson_Ho" />
 
@@ -57,8 +58,10 @@
             tools:text="2019/11/18"
             android:textColor="@color/wechat"
             app:layout_constraintTop_toTopOf="@id/item_article_author"
-            app:layout_constraintTop_toBottomOf="@id/item_article_author"
-            app:layout_constraintRight_toRightOf="@+id/content"
+            app:layout_constraintBottom_toBottomOf="@id/item_article_author"
+            app:layout_constraintEnd_toEndOf="@+id/content"
+            app:layout_constraintStart_toStartOf="@id/content"
+            android:gravity="end"
             android:layout_marginEnd="12dp"
              />
 

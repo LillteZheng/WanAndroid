@@ -87,7 +87,7 @@ public class SquarePresent extends BasePresent<IContractView.ISquareView> {
                         super.onNext(info);
                         ShareBean.CoinInfoBean coinInfo = info.getCoinInfo();
                         ShareBean.ShareArticlesBean shareArticles = info.getShareArticles();
-                        //mView.getShareData(info.getPageCount(),info.getDatas(),isRefresh);
+                        //mView.getSearchData(info.getPageCount(),info.getDatas(),isRefresh);
                         mView.getShareData(shareArticles.getPageCount(),shareArticles.getDatas(),isRefresh);
                     }
                 })

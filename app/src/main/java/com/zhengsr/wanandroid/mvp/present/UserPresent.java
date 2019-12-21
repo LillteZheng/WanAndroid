@@ -270,14 +270,35 @@ public class UserPresent extends BasePresent<IBaseView> {
     public void shareArticle(String title,String link){
         addSubscribe(
                 mDataManager.shareArticle(title,link)
+                        .compose(RxUtils.rxScheduers())
+                        .subscribeWith(new CusSubscribe<BaseResponse>(mView){
+                            @Override
+                            public void onNext(BaseResponse baseResponse) {
+                                super.onNext(baseResponse);
+                                if (mView instanceof IContractView.IShareView){
+                                    if (baseResponse.getErrorCode() == 0) {
+                                        ((IContractView.IShareView) mView).shareSuccess();
+                                    }else{
+                                        mView.showErrorMsg(baseResponse.getErrorMsg());
+                                    }
+                                }
+                            }
+                        })
+        );
+    }
+
+
+    public void addLinkArticle(String title,String author,String link){
+        addSubscribe(
+               mDataManager.addLinkArticle(title,author,link)
                 .compose(RxUtils.rxScheduers())
-                .subscribeWith(new CusSubscribe<BaseResponse>(mView){
+                .subscribeWith(new CusSubscribe<BaseResponse<CollectBean>>(mView){
                     @Override
-                    public void onNext(BaseResponse baseResponse) {
+                    public void onNext(BaseResponse<CollectBean> baseResponse) {
                         super.onNext(baseResponse);
-                        if (mView instanceof IContractView.IShareView){
+                        if (mView instanceof IContractView.IArticleView){
                             if (baseResponse.getErrorCode() == 0) {
-                                ((IContractView.IShareView) mView).shareSuccess();
+                                ((IContractView.IArticleView) mView).addSuccess();
                             }else{
                                 mView.showErrorMsg(baseResponse.getErrorMsg());
                             }
