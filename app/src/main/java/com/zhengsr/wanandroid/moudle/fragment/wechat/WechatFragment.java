@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.zhengsr.tablib.view.adapter.TabAdapter;
+import com.zhengsr.tablib.view.flow.TabFlowLayout;
 import com.zhengsr.viewpagerlib.indicator.TabIndicator;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.WechatBean;
@@ -29,8 +31,8 @@ public class WechatFragment extends BaseNetFragment<WechatPresent> implements IC
 
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
-    @BindView(R.id.tabindicator)
-    TabIndicator mTabIndicator;
+    @BindView(R.id.tabflow)
+    TabFlowLayout mTabFlowLayout;
 
     public static WechatFragment newInstance() {
         
@@ -55,7 +57,7 @@ public class WechatFragment extends BaseNetFragment<WechatPresent> implements IC
     public void initView(View view) {
         super.initView(view);
         getBarTitleView().setText("体系");
-        mTabIndicator.setViewPagerSwitchSpeed(mViewPager,600);
+     //   mTabIndicator.setViewPagerSwitchSpeed(mViewPager,600);
     }
 
     @Override
@@ -75,9 +77,18 @@ public class WechatFragment extends BaseNetFragment<WechatPresent> implements IC
             fragments.add(WechatDetailFragment.newInstance(bean));
         }
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),fragments));
-        mTabIndicator.setTabData(mViewPager, titles, new TabIndicator.TabClickListener() {
+        mTabFlowLayout.setViewPager(mViewPager,R.id.item_text,getResources().getColor(R.color.unselect),
+                getResources().getColor(R.color.main_color));
+        mTabFlowLayout.setAdapter(new TabAdapter<String>(R.layout.item_tab,titles) {
+
             @Override
-            public void onClick(int position) {
+            public void bindView(View view, String data, int position) {
+                setText(view,R.id.item_text,data);
+            }
+
+            @Override
+            public void onItemClick(View view, String data, int position) {
+                super.onItemClick(view, data, position);
                 mViewPager.setCurrentItem(position);
             }
         });

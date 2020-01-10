@@ -16,29 +16,24 @@
         android:layout_height="0dp">
 
 
-        <com.zhengsr.viewpagerlib.indicator.TabIndicator
-            android:id="@+id/tabindicator"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@color/white"
-            app:layout_constraintTop_toTopOf="@+id/normal_view"
-            app:tab_color="@color/main_color"
-            app:tab_width="30dp"
-            app:tab_height="2dp"
-            app:tab_text_default_color="@color/bottom_normal_color"
-            app:tab_text_change_color="@color/main_color"
-            app:tab_show="true"
-            app:tab_text_type="colortext"
-            app:tab_textsize="14sp"
-            app:visiabel_size="3"
-            app:tap_type="rect"
+        <com.zhengsr.tablib.view.flow.TabFlowLayout
+            android:id="@+id/tabflow"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toTopOf="@id/normal_view"
+            app:tab_type="tri"
+            app:tab_color="@color/colorPrimary"
+            app:tab_height="3dp"
+            app:tab_width="10dp"
+            app:tab_margin_b="3dp"
+            android:layout_height="wrap_content"
             />
 
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/tabindicator"
+            app:layout_constraintTop_toBottomOf="@id/tabflow"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/normal_view"
             android:layout_marginBottom="10dp" />

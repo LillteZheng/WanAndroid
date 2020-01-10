@@ -88,5 +88,6 @@ ext {
             //下拉，上拉刷新
             "smartrefreshLayout"                : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0",
             "smartrefreshHeader"                : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0",
+            "flowhelper"                        : "com.github.LillteZheng:FlowHelper:v1.0"
     ]
 }

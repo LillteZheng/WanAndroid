@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.zhengsr.tablib.view.adapter.LabelFlowAdapter;
+import com.zhengsr.tablib.view.flow.LabelFlowLayout;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.HotKeyBean;
@@ -51,6 +53,13 @@ public class SearchFragment extends BaseMvpFragment<SearchPresent> implements IC
     EditText mSearchEd;
     @BindView(R.id.search_clear_his_tv)
     TextView mClearHistory;
+    @BindView(R.id.labelflow)
+    LabelFlowLayout mFlowLayout;
+
+
+    private List<HotKeyBean> mDatas = new ArrayList<>();
+    private LabelAdaper mLabelAdaper;
+
 
     @Override
     public int getLayoutId() {
@@ -74,7 +83,6 @@ public class SearchFragment extends BaseMvpFragment<SearchPresent> implements IC
         mAdapter.setOnItemChildClickListener(this);
         Map<String, String> historys =  SpfUtils.getAll(SPF_NAME);
         mClearHistory.setVisibility(View.GONE);
-        Lgg.d("his: "+historys);
         if (historys != null && !historys.isEmpty()) {
             List<String> data = new ArrayList<>();
             for (Map.Entry<String, String> stringEntry : historys.entrySet()) {
@@ -83,6 +91,9 @@ public class SearchFragment extends BaseMvpFragment<SearchPresent> implements IC
             mAdapter.setNewData(data);
             mClearHistory.setVisibility(View.VISIBLE);
         }
+
+        mLabelAdaper = new LabelAdaper(R.layout.item_textview,mDatas);
+        mFlowLayout.setAdapter(mLabelAdaper);
 
     }
 
@@ -123,6 +134,23 @@ public class SearchFragment extends BaseMvpFragment<SearchPresent> implements IC
     @Override
     public void getHotkeyData(List<HotKeyBean> datas) {
      //   mHotAdapter.setNewData(datas);
+        mDatas.clear();
+        mDatas.addAll(datas);
+        mLabelAdaper.notifyDataChanged();
+    }
+
+    class LabelAdaper extends LabelFlowAdapter<HotKeyBean>{
+
+        public LabelAdaper(int layoutId, List<HotKeyBean> data) {
+            super(layoutId, data);
+        }
+
+        @Override
+        public void bindView(View view, HotKeyBean data, int position) {
+            setText(view,R.id.item_text,data.getName())
+                    .setTextColor(view,R.id.item_text,Color.WHITE);
+            view.setBackground(CommonUtils.getColorDrawable(10));
+        }
     }
 
     @Override

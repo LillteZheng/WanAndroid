@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.zhengsr.tablib.view.adapter.TabAdapter;
+import com.zhengsr.tablib.view.flow.TabFlowLayout;
 import com.zhengsr.viewpagerlib.indicator.TabIndicator;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
@@ -28,8 +30,8 @@ public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements 
 
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
-    @BindView(R.id.tabindicator)
-    TabIndicator mTabIndicator;
+    @BindView(R.id.tabflow)
+    TabFlowLayout mTabFlowLayout;
     public static ProjectFragment newInstance() {
         
         Bundle args = new Bundle();
@@ -55,7 +57,6 @@ public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements 
     public void initView(View view) {
         super.initView(view);
         getBarTitleView().setText("项目");
-        mTabIndicator.setViewPagerSwitchSpeed(mViewPager,600);
 
     }
 
@@ -76,9 +77,19 @@ public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements 
             fragments.add(ProjectDetailFragment.newInstance(bean));
         }
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),fragments));
-        mTabIndicator.setTabData(mViewPager, titles, new TabIndicator.TabClickListener() {
+        mTabFlowLayout.setViewPager(mViewPager,R.id.item_text,getResources().getColor(R.color.black_ff),
+                getResources().getColor(R.color.main_color));
+        mTabFlowLayout.setAdapter(new TabAdapter<String>(R.layout.item_tab,titles) {
+
             @Override
-            public void onClick(int position) {
+            public void bindView(View view, String data, int position) {
+                setText(view,R.id.item_text,data)
+                        .setTextColor(view,R.id.item_text,R.color.black_ff);
+            }
+
+            @Override
+            public void onItemClick(View view, String data, int position) {
+                super.onItemClick(view, data, position);
                 mViewPager.setCurrentItem(position);
             }
         });

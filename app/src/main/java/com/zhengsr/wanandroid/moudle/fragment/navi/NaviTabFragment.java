@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.zhengsr.tablib.view.adapter.TabAdapter;
+import com.zhengsr.tablib.view.flow.TabFlowLayout;
 import com.zhengsr.viewpagerlib.indicator.TabIndicator;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.NaviBean;
@@ -35,8 +37,8 @@ public class NaviTabFragment extends BaseMvpFragment  {
 
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
-    @BindView(R.id.tabindicator)
-    TabIndicator mTabIndicator;
+    @BindView(R.id.tabflow)
+    TabFlowLayout mTabFlowLayout;
     private NaviBean mBean;
 
     public static NaviTabFragment newInstance(NaviBean bean) {
@@ -60,7 +62,6 @@ public class NaviTabFragment extends BaseMvpFragment  {
     public void initView(View view) {
         super.initView(view);
         getBarTitleView().setText("项目");
-        mTabIndicator.setViewPagerSwitchSpeed(mViewPager,600);
         initToolbar();
     }
 
@@ -90,12 +91,22 @@ public class NaviTabFragment extends BaseMvpFragment  {
             fragments.add(NaviRecyFragment.newInstance(child));
         }
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),fragments));
-        mTabIndicator.setTabData(mViewPager, titles, new TabIndicator.TabClickListener() {
-            @Override
-            public void onClick(int position) {
-                mViewPager.setCurrentItem(position);
-            }
-        });
+
+       mTabFlowLayout.setViewPager(mViewPager,R.id.item_text,getResources().getColor(R.color.black_ff),
+               getResources().getColor(R.color.main_color));
+       mTabFlowLayout.setAdapter(new TabAdapter<String>(R.layout.item_tab,titles) {
+
+           @Override
+           public void bindView(View view, String data, int position) {
+               setText(view,R.id.item_text,data);
+           }
+
+           @Override
+           public void onItemClick(View view, String data, int position) {
+               super.onItemClick(view, data, position);
+               mViewPager.setCurrentItem(position);
+           }
+       });
 
     }
 
