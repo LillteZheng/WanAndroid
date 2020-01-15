@@ -6,10 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.zhengsr.tablib.view.adapter.TabAdapter;
+import com.zhengsr.tablib.view.adapter.TabFlowAdapter;
 import com.zhengsr.tablib.view.flow.TabFlowLayout;
 import com.zhengsr.viewpagerlib.indicator.TabIndicator;
 import com.zhengsr.wanandroid.R;
@@ -22,6 +23,7 @@ import com.zhengsr.wanandroid.moudle.fragment.project.ProjectDetailFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.NaviPresent;
 import com.zhengsr.wanandroid.mvp.present.ProjectPresent;
+import com.zhengsr.wanandroid.utils.Lgg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ import butterknife.BindView;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class NaviTabFragment extends BaseMvpFragment  {
+public class NaviTabFragment extends BaseMvpFragment {
 
 
     @BindView(R.id.viewpager)
@@ -42,15 +44,13 @@ public class NaviTabFragment extends BaseMvpFragment  {
     private NaviBean mBean;
 
     public static NaviTabFragment newInstance(NaviBean bean) {
-        
+
         Bundle args = new Bundle();
-        args.putSerializable("bean",bean);
+        args.putSerializable("bean", bean);
         NaviTabFragment fragment = new NaviTabFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
-
 
 
     @Override
@@ -69,7 +69,7 @@ public class NaviTabFragment extends BaseMvpFragment  {
         ImageView imageView = getLeftIconView();
         imageView.setImageResource(R.mipmap.back);
         imageView.setTag(TAG_BACK);
-        imageView.setPadding(10,10,10,10);
+        imageView.setPadding(10, 10, 10, 10);
         imageView.setColorFilter(Color.WHITE);
         getRightIconView().setVisibility(View.GONE);
 
@@ -86,33 +86,35 @@ public class NaviTabFragment extends BaseMvpFragment  {
         List<String> titles = new ArrayList<>();
         List<Fragment> fragments = new ArrayList<>();
         for (NaviChildrenBean child : mBean.getChildren()) {
-            String title = child.getName().replaceAll("&amp;","和");
+            String title = child.getName().replaceAll("&amp;", "和");
             titles.add(title);
             fragments.add(NaviRecyFragment.newInstance(child));
         }
-        mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),fragments));
+        mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), fragments));
 
-       mTabFlowLayout.setViewPager(mViewPager,R.id.item_text,getResources().getColor(R.color.black_ff),
-               getResources().getColor(R.color.main_color));
-       mTabFlowLayout.setAdapter(new TabAdapter<String>(R.layout.item_tab,titles) {
+        mViewPager.setOffscreenPageLimit(3);
+        mTabFlowLayout.setViewPager(mViewPager, R.id.item_text);
 
-           @Override
-           public void bindView(View view, String data, int position) {
-               setText(view,R.id.item_text,data);
-           }
+        mTabFlowLayout.setAdapter(new TabFlowAdapter<String>(R.layout.item_tab, titles) {
 
-           @Override
-           public void onItemClick(View view, String data, int position) {
-               super.onItemClick(view, data, position);
-               mViewPager.setCurrentItem(position);
-           }
-       });
+            @Override
+            public void bindView(View view, String data, int position) {
+                setText(view, R.id.item_text, data);
+            }
+
+            @Override
+            public void onItemClick(View view, String data, int position) {
+                super.onItemClick(view, data, position);
+                mViewPager.setCurrentItem(position);
+            }
+        });
 
     }
 
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         List<Fragment> fragments;
+
         public ViewPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);
             this.fragments = fragments;

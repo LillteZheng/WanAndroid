@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.zhengsr.tablib.view.adapter.TabAdapter;
+import com.zhengsr.tablib.view.adapter.TabFlowAdapter;
 import com.zhengsr.tablib.view.flow.TabFlowLayout;
 import com.zhengsr.viewpagerlib.indicator.TabIndicator;
 import com.zhengsr.wanandroid.R;
@@ -77,9 +77,9 @@ public class WechatFragment extends BaseNetFragment<WechatPresent> implements IC
             fragments.add(WechatDetailFragment.newInstance(bean));
         }
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),fragments));
-        mTabFlowLayout.setViewPager(mViewPager,R.id.item_text,getResources().getColor(R.color.unselect),
-                getResources().getColor(R.color.main_color));
-        mTabFlowLayout.setAdapter(new TabAdapter<String>(R.layout.item_tab,titles) {
+        mViewPager.setOffscreenPageLimit(3);
+        mTabFlowLayout.setViewPager(mViewPager,R.id.item_text);
+        mTabFlowLayout.setAdapter(new TabFlowAdapter<String>(R.layout.item_tab,titles) {
 
             @Override
             public void bindView(View view, String data, int position) {

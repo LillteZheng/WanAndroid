@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.NaviPresent;
+import com.zhengsr.wanandroid.utils.Lgg;
 
 import java.util.ArrayList;
 import java.util.List;

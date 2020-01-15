@@ -21,11 +21,13 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="5dp"
             app:layout_constraintTop_toTopOf="@id/normal_view"
-            app:tab_type="tri"
-            app:tab_color="@color/colorPrimary"
-            app:tab_height="3dp"
-            app:tab_width="10dp"
+            app:layout_constraintStart_toStartOf="@id/normal_view"
+            app:layout_constraintEnd_toEndOf="@id/normal_view"
+            app:tab_type="rect"
+            app:tab_color="@color/main_color"
             app:tab_margin_b="3dp"
+            app:tab_height="2dp"
+            app:tab_width="40dp"
             android:layout_height="wrap_content"
             />
 

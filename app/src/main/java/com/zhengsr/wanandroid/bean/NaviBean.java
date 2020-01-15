@@ -98,4 +98,18 @@ public class NaviBean implements Serializable {
     }
 
 
+    @Override
+    public String toString() {
+        return "NaviBean{" +
+                "courseId=" + courseId +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", order=" + order +
+                ", parentChapterId=" + parentChapterId +
+                ", userControlSetTop=" + userControlSetTop +
+                ", visible=" + visible +
+                ", children=" + children +
+                ", childAppendString='" + childAppendString + '\'' +
+                '}';
+    }
 }

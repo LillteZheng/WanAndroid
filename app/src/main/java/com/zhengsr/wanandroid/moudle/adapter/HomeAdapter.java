@@ -1,7 +1,9 @@
 package com.zhengsr.wanandroid.moudle.adapter;
 
+import android.service.quicksettings.Tile;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -39,9 +41,11 @@ public class HomeAdapter extends BaseQuickAdapter<ArticleData, BaseViewHolder> {
             msg = item.getChapterName();
         }
         String author = (item.getAuthor() != null && item.getAuthor().length() > 0) ? item.getAuthor():item.getShareUser();
+        String title = item.getTitle();
+        title = title.replaceAll("&ldquo;","“").replaceAll("&rdquo;","”");
         helper.setText(R.id.item_article_author,author)
                 .setText(R.id.item_article_chapat, msg)
-                .setText(R.id.item_article_title,item.getTitle())
+                .setText(R.id.item_article_title,title)
                 .setText(R.id.item_article_time,item.getNiceDate())
                 .addOnClickListener(R.id.item_article_like);
 
