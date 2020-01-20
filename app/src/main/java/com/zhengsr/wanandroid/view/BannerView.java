@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.zhengsr.viewpagerlib.anim.MzTransformer;
 import com.zhengsr.viewpagerlib.bean.PageBean;
 import com.zhengsr.viewpagerlib.callback.PageHelperListener;
+import com.zhengsr.viewpagerlib.indicator.CircleIndicator;
 import com.zhengsr.viewpagerlib.indicator.TextIndicator;
 import com.zhengsr.viewpagerlib.view.BannerViewPager;
 import com.zhengsr.wanandroid.R;
@@ -47,32 +48,27 @@ public class BannerView extends FrameLayout {
     public void setData(List<BannerBean> beans){
         if (beans != null && beans.size() >0){
             BannerViewPager bannerViewPager = mView.findViewById(R.id.banner);
-            TextIndicator textIndicator = mView.findViewById(R.id.banner_indicator);
-            PageBean bean = new PageBean.Builder<BannerBean>()
-                    .data(beans)
-                    .indicator(textIndicator)
-                    .builder();
-            bannerViewPager.setPageListener(bean, R.layout.banner_item_layout, new PageHelperListener<BannerBean>() {
+            CircleIndicator indicator = mView.findViewById(R.id.banner_indicator);
+
+            bannerViewPager.addIndicator(indicator);
+
+            bannerViewPager.setPageListener(R.layout.banner_item_layout, beans, new PageHelperListener<BannerBean>() {
                 @Override
-                public void getItemView(final View view, final BannerBean bannerBean) {
+                public void bindView(View view, BannerBean data, int position) {
+                    setText(view,R.id.banner_text,data.getTitle());
                     ImageView imageView = view.findViewById(R.id.banner_icon);
-                    TextView textView = view.findViewById(R.id.banner_text);
                     Glide.with(getContext())
-                            .load(bannerBean.getImagePath())
+                            .load(data.getImagePath())
                             .into(imageView);
-                    textView.setText(bannerBean.getTitle());
-
-                    view.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (mListener != null){
-                                mListener.itemClick(view,bannerBean);
-                            }
-                        }
-                    });
-
                 }
 
+                @Override
+                public void onItemClick(View view, BannerBean data, int position) {
+                    super.onItemClick(view, data, position);
+                    if (mListener != null){
+                        mListener.itemClick(view,data);
+                    }
+                }
             });
 
         }

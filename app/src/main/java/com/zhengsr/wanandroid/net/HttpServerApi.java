@@ -16,6 +16,7 @@ import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
 import com.zhengsr.wanandroid.bean.ShareBean;
+import com.zhengsr.wanandroid.bean.UsefulWebBean;
 import com.zhengsr.wanandroid.bean.WechatBean;
 
 import java.util.List;
@@ -250,4 +251,13 @@ public interface HttpServerApi {
     @POST("article/query/{page}/json")
     Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchArticleByKeyWord(@Path("page") int page,
                                                                                      @Query("k") String word);
+
+    /**
+     * https://www.wanandroid.com/friend/json
+     * 常用网站
+     */
+
+    @GET("friend/json")
+    Observable<BaseResponse<List<UsefulWebBean>>> getUsefulWeb();
+
 }

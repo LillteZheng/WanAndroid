@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
@@ -22,7 +22,26 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+}
 
+MobSDK {
+    appKey "2d8f2512a3b42"
+    appSecret "f079cace1ef9c7a89b776de65732c01b"
+    ShareSDK {
+        //不同平台信息
+        devInfo {
+            Wechat {
+                appId "wxcdff80a50b29c7a5"
+                appSecret "16ee97be834ff85396bd0dcdab426b40"
+            }
+            SinaWeibo {
+                appKey "2825772653"
+                appSecret "f9a3b8fe085853a7d963c656042c6b0d"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient true
+            }
+        }
+    }
 }
 
 dependencies {

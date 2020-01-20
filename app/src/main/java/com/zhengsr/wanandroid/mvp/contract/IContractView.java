@@ -13,6 +13,7 @@ import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
+import com.zhengsr.wanandroid.bean.UsefulWebBean;
 import com.zhengsr.wanandroid.bean.WechatBean;
 import com.zhengsr.wanandroid.mvp.base.IBaseView;
 
@@ -113,6 +114,10 @@ public interface IContractView {
 
     interface ISearchView extends IAddOrCancelArticleView<ArticleData>{
         void getSearchData(int maxPage, List<ArticleData> datas, boolean isRefresh);
+    }
+
+    interface IUsefulWebView extends IBaseView{
+        void getUsefulWeb(List<UsefulWebBean> beans);
     }
 
 

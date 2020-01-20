@@ -70,6 +70,7 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         mHomeAdapter.setOnItemChildClickListener(this);
         mHomeAdapter.setOnItemClickListener(this);
         mBannerView.setBannerItemClickListener(this);
+        showWebIcon();
     }
 
     @Override

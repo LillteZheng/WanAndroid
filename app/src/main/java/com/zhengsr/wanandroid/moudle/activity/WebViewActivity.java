@@ -22,6 +22,8 @@ import com.zhengsr.wanandroid.utils.NetUtils;
 import com.zhengsr.zweblib.ZWebHelper;
 import com.zhengsr.zweblib.widght.ZWebChromeClient;
 
+import cn.sharesdk.onekeyshare.OnekeyShare;
+
 public class WebViewActivity extends BaseDelegateActivity<ArticlePresent> implements View.OnClickListener,
         IContractView.IAddOrCancelArticleView<WebBean> {
     private static final String TAG = "WebViewActivity";
@@ -47,10 +49,40 @@ public class WebViewActivity extends BaseDelegateActivity<ArticlePresent> implem
         imageView.setColorFilter(Color.WHITE);
         imageView.setOnClickListener(this);
 
-        mRightIv = getRightIconView();
         mTitleTv = getBarTitleView();
+        mRightIv = findViewById(R.id.toolbar_web);
+        mRightIv.setVisibility(View.VISIBLE);
         mRightIv.setOnClickListener(this);
 
+        ImageView shareIv = findViewById(R.id.toolbar_right_iv);
+        shareIv.setImageResource(R.mipmap.ic_more);
+
+        shareIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShare(mBean.title,mBean.url);
+            }
+        });
+
+    }
+
+    /**
+     * 分享
+     */
+    private void showShare(String title,String msg) {
+        OnekeyShare oks = new OnekeyShare();
+        // title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle(title);
+        // titleUrl QQ和QQ空间跳转链接
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(msg);
+        // imagePath是图片的本地路径，确保SDcard下面存在此张图片
+        oks.setImagePath("/sdcard/test.jpg");
+        // url在微信、Facebook等平台中使用
+        oks.setUrl("http://sharesdk.cn");
+        // 启动分享GUI
+        oks.show(this);
     }
 
     @Override
@@ -116,6 +148,8 @@ public class WebViewActivity extends BaseDelegateActivity<ArticlePresent> implem
                 default:break;
         }
     }
+
+
 
     @Override
     public void addArticleSuccess(int position, WebBean data) {

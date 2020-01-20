@@ -57,6 +57,7 @@ public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements 
     public void initView(View view) {
         super.initView(view);
         getBarTitleView().setText("项目");
+        showWebIcon();
 
     }
 

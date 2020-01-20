@@ -58,6 +58,7 @@ public class WechatFragment extends BaseNetFragment<WechatPresent> implements IC
         super.initView(view);
         getBarTitleView().setText("体系");
      //   mTabIndicator.setViewPagerSwitchSpeed(mViewPager,600);
+        showWebIcon();
     }
 
     @Override

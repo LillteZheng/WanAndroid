@@ -16,6 +16,7 @@ import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.bean.RegisterBean;
 import com.zhengsr.wanandroid.bean.ShareBean;
+import com.zhengsr.wanandroid.bean.UsefulWebBean;
 import com.zhengsr.wanandroid.bean.WechatBean;
 import com.zhengsr.wanandroid.net.HttpCreate;
 import com.zhengsr.wanandroid.net.HttpServerApi;
@@ -284,6 +285,14 @@ public class DataManager {
      */
     public Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> searchArticleByKeyWord(int page,String keyWord){
         return mServerApi.searchArticleByKeyWord(page,keyWord);
+    }
+
+    /**
+     * 获取常用网站
+     * @return
+     */
+    public Observable<BaseResponse<List<UsefulWebBean>>> getUsefulWeb(){
+        return mServerApi.getUsefulWeb();
     }
 
 }

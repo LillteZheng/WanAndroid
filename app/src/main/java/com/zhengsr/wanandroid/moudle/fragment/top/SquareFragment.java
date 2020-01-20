@@ -22,7 +22,7 @@ import com.zhengsr.wanandroid.moudle.activity.LoginActivity;
 import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
-import com.zhengsr.wanandroid.mvp.present.SquarePresent;
+import com.zhengsr.wanandroid.mvp.present.TopPresent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import butterknife.BindView;
  * @auther by zhengshaorui on 2019/12/1
  * describe:
  */
-public class SquareFragment extends BaseNetFragment<SquarePresent> implements BaseQuickAdapter.OnItemChildClickListener,
+public class SquareFragment extends BaseNetFragment<TopPresent> implements BaseQuickAdapter.OnItemChildClickListener,
         BaseQuickAdapter.OnItemClickListener, IContractView.ISquareView<ArticleData> {
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
@@ -72,8 +72,8 @@ public class SquareFragment extends BaseNetFragment<SquarePresent> implements Ba
     }
 
     @Override
-    public SquarePresent getPresent() {
-        mPresent = new SquarePresent(this);
+    public TopPresent getPresent() {
+        mPresent = new TopPresent(this);
         return mPresent;
     }
 

@@ -24,17 +24,19 @@
             app:banner_transformer="mz"
             app:banner_switchtime="600" />
 
-        <com.zhengsr.viewpagerlib.indicator.TextIndicator
+        <com.zhengsr.viewpagerlib.indicator.CircleIndicator
             android:id="@+id/banner_indicator"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             android:gravity="center_vertical"
-            app:word_circle_color="@android:color/transparent"
-            app:word_show_circle="false"
-            app:word_text_color="@color/white"
-            app:word_text_size="14sp"
+            app:cir_horizon_margin="13dp"
+            app:cir_rect_width="12dp"
+            app:cir_size="5dp"
+            app:cir_normalColor="@color/page_gray_cc"
+            app:cir_selectedColor="@color/white"
+            app:cir_type="cirToRect"
             />
     </FrameLayout>
     

@@ -4,6 +4,7 @@ import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.ShareBean;
+import com.zhengsr.wanandroid.bean.UsefulWebBean;
 import com.zhengsr.wanandroid.mvp.base.BasePresent;
 import com.zhengsr.wanandroid.mvp.base.IBaseView;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
@@ -17,8 +18,8 @@ import java.util.List;
  * @auther by zhengshaorui on 2019/12/1
  * describe:
  */
-public class SquarePresent extends BasePresent<IContractView.ISquareView> {
-    public SquarePresent(IContractView.ISquareView view) {
+public class TopPresent extends BasePresent<IBaseView> {
+    public TopPresent(IBaseView view) {
         super(view);
     }
 
@@ -34,7 +35,10 @@ public class SquarePresent extends BasePresent<IContractView.ISquareView> {
                     @Override
                     public void onNext(PageDataInfo<List<ArticleData>> info) {
                         super.onNext(info);
-                        mView.getSquareData(info.getPageCount(),info.getDatas(),isRefresh);
+                        if (mView instanceof IContractView.ISquareView){
+                            ((IContractView.ISquareView) mView).getSquareData(info.getPageCount(),info.getDatas(),isRefresh);
+                        }
+
                     }
                 })
         );
@@ -88,7 +92,28 @@ public class SquarePresent extends BasePresent<IContractView.ISquareView> {
                         ShareBean.CoinInfoBean coinInfo = info.getCoinInfo();
                         ShareBean.ShareArticlesBean shareArticles = info.getShareArticles();
                         //mView.getSearchData(info.getPageCount(),info.getDatas(),isRefresh);
-                        mView.getShareData(shareArticles.getPageCount(),shareArticles.getDatas(),isRefresh);
+                        if (mView instanceof IContractView.ISquareView){
+                            ((IContractView.ISquareView) mView).getShareData(shareArticles.getPageCount(),shareArticles.getDatas(),isRefresh);
+                        }
+                    }
+                })
+        );
+    }
+
+
+    public void getUsefulWeb(){
+        mView.showLoading();
+        addSubscribe(
+                mDataManager.getUsefulWeb()
+                .compose(RxUtils.rxScheduers())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new CusSubscribe<List<UsefulWebBean>>(mView) {
+                    @Override
+                    public void onNext(List<UsefulWebBean> usefulWebBeans) {
+                        super.onNext(usefulWebBeans);
+                        if (mView instanceof IContractView.IUsefulWebView){
+                            ((IContractView.IUsefulWebView) mView).getUsefulWeb(usefulWebBeans);
+                        }
                     }
                 })
         );

@@ -137,6 +137,7 @@ public class ShareFragment extends BaseNetFragment<UserPresent> implements BaseQ
         webBean.isCollect = true;
         webBean.position = position;
         webBean.url = bean.getLink();
+        webBean.isShowIcon = false;
         Intent intent = new Intent(_mActivity, WebViewActivity.class);
         intent.putExtra("bean",webBean);
         ShareFragment.this.startActivity(intent);
@@ -224,8 +225,7 @@ public class ShareFragment extends BaseNetFragment<UserPresent> implements BaseQ
                     .setText(R.id.item_article_time,item.getNiceDate())
                     .addOnClickListener(R.id.item_article_like);
 
-
-            helper.setImageResource(R.id.item_article_like, R.drawable.icon_like_article_select);
+            //helper.setImageResource(R.id.item_article_like, R.drawable.icon_like_article_select);
         }
 
     }

@@ -3,6 +3,7 @@ package com.zhengsr.wanandroid.moudle.fragment.base;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,18 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhengsr.wanandroid.Constant;
 import com.zhengsr.wanandroid.R;
+import com.zhengsr.wanandroid.moudle.fragment.HomeFragment;
 import com.zhengsr.wanandroid.moudle.fragment.MainFragment;
+import com.zhengsr.wanandroid.moudle.fragment.navi.NaviFragment;
 import com.zhengsr.wanandroid.moudle.fragment.top.SearchFragment;
 import com.zhengsr.wanandroid.moudle.fragment.top.SquareFragment;
+import com.zhengsr.wanandroid.moudle.fragment.top.UsefulFragment;
 import com.zhengsr.wanandroid.utils.SpfUtils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -142,6 +147,17 @@ public abstract class BaseDelegateFragment extends SupportFragment {
             });
         }
 
+        View view = mView.findViewById(R.id.toolbar_web);
+        if (view != null) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    useParentStart(UsefulFragment.newInstance());
+                }
+            });
+        }
+
+
         ImageView rightImg = mView.findViewById(R.id.toolbar_right_iv);
         if (rightImg != null && !TAG_ADD.equals(rightImg.getTag())) {
             rightImg.setOnClickListener(new View.OnClickListener() {
@@ -241,6 +257,12 @@ public abstract class BaseDelegateFragment extends SupportFragment {
             return imageView;
         }
         return null;
+    }
+
+    public void showWebIcon(){
+        if (mView != null) {
+            mView.findViewById(R.id.toolbar_web).setVisibility(View.VISIBLE);
+        }
     }
 
 }

@@ -63,7 +63,7 @@ public class NaviFragment extends BaseNetFragment<NaviPresent> implements IContr
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter.setOnItemClickListener(this);
-
+        showWebIcon();
     }
 
     @Override
