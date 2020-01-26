@@ -7,7 +7,7 @@ import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.HotKeyBean;
 import com.zhengsr.wanandroid.bean.LoginBean;
 import com.zhengsr.wanandroid.bean.NaviBean;
-import com.zhengsr.wanandroid.bean.PageDataInfo;
+import com.zhengsr.wanandroid.bean.SystematicBean;
 import com.zhengsr.wanandroid.bean.ProjectBean;
 import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.RankBean;
@@ -80,11 +80,18 @@ public interface IContractView {
     /**
      * 知识体系
      */
-    interface INaviView extends IBaseView{
-        void getTreeKnowledge(List<NaviBean> beans);
+    interface ISystematicView extends IBaseView{
+        void getTreeKnowledge(List<SystematicBean> beans);
     }
-    interface INaviDetailView<T> extends IAddOrCancelArticleView<T>{
-        void getNaviDetail(int maxPage,List<ArticleData> datas,boolean isRefresh);
+    interface ISystematicDetail<T> extends IAddOrCancelArticleView<T>{
+        void getSystematicDetail(int maxPage, List<ArticleData> datas, boolean isRefresh);
+    }
+
+    /**
+     * 导航数据
+     */
+    interface INaviView extends IBaseView{
+        void getNaviData(List<NaviBean> datas);
     }
 
     interface IWechatView extends IBaseView{

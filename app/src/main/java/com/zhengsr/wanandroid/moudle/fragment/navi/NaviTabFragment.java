@@ -6,24 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.zhengsr.tablib.view.adapter.TabFlowAdapter;
 import com.zhengsr.tablib.view.flow.TabFlowLayout;
-import com.zhengsr.viewpagerlib.indicator.TabIndicator;
 import com.zhengsr.wanandroid.R;
-import com.zhengsr.wanandroid.bean.NaviBean;
+import com.zhengsr.wanandroid.bean.SystematicBean;
 import com.zhengsr.wanandroid.bean.NaviChildrenBean;
-import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
-import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
-import com.zhengsr.wanandroid.moudle.fragment.project.ProjectDetailFragment;
-import com.zhengsr.wanandroid.mvp.contract.IContractView;
-import com.zhengsr.wanandroid.mvp.present.NaviPresent;
-import com.zhengsr.wanandroid.mvp.present.ProjectPresent;
-import com.zhengsr.wanandroid.utils.Lgg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +32,9 @@ public class NaviTabFragment extends BaseMvpFragment {
     ViewPager mViewPager;
     @BindView(R.id.tabflow)
     TabFlowLayout mTabFlowLayout;
-    private NaviBean mBean;
+    private SystematicBean mBean;
 
-    public static NaviTabFragment newInstance(NaviBean bean) {
+    public static NaviTabFragment newInstance(SystematicBean bean) {
 
         Bundle args = new Bundle();
         args.putSerializable("bean", bean);
@@ -81,7 +72,7 @@ public class NaviTabFragment extends BaseMvpFragment {
         Bundle arguments = getArguments();
         if (arguments != null) {
         }
-        mBean = (NaviBean) arguments.getSerializable("bean");
+        mBean = (SystematicBean) arguments.getSerializable("bean");
         getBarTitleView().setText(mBean.getName());
         List<String> titles = new ArrayList<>();
         List<Fragment> fragments = new ArrayList<>();

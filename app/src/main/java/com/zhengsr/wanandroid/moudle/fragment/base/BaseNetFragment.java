@@ -16,9 +16,9 @@ public abstract class BaseNetFragment<T extends BasePresent> extends BaseMvpFrag
     private static final int LOADING_VIEW = 2;
     private static final int ERROR_VIEW = 3;
 
-    private View mNormalView;
-    private View mErrorView;
-    private View mLoadingView;
+    protected View mNormalView;
+    protected View mErrorView;
+    protected View mLoadingView;
 
     @Override
     public void initDataAndEvent() {
@@ -87,7 +87,7 @@ public abstract class BaseNetFragment<T extends BasePresent> extends BaseMvpFrag
             return;
         }
 
-        mNormalView.setVisibility(View.INVISIBLE);
+        mNormalView.setVisibility(View.GONE);
         mLoadingView.setVisibility(View.GONE);
         mErrorView.setVisibility(View.GONE);
 

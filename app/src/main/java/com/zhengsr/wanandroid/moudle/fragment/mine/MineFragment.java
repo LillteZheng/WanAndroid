@@ -56,7 +56,7 @@ public class MineFragment extends BaseMvpFragment<UserPresent> implements BaseQu
             R.mipmap.rank,R.mipmap.ic_share_article,R.mipmap.ic_collect,R.mipmap.ic_about,R.mipmap.ic_setting
     };
     private static String[] TEXT = new String[]{
-            "积分排行榜","我的分享","我的收藏","关于我","设置"
+            "积分排行榜","我的分享","我的收藏","关于软件","设置"
     };
 
     /**
@@ -156,6 +156,9 @@ public class MineFragment extends BaseMvpFragment<UserPresent> implements BaseQu
                         useParentStart(MyCollectArticleFragment.newInstance());
                         break;
                         default:break;
+                    case 3:
+
+                        break;
                 }
             }else {
                 MineFragment.this.startActivityForResult(new Intent(_mActivity, LoginActivity.class), LOGIN);

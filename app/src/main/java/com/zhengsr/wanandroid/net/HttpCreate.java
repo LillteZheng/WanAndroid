@@ -44,7 +44,7 @@ public class HttpCreate {
     private static class OkHttpHolder{
         static OkHttpClient BUILDER = new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                //.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .cookieJar(cookieJar)
                 .build();
     }

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,17 +11,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.NaviChildrenBean;
-import com.zhengsr.wanandroid.bean.ProjectListBean;
 import com.zhengsr.wanandroid.bean.WebBean;
 import com.zhengsr.wanandroid.moudle.activity.LoginActivity;
 import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
 import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
-import com.zhengsr.wanandroid.moudle.fragment.HomeFragment;
-import com.zhengsr.wanandroid.moudle.fragment.base.BaseMvpFragment;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.NaviPresent;
-import com.zhengsr.wanandroid.utils.Lgg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +28,7 @@ import butterknife.BindView;
  * @author by  zhengshaorui on 2019/10/8
  * Describe:
  */
-public class NaviRecyFragment extends BaseNetFragment<NaviPresent> implements IContractView.INaviDetailView<ArticleData>,
+public class NaviRecyFragment extends BaseNetFragment<NaviPresent> implements IContractView.ISystematicDetail<ArticleData>,
         BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
     private HomeAdapter mAdapter;
@@ -80,14 +75,14 @@ public class NaviRecyFragment extends BaseNetFragment<NaviPresent> implements IC
         Bundle arguments = getArguments();
         if (arguments != null) {
             mNaviChildBean = (NaviChildrenBean) arguments.getSerializable("bean");
-            mPresent.getDetailNavi(mCurPage, mNaviChildBean);
+            mPresent.getSystematicDetail(mCurPage, mNaviChildBean);
         }
     }
 
 
 
     @Override
-    public void getNaviDetail(int maxPage, List<ArticleData> datas, boolean isRefresh) {
+    public void getSystematicDetail(int maxPage, List<ArticleData> datas, boolean isRefresh) {
         mMaxPage = maxPage;
         if (isRefresh){
             mArticleBeans.clear();
@@ -152,7 +147,7 @@ public class NaviRecyFragment extends BaseNetFragment<NaviPresent> implements IC
     public void reFreshMore() {
         super.reFreshMore();
         mCurPage = 0;
-        mPresent.getDetailNavi(mCurPage,mNaviChildBean);
+        mPresent.getSystematicDetail(mCurPage,mNaviChildBean);
     }
 
     @Override

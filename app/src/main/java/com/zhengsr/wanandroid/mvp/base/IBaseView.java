@@ -13,7 +13,7 @@ public interface IBaseView {
     /**
      * 隐藏加载
      */
-    public void loadSuccess() ;
+    void loadSuccess() ;
 
     /**
      * 加载失败

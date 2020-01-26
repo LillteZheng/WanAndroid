@@ -6,6 +6,7 @@ import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.HotKeyBean;
 import com.zhengsr.wanandroid.bean.NaviBean;
+import com.zhengsr.wanandroid.bean.SystematicBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
@@ -188,7 +189,7 @@ public interface HttpServerApi {
      * https://www.wanandroid.com/tree/json
      */
     @GET("tree/json")
-    Observable<BaseResponse<List<NaviBean>>> getTreeKnowledge();
+    Observable<BaseResponse<List<SystematicBean>>> getTreeKnowledge();
 
     /**
      * 获取系列的具体内容
@@ -198,6 +199,12 @@ public interface HttpServerApi {
     @GET("article/list/{page}/json")
     Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getNaviDetail(@Path("page") int page,@Query("cid") int cid);
 
+    /**
+     * https://www.wanandroid.com/navi/json
+     * 获取导航数据
+     */
+    @GET("navi/json")
+    Observable<BaseResponse<List<NaviBean>>> getNaviData();
 
     /**
      * 获取公众号

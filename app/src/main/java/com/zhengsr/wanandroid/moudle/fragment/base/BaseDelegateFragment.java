@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +18,14 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhengsr.wanandroid.Constant;
 import com.zhengsr.wanandroid.R;
-import com.zhengsr.wanandroid.moudle.fragment.HomeFragment;
 import com.zhengsr.wanandroid.moudle.fragment.MainFragment;
-import com.zhengsr.wanandroid.moudle.fragment.navi.NaviFragment;
 import com.zhengsr.wanandroid.moudle.fragment.top.SearchFragment;
 import com.zhengsr.wanandroid.moudle.fragment.top.SquareFragment;
 import com.zhengsr.wanandroid.moudle.fragment.top.UsefulFragment;
 import com.zhengsr.wanandroid.utils.SpfUtils;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -190,7 +187,15 @@ public abstract class BaseDelegateFragment extends SupportFragment {
      * @param fragment
      */
     protected void useParentStart(SupportFragment fragment) {
-        ((MainFragment) (getParentFragment())).start(fragment);
+        SupportFragment parentFragment = (SupportFragment) getParentFragment();
+        if (parentFragment instanceof  MainFragment) {
+            parentFragment.start(fragment);
+        }else{
+            parentFragment = (SupportFragment) parentFragment.getParentFragment();
+            if (parentFragment instanceof  MainFragment) {
+                parentFragment.start(fragment);
+            }
+        }
     }
 
     /**

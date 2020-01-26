@@ -8,7 +8,7 @@ import com.zhengsr.ariesuilib.wieght.bottom.CusBottomLayout;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseDelegateFragment;
 import com.zhengsr.wanandroid.moudle.fragment.mine.MineFragment;
-import com.zhengsr.wanandroid.moudle.fragment.navi.NaviFragment;
+import com.zhengsr.wanandroid.moudle.fragment.navi.NaviSystemFragment;
 import com.zhengsr.wanandroid.moudle.fragment.project.ProjectFragment;
 import com.zhengsr.wanandroid.moudle.fragment.wechat.WechatFragment;
 
@@ -46,7 +46,7 @@ public class MainFragment extends BaseDelegateFragment implements CusBottomLayou
         SupportFragment firstFragment = findChildFragment(HomeFragment.class);
         if (firstFragment == null){
             mFragments[0] = HomeFragment.newInstance();
-            mFragments[1] = NaviFragment.newInstance();
+            mFragments[1] = NaviSystemFragment.newInstance();
             mFragments[2] = WechatFragment.newInstance();
             mFragments[3] = ProjectFragment.newInstance();
             mFragments[4] = MineFragment.newInstance();
@@ -56,7 +56,7 @@ public class MainFragment extends BaseDelegateFragment implements CusBottomLayou
         }else{
             //需要重新赋值，此时这个 mfragmengt 是null 的
             mFragments[0] = firstFragment;
-            mFragments[1] = findChildFragment(NaviFragment.class);
+            mFragments[1] = findChildFragment(NaviSystemFragment.class);
             mFragments[2] = findChildFragment(WechatFragment.class);
             mFragments[3] = findChildFragment(ProjectFragment.class);
             mFragments[4] = findChildFragment(MineFragment.class);

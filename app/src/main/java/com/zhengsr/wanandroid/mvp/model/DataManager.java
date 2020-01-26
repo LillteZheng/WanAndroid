@@ -6,6 +6,7 @@ import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.CollectBean;
 import com.zhengsr.wanandroid.bean.HotKeyBean;
 import com.zhengsr.wanandroid.bean.NaviBean;
+import com.zhengsr.wanandroid.bean.SystematicBean;
 import com.zhengsr.wanandroid.bean.PageDataInfo;
 import com.zhengsr.wanandroid.bean.BannerBean;
 import com.zhengsr.wanandroid.bean.BaseResponse;
@@ -24,8 +25,6 @@ import com.zhengsr.wanandroid.net.HttpServerApi;
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * @author by  zhengshaorui on 2019/10/9
@@ -177,7 +176,7 @@ public class DataManager {
      * 获取知识体系
      * @return
      */
-    public Observable<BaseResponse<List<NaviBean>>> getTreeKnowledge(){
+    public Observable<BaseResponse<List<SystematicBean>>> getTreeKnowledge(){
         return mServerApi.getTreeKnowledge();
     }
 
@@ -187,7 +186,7 @@ public class DataManager {
      * @param cid
      * @return
      */
-    public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getNaviDetail(int page, int cid){
+    public  Observable<BaseResponse<PageDataInfo<List<ArticleData>>>> getSystematicDetail(int page, int cid){
         return mServerApi.getNaviDetail(page,cid);
     }
 
@@ -293,6 +292,14 @@ public class DataManager {
      */
     public Observable<BaseResponse<List<UsefulWebBean>>> getUsefulWeb(){
         return mServerApi.getUsefulWeb();
+    }
+
+
+    /**
+     * 获取导航数据
+     */
+    public Observable<BaseResponse<List<NaviBean>>> getNaviData(){
+        return mServerApi.getNaviData();
     }
 
 }
