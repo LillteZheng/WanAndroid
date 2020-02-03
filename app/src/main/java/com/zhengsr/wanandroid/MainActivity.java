@@ -1,10 +1,12 @@
 package com.zhengsr.wanandroid;
 
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.zhengsr.wanandroid.moudle.activity.BaseDelegateActivity;
 import com.zhengsr.wanandroid.moudle.fragment.MainFragment;
+import com.zhengsr.wanandroid.utils.Lgg;
 
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;

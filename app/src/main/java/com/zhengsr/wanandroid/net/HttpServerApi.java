@@ -86,6 +86,7 @@ public interface HttpServerApi {
     @GET("coin/rank/{page}/json")
     Observable<BaseResponse<RankListBean>> getRankInfo(@Path("page") int page);
 
+
     /**
      * 获取个人积分，需要登录后
      * https://www.wanandroid.com/lg/coin/userinfo/json

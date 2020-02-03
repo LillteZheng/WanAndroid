@@ -106,7 +106,7 @@ public class MyCollectArticleFragment extends BaseNetFragment<UserPresent> imple
                             public void onMsg(String title, String author, String link) {
                                 super.onMsg(title, author, link);
                                 if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(author) && !TextUtils.isEmpty(link)) {
-                                    Lgg.d("add: "+title+" "+author+" "+link);
+                                   // Lgg.d("add: "+title+" "+author+" "+link);
                                     mPresent.addLinkArticle(title, author,link);
                                     mDialog = new LoadingDialog(_mActivity, "正在上传...");
                                 } else {

@@ -14,6 +14,7 @@ public class Constant {
     public static final String KEY_IS_LOGIN = "KEY_IS_LOGIN";
     public static final String KEY_USERNAME = "KEY_USERNAME";
     public static final String KEY_PASSWORD = "KEY_PASSWORD";
+    public static final String KEY_IS_NIGHT = "KEY_IS_NIGHT";
 
     /**
      * Tab colors
@@ -28,4 +29,17 @@ public class Constant {
             Color.parseColor("#F6BC7E"),
             Color.parseColor("#3399ff")
     };
+
+    public static final int[] TAB_COLORS_NIGHT = new int[]{
+            Color.parseColor("#B090C5F0"),
+            Color.parseColor("#B091CED5"),
+            Color.parseColor("#B0F88F55"),
+            Color.parseColor("#B0C0AFD0"),
+            Color.parseColor("#B0E78F8F"),
+            Color.parseColor("#B067CCB7"),
+            Color.parseColor("#B0F6BC7E"),
+            Color.parseColor("#B03399ff")
+    };
+
+
 }

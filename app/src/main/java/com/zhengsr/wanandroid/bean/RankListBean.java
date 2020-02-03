@@ -8,8 +8,6 @@ import java.util.List;
  */
 public class RankListBean {
 
-
-
     private int curPage;
     private int offset;
     private boolean over;

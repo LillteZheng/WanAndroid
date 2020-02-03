@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/normal_view"
     android:layout_width="match_parent"
+    android:background="@color/colorBackground"
     android:layout_height="match_parent">
 
     <include

@@ -32,7 +32,7 @@
             android:layout_marginEnd="10dp"
             android:gravity="center_vertical"
             app:cir_horizon_margin="13dp"
-            app:cir_rect_width="12dp"
+            app:cir_rect_width="15dp"
             app:cir_size="5dp"
             app:cir_normalColor="@color/page_gray_cc"
             app:cir_selectedColor="@color/white"

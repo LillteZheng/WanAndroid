@@ -1,5 +1,6 @@
 package com.zhengsr.wanandroid.moudle.fragment.navi;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,9 @@ import com.zhengsr.tablib.view.flow.TabFlowLayout;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.ArticleData;
 import com.zhengsr.wanandroid.bean.NaviBean;
+import com.zhengsr.wanandroid.bean.WebBean;
+import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
+import com.zhengsr.wanandroid.moudle.fragment.HomeFragment;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.NaviPresent;
@@ -90,16 +94,16 @@ public class NaviFragment extends BaseNetFragment<NaviPresent> implements IContr
             @Override
             public void bindView(View view, NaviBean data, int position) {
                 setText(view,R.id.item_text,data.getName());
-                setTextColor(view, R.id.item_text, getResources().getColor(R.color.wechat));
+                setTextColor(view, R.id.item_text, getResources().getColor(R.color.colorText));
             }
 
             @Override
             public void onItemSelectState(View view, boolean isSelected) {
                 super.onItemSelectState(view, isSelected);
                 if (isSelected){
-                    setTextColor(view, R.id.item_text, getResources().getColor(R.color.colorPrimary));
+                    setTextColor(view, R.id.item_text, getResources().getColor(R.color.tab_color));
                 }else {
-                    setTextColor(view, R.id.item_text, getResources().getColor(R.color.wechat));
+                    setTextColor(view, R.id.item_text, getResources().getColor(R.color.colorText));
                 }
             }
 
@@ -208,6 +212,15 @@ public class NaviFragment extends BaseNetFragment<NaviPresent> implements IContr
         @Override
         public void onItemClick(View view, ArticleData data, int position) {
             super.onItemClick(view, data, position);
+            ArticleData bean = data;
+            WebBean webBean = new WebBean();
+            webBean.id = bean.getId();
+            webBean.title = bean.getTitle();
+            webBean.isShowIcon = false;
+            webBean.url = bean.getLink();
+            Intent intent = new Intent(_mActivity, WebViewActivity.class);
+            intent.putExtra("bean",webBean);
+            NaviFragment.this.startActivity(intent);
         }
     }
 }

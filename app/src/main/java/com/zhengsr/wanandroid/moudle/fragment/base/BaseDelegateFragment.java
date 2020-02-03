@@ -1,9 +1,11 @@
 package com.zhengsr.wanandroid.moudle.fragment.base;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.zhengsr.wanandroid.moudle.fragment.MainFragment;
 import com.zhengsr.wanandroid.moudle.fragment.top.SearchFragment;
 import com.zhengsr.wanandroid.moudle.fragment.top.SquareFragment;
 import com.zhengsr.wanandroid.moudle.fragment.top.UsefulFragment;
+import com.zhengsr.wanandroid.utils.Lgg;
 import com.zhengsr.wanandroid.utils.SpfUtils;
 
 import butterknife.ButterKnife;
@@ -132,6 +135,7 @@ public abstract class BaseDelegateFragment extends SupportFragment {
         //可以在initview 中去配置是否坐这边的图片是作为返回的
         ImageView imageView = mView.findViewById(R.id.toolbar_left_iv);
         if (imageView != null) {
+            imageView.setColorFilter(getResources().getColor(R.color.white));
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -140,6 +144,9 @@ public abstract class BaseDelegateFragment extends SupportFragment {
                     }else{
                         useParentStart(SquareFragment.newInstance(null));
                     }
+
+
+
                 }
             });
         }

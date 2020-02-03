@@ -1,9 +1,11 @@
 package com.zhengsr.wanandroid.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,6 +21,10 @@ import com.zhengsr.viewpagerlib.indicator.TextIndicator;
 import com.zhengsr.viewpagerlib.view.BannerViewPager;
 import com.zhengsr.wanandroid.R;
 import com.zhengsr.wanandroid.bean.BannerBean;
+import com.zhengsr.wanandroid.bean.WebBean;
+import com.zhengsr.wanandroid.moudle.activity.WebViewActivity;
+import com.zhengsr.wanandroid.moudle.fragment.HomeFragment;
+import com.zhengsr.wanandroid.utils.Lgg;
 
 import java.util.List;
 
@@ -62,25 +68,25 @@ public class BannerView extends FrameLayout {
                             .into(imageView);
                 }
 
+
+
                 @Override
-                public void onItemClick(View view, BannerBean data, int position) {
-                    super.onItemClick(view, data, position);
-                    if (mListener != null){
-                        mListener.itemClick(view,data);
-                    }
+                public void onItemClick(View view, BannerBean bean, int position) {
+                    super.onItemClick(view, bean, position);
+                    WebBean webBean = new WebBean();
+                    webBean.id = bean.getId();
+                    webBean.title = bean.getTitle();
+                    webBean.url = bean.getUrl();
+                    webBean.isShowIcon = false;
+                    Intent intent = new Intent(getContext(), WebViewActivity.class);
+                    intent.putExtra("bean",webBean);
+                    getContext().startActivity(intent);
                 }
             });
 
         }
     }
-    private BannerItemClickListener mListener;
-    public void setBannerItemClickListener(BannerItemClickListener listener){
-        mListener = listener;
-    }
 
-    public interface  BannerItemClickListener{
-        void itemClick(View view, BannerBean bannerBean);
-    }
 
 
 

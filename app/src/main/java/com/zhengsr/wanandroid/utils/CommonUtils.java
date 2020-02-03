@@ -14,11 +14,12 @@ import java.util.Random;
 public class CommonUtils {
     public static int randomTagColor() {
         int randomNum = new Random().nextInt();
-        int position = randomNum % Constant.TAB_COLORS.length;
+        int[] colors = SpfUtils.get(Constant.KEY_IS_NIGHT,false) ? Constant.TAB_COLORS_NIGHT : Constant.TAB_COLORS;
+        int position = randomNum % colors.length;
         if (position < 0) {
             position = -position;
         }
-        return Constant.TAB_COLORS[position];
+        return colors[position];
     }
 
     public static Drawable getColorDrawable(int radius){

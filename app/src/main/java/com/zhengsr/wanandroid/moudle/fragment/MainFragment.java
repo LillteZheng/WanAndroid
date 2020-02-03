@@ -11,6 +11,7 @@ import com.zhengsr.wanandroid.moudle.fragment.mine.MineFragment;
 import com.zhengsr.wanandroid.moudle.fragment.navi.NaviSystemFragment;
 import com.zhengsr.wanandroid.moudle.fragment.project.ProjectFragment;
 import com.zhengsr.wanandroid.moudle.fragment.wechat.WechatFragment;
+import com.zhengsr.wanandroid.utils.Lgg;
 
 import me.yokeyword.fragmentation.SupportFragment;
 

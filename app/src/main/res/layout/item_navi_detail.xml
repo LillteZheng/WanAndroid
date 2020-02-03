@@ -15,7 +15,7 @@
         tools:text="测试"
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/main_color"/>
 
     <com.zhengsr.tablib.view.flow.LabelFlowLayout
         android:id="@+id/labelflow"

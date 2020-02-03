@@ -139,7 +139,7 @@ public class SquareFragment extends BaseNetFragment<TopPresent> implements BaseQ
         WebBean webBean = new WebBean();
         webBean.id = bean.getId();
         webBean.title = bean.getTitle();
-        webBean.isCollect = true;
+        webBean.isCollect = bean.isCollect();
         webBean.position = position;
         webBean.url = bean.getLink();
         Intent intent = new Intent(_mActivity, WebViewActivity.class);

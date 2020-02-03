@@ -3,6 +3,7 @@ package com.zhengsr.wanandroid.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.zhengsr.wanandroid.MainApplication;
 

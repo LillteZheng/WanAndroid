@@ -84,4 +84,13 @@ public class BasePresent<T extends IBaseView> {
     public void setPassword(String password){
         SpfUtils.put(Constant.KEY_PASSWORD,password);
     }
+
+
+    public void setNightMode(boolean isNight){
+        SpfUtils.put(Constant.KEY_IS_NIGHT,isNight);
+    }
+
+    public boolean isNightMode(){
+        return SpfUtils.get(Constant.KEY_IS_NIGHT,false);
+    }
 }

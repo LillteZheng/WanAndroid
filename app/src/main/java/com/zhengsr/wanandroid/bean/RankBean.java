@@ -11,6 +11,8 @@ public class RankBean {
     private int userId;
     private String username;
 
+
+
     public int getCoinCount() {
         return coinCount;
     }

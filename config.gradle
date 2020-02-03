@@ -62,7 +62,7 @@ ext {
             "avloading"                         :"com.wang.avi:library:2.1.3",
 
             //viewpager
-            "viewpager"                         :"com.github.LillteZheng:ViewPagerHelper:v2.1",
+            "viewpager"                         :"com.github.LillteZheng:ViewPagerHelper:v2.2",
             //网络
             "retorfit"                          : "com.squareup.retrofit2:retrofit:${version["retrofitversion"]}",
             "scalars"                           : "com.squareup.retrofit2:converter-scalars:${version["retrofitversion"]}",
@@ -88,6 +88,6 @@ ext {
             //下拉，上拉刷新
             "smartrefreshLayout"                : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0",
             "smartrefreshHeader"                : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0",
-            "flowhelper"                        : "com.github.LillteZheng:FlowHelper:v1.16"
+            "flowhelper"                        : "com.github.LillteZheng:FlowHelper:v1.18"
     ]
 }

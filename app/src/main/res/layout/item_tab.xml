@@ -11,6 +11,6 @@
     android:paddingEnd="12dp"
     android:paddingBottom="6dp"
     android:textSize="14sp"
-    app:colortext_default_color="@color/black_ff"
+    app:colortext_default_color="@color/colorText"
     app:colortext_change_color="@color/main_color"
   />

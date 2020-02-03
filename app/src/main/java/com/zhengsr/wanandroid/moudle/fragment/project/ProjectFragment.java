@@ -84,8 +84,7 @@ public class ProjectFragment extends BaseNetFragment<ProjectPresent> implements 
 
             @Override
             public void bindView(View view, String data, int position) {
-                setText(view,R.id.item_text,data)
-                        .setTextColor(view,R.id.item_text,R.color.black_ff);
+                setText(view,R.id.item_text,data);
             }
 
             @Override

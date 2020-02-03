@@ -6,23 +6,32 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhengsr.wanandroid.R;
+import com.zhengsr.wanandroid.bean.BaseResponse;
 import com.zhengsr.wanandroid.bean.RankBean;
 import com.zhengsr.wanandroid.bean.RankListBean;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.UserPresent;
+import com.zhengsr.wanandroid.net.HttpCreate;
+import com.zhengsr.wanandroid.utils.Lgg;
+import com.zhengsr.wanandroid.utils.RxUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.observers.ResourceObserver;
 
 /**
  * @author by  zhengshaorui on 2019/10/8
@@ -69,6 +78,7 @@ public class RankFragment extends BaseNetFragment<UserPresent> implements IContr
     public void initDataAndEvent() {
         super.initDataAndEvent();
         mPresent.getRankInfo(true);
+
     }
 
     private void initToolbar() {
@@ -77,7 +87,6 @@ public class RankFragment extends BaseNetFragment<UserPresent> implements IContr
         imageView.setImageResource(R.mipmap.back);
         imageView.setTag(TAG_BACK);
         imageView.setPadding(10,10,10,10);
-        imageView.setColorFilter(Color.WHITE);
         getRightIconView().setVisibility(View.GONE);
 
     }
@@ -85,6 +94,7 @@ public class RankFragment extends BaseNetFragment<UserPresent> implements IContr
     @Override
     public void rankInfo(RankListBean listBean) {
         mRankBeans.clear();
+
         mRankBeans.addAll(listBean.getDatas());
 
         mRankAdapter.notifyDataSetChanged();

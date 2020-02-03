@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class UserPresent extends BasePresent<IBaseView> {
 
-    private int mRankPage = 0;
+    private int mRankPage = 1;
     private int mCollectPage = 0;
     private int mMaxCollectPage = -1;
 

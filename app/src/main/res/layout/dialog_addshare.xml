@@ -40,6 +40,8 @@
         android:layout_marginEnd="20dp"
         android:hint="文章标题(100字以内)"
         android:layout_marginTop="10dp"
+        android:textColorHint="@color/colorText"
+        android:textColor="@color/colorText"
         android:textSize="14sp"
         />
 
@@ -54,6 +56,8 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:visibility="gone"
+        android:textColorHint="@color/colorText"
+        android:textColor="@color/colorText"
         android:hint="请输入作者"
         android:textSize="14sp"
         />
@@ -69,6 +73,8 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:hint="文章链接(请以http或https开头)"
+        android:textColorHint="@color/colorText"
+        android:textColor="@color/colorText"
         android:textSize="14sp"
         />
 

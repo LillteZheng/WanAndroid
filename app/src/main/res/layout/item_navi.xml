@@ -11,6 +11,7 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorCard"
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
@@ -27,7 +28,7 @@
             app:layout_constraintTop_toTopOf="@id/content"
             app:layout_constraintLeft_toLeftOf="@id/content"
             android:layout_margin="10dp"
-            android:textColor="@color/wechat"
+            android:textColor="@color/colorText"
             android:textSize="16sp"/>
 
         <TextView
@@ -40,6 +41,7 @@
             app:layout_constraintBottom_toBottomOf="@id/content"
             app:layout_constraintRight_toLeftOf="@id/item_navi_icon"
             android:layout_margin="12dp"
+            android:textColor="@color/colorText"
             android:textSize="14sp"/>
 
         <ImageView

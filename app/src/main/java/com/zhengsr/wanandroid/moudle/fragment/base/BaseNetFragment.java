@@ -78,6 +78,7 @@ public abstract class BaseNetFragment<T extends BasePresent> extends BaseMvpFrag
         showCurrentView(NORMAL_VIEW);
     }
 
+
     /**
      * 切换不同的页面
      * @param type
@@ -102,5 +103,13 @@ public abstract class BaseNetFragment<T extends BasePresent> extends BaseMvpFrag
 
     public void reload(){
 
+    }
+
+    @Override
+    public void pop() {
+        super.pop();
+        if (mLoadingView != null) {
+            mLoadingView.setVisibility(View.GONE);
+        }
     }
 }

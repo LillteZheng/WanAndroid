@@ -47,8 +47,7 @@
                 app:layout_constraintLeft_toLeftOf="@id/toolbar_left_iv"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:tab_type="rect"
-                app:tab_color="@color/white"
+                app:tab_type="color"
                 app:tab_scale_factor="1.2"
                 app:tab_item_autoScale="true"
                 />

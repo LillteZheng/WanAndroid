@@ -151,6 +151,12 @@ public class SearchFragment extends BaseMvpFragment<SearchPresent> implements IC
                     .setTextColor(view,R.id.item_text,Color.WHITE);
             view.setBackground(CommonUtils.getColorDrawable(10));
         }
+
+        @Override
+        public void onItemClick(View view, HotKeyBean data, int position) {
+            super.onItemClick(view, data, position);
+            start(SearchDetailFragment.newInstance(data.getName()));
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.zhengsr.wanandroid.moudle.adapter.HomeAdapter;
 import com.zhengsr.wanandroid.moudle.fragment.base.BaseNetFragment;
 import com.zhengsr.wanandroid.mvp.contract.IContractView;
 import com.zhengsr.wanandroid.mvp.present.HomePresent;
+import com.zhengsr.wanandroid.utils.Lgg;
 import com.zhengsr.wanandroid.view.BannerView;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ import butterknife.BindView;
  * Describe:
  */
 public class HomeFragment extends BaseNetFragment<HomePresent> implements IContractView.IHomeView<ArticleData>, BaseQuickAdapter.OnItemChildClickListener,
-        BaseQuickAdapter.OnItemClickListener, BannerView.BannerItemClickListener {
+        BaseQuickAdapter.OnItemClickListener {
 
 
     public static HomeFragment newInstance() {
@@ -69,7 +71,6 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         mRecyclerView.setAdapter(mHomeAdapter);
         mHomeAdapter.setOnItemChildClickListener(this);
         mHomeAdapter.setOnItemClickListener(this);
-        mBannerView.setBannerItemClickListener(this);
         showWebIcon();
     }
 
@@ -162,18 +163,6 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         }
     }
 
-    @Override
-    public void itemClick(View view, BannerBean bean) {
-
-        WebBean webBean = new WebBean();
-        webBean.id = bean.getId();
-        webBean.title = bean.getTitle();
-        webBean.url = bean.getUrl();
-        webBean.isShowIcon = false;
-        Intent intent = new Intent(_mActivity, WebViewActivity.class);
-        intent.putExtra("bean",webBean);
-        HomeFragment.this.startActivity(intent);
-    }
 
     @Override
     public void reFreshMore() {

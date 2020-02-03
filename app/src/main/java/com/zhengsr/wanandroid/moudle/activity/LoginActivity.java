@@ -210,7 +210,6 @@ public class LoginActivity extends BaseDelegateActivity<UserPresent> implements 
 
     @Override
     public void registerInfo(RegisterBean bean) {
-        Lgg.d("register: "+bean);
         mDialog.updateMsg("注册成功，正在登录..");
         mPresent.login(bean.getUsername(),mRegisterPassEt.getText().toString().trim());
     }
