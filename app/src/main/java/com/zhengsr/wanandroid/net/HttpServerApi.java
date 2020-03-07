@@ -23,6 +23,7 @@ import com.zhengsr.wanandroid.bean.WechatBean;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -268,4 +269,7 @@ public interface HttpServerApi {
     @GET("friend/json")
     Observable<BaseResponse<List<UsefulWebBean>>> getUsefulWeb();
 
+
+    @GET("https://raw.githubusercontent.com/LillteZheng/WanAndroid/master/apk/update.json")
+    Observable<String> getApk();
 }

@@ -6,13 +6,16 @@ import android.widget.Toast;
 
 import com.zhengsr.wanandroid.moudle.activity.BaseDelegateActivity;
 import com.zhengsr.wanandroid.moudle.fragment.MainFragment;
+import com.zhengsr.wanandroid.net.HttpCreate;
 import com.zhengsr.wanandroid.utils.Lgg;
+import com.zhengsr.wanandroid.utils.RxUtils;
 
+import io.reactivex.observers.ResourceObserver;
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class MainActivity extends BaseDelegateActivity {
-
+    private static final String TAG = "MainActivity";
 
     @Override
     public int getLayoutId() {
@@ -24,7 +27,27 @@ public class MainActivity extends BaseDelegateActivity {
         super.initView();
         if (findFragment(MainFragment.class) == null){
             loadRootFragment(R.id.content,MainFragment.newInstance());
+
+            HttpCreate.getServer().getApk()
+                    .compose(RxUtils.rxScheduers())
+                    .subscribeWith(new ResourceObserver<String>() {
+                        @Override
+                        public void onNext(String s) {
+                            Log.d(TAG, "zsr onNext: "+s);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.d(TAG, "zsr onError: "+e);
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
         }
+        
     }
 
     @Override

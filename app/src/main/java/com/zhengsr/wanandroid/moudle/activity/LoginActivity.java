@@ -83,8 +83,7 @@ public class LoginActivity extends BaseDelegateActivity<UserPresent> implements 
         PasswordView passView = mLoginView.findViewById(R.id.password);
         mLoginUserEt = userView.getEditText();
         mLoginPassEt = passView.getEditText();
-        mLoginUserEt.setText("zhengsr");
-        mLoginPassEt.setText("17320220zsr");
+
         mLoginUserEt.setSelection(mLoginUserEt.getText().length());
         /**
          * register
@@ -96,9 +95,7 @@ public class LoginActivity extends BaseDelegateActivity<UserPresent> implements 
         mRegisterPassEt = passwordView.getEditText();
         mRegisterRePassEt = passwordView2.getEditText();
 
-        mRegisterUserEt.setText("zhengsr_123sd");
-        mRegisterPassEt.setText("12345678");
-        mRegisterRePassEt.setText("12345678");
+
         mRegisterUserEt.setSelection(mRegisterUserEt.getText().length());
 
 
