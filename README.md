@@ -8,7 +8,14 @@
 
 ## Gif 图如下；
 
-https://github.com/LillteZheng/WanAndroid/raw/master/gif/wanandroid.gif
+<table  align="center">
+
+  <tr>
+    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/wanandroid.gif" align="left"height="789" width="479"></a></td>
+  </tr>
+
+</table>
+
 
 
 ## 其他效果图如下：
@@ -18,8 +25,8 @@ https://github.com/LillteZheng/WanAndroid/raw/master/gif/wanandroid.gif
 
   <tr>
     <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/home.png" align="left"height="789" width="479"></a></td>
-    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/nvai.gif" align="left" height="789" width="479" ></a></td>
-    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/wechat.gif" align="left" height="789" width="479" ></a></td>
+    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/nvai.png" align="left" height="789" width="479" ></a></td>
+    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/wechat.png" align="left" height="789" width="479" ></a></td>
   </tr>
 
 </table>
@@ -28,8 +35,8 @@ https://github.com/LillteZheng/WanAndroid/raw/master/gif/wanandroid.gif
 
   <tr>
     <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/project.png" align="left"height="789" width="479"></a></td>
-    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/mine.gif" align="left" height="789" width="479" ></a></td>
-    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/login.gif" align="left" height="789" width="479" ></a></td>
+    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/mine.png" align="left" height="789" width="479" ></a></td>
+    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/login.png" align="left" height="789" width="479" ></a></td>
   </tr>
 
 </table>
@@ -40,7 +47,7 @@ https://github.com/LillteZheng/WanAndroid/raw/master/gif/wanandroid.gif
 
   <tr>
     <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/night_home.png" align="left"height="789" width="479"></a></td>
-    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/night_guang.gif" align="left" height="789" width="479" ></a></td>
+    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/night_guang.png" align="left" height="789" width="479" ></a></td>
   </tr>
 
 </table>
