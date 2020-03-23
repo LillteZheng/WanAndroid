@@ -31,6 +31,8 @@ public interface IContractView {
     interface IHomeView<T> extends IAddOrCancelArticleView<T> {
         void loadMainData(List<BannerBean> bannerBeans, List<ArticleData> articles);
         void loadArticle(List<ArticleData> articles);
+        void refreshArticle(List<ArticleData> articles);
+        void refreshBanner(List<BannerBean> bannerBeans);
     }
 
     /**

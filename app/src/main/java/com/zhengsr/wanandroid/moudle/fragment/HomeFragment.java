@@ -91,8 +91,8 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         if (articles != null){
             mArticleBeans.clear();
             mArticleBeans.addAll(articles);
+            mHomeAdapter.setNewData(mArticleBeans);
         }
-        mHomeAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -103,11 +103,22 @@ public class HomeFragment extends BaseNetFragment<HomePresent> implements IContr
         }
     }
 
+    @Override
+    public void refreshArticle(List<ArticleData> articles) {
+        mHomeAdapter.setNewData(articles);
+    }
+
+    @Override
+    public void refreshBanner(List<BannerBean> bannerBeans) {
+        mBannerView.setData(bannerBeans);
+        mHomeAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void reload() {
         super.reload();
-        mPresent.startLoad(true);
+        mPresent.reload();
     }
 
     @Override

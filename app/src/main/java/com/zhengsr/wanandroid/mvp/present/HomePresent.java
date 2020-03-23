@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function4;
 
 /**
@@ -164,6 +165,48 @@ public class HomePresent extends BasePresent<IContractView.IHomeView> {
                                 mView.removeArticleSuccess(position,data);
                             }
                         })
+        );
+    }
+
+    /**
+     * 刷新
+     */
+    public void reload() {
+        //分 banner 和article
+        addSubscribe(
+                mDataManager.getBanner()
+                .compose(RxUtils.rxScheduers())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new CusSubscribe<List<BannerBean>>(mView){
+                    @Override
+                    public void onNext(List<BannerBean> bannerBeans) {
+                        super.onNext(bannerBeans);
+                        mView.refreshBanner(bannerBeans);
+                    }
+                })
+        );
+
+        addSubscribe(
+
+                Observable.zip(mDataManager.getTopArticle(), mDataManager.getArticles(mCurNum), new BiFunction<BaseResponse<List<ArticleData>>, BaseResponse<PageDataInfo<List<ArticleData>>>, List<ArticleData>>() {
+
+
+                    @Override
+                    public List<ArticleData> apply(BaseResponse<List<ArticleData>> listBaseResponse, BaseResponse<PageDataInfo<List<ArticleData>>> pageDataInfoBaseResponse) throws Exception {
+                        List<ArticleData> topData = listBaseResponse.getData();
+                        List<ArticleData> datas = pageDataInfoBaseResponse.getData().getDatas();
+                        topData.addAll(datas);
+                        return topData;
+                    }
+                }).compose(RxUtils.rxScheduers())
+                .subscribeWith(new CusSubscribe<List<ArticleData>>(mView){
+                    @Override
+                    public void onNext(List<ArticleData> articleData) {
+                        super.onNext(articleData);
+                        mView.loadArticle(articleData);
+                    }
+                })
+
         );
     }
 }

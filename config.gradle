@@ -48,8 +48,7 @@ ext {
 
             //更新
             "zdload"                            : "com.github.LillteZheng:ZDownLoader:v2.1",
-            //viewpager 工具类
-            "viewpager"                         : "com.github.LillteZheng:ViewPagerHelper:v1.5",
+
 
             //leakcanary
             "leakcanary-android"                : "com.squareup.leakcanary:leakcanary-android:2.0-beta-3",
@@ -62,7 +61,7 @@ ext {
             "avloading"                         :"com.wang.avi:library:2.1.3",
 
             //viewpager
-            "viewpager"                         :"com.github.LillteZheng:ViewPagerHelper:v2.2",
+            "viewpager"                         :"com.github.LillteZheng:ViewPagerHelper:v2.6",
             //网络
             "retorfit"                          : "com.squareup.retrofit2:retrofit:${version["retrofitversion"]}",
             "scalars"                           : "com.squareup.retrofit2:converter-scalars:${version["retrofitversion"]}",

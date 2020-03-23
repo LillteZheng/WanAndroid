@@ -37,6 +37,7 @@ public class BannerView extends FrameLayout {
 
 
     private View mView;
+    private BannerViewPager mBannerViewPager;
 
     public BannerView(@NonNull Context context) {
         this(context,null);
@@ -48,27 +49,26 @@ public class BannerView extends FrameLayout {
         removeAllViews();
         mView = LayoutInflater.from(getContext()).inflate(R.layout.banner_layout,this,false);
         addView(mView);
+
+        mBannerViewPager = mView.findViewById(R.id.banner);
+        CircleIndicator indicator = mView.findViewById(R.id.banner_indicator);
+
+        mBannerViewPager.addIndicator(indicator);
     }
 
 
     public void setData(List<BannerBean> beans){
         if (beans != null && beans.size() >0){
-            BannerViewPager bannerViewPager = mView.findViewById(R.id.banner);
-            CircleIndicator indicator = mView.findViewById(R.id.banner_indicator);
-
-            bannerViewPager.addIndicator(indicator);
-
-            bannerViewPager.setPageListener(R.layout.banner_item_layout, beans, new PageHelperListener<BannerBean>() {
+            mBannerViewPager.setPageListener(R.layout.banner_item_layout, beans, new PageHelperListener<BannerBean>() {
                 @Override
                 public void bindView(View view, BannerBean data, int position) {
-                    setText(view,R.id.banner_text,data.getTitle());
+                    String title = data.getTitle().replaceAll("&ldquo;","\"").replaceAll("&rdquo;","\"");
+                    setText(view,R.id.banner_text,title);
                     ImageView imageView = view.findViewById(R.id.banner_icon);
                     Glide.with(getContext())
                             .load(data.getImagePath())
                             .into(imageView);
                 }
-
-
 
                 @Override
                 public void onItemClick(View view, BannerBean bean, int position) {
