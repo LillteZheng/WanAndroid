@@ -40,11 +40,11 @@ public class SettingFragment extends BaseMvpFragment<SettingPresent> implements 
     }
 
     private static final int[] RESID = new int[]{
-        R.mipmap.ic_night,
+        R.mipmap.ic_night,R.mipmap.gray
     };
 
     private static final String[] MSG = new String[]{
-            "夜间模式",
+            "夜间模式","灰色模式"
     };
 
     @BindView(R.id.recyclerview)
@@ -81,6 +81,10 @@ public class SettingFragment extends BaseMvpFragment<SettingPresent> implements 
                 case 0:
                     bean.isCheck = SpfUtils.get(Constant.KEY_IS_NIGHT,false);
                     break;
+                case 1:
+                    bean.isCheck =  SpfUtils.get(Constant.KEY_IS_GRAY,false);
+                    break;
+                    default:break;
             }
 
             datas.add(bean);
@@ -96,12 +100,22 @@ public class SettingFragment extends BaseMvpFragment<SettingPresent> implements 
             case 0:
                 boolean isNight = mPresent.isNightMode();
                 mPresent.setNightMode(!isNight);
-                Lgg.d("isnight; "+mPresent.isNightMode());
+                mPresent.setGray(false);
                 if (mPresent.isNightMode()) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
+                MainApplication.HANDLER.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        _mActivity.recreate();
+                    }
+                },500);
+                break;
+            case 1:
+                mPresent.setNightMode(false);
+                mPresent.setGray(!mPresent.isGray());
                 MainApplication.HANDLER.postDelayed(new Runnable() {
                     @Override
                     public void run() {

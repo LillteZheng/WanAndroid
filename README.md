@@ -63,6 +63,16 @@
 
 </table>
 
+## 清明灰度模式
+
+<table  align="center">
+
+  <tr>
+    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/gray.png" align="left"height="789" width="479"></a></td>
+  </tr>
+
+</table>
+
 
 
 

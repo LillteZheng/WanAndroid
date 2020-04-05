@@ -93,4 +93,11 @@ public class BasePresent<T extends IBaseView> {
     public boolean isNightMode(){
         return SpfUtils.get(Constant.KEY_IS_NIGHT,false);
     }
+
+    public void setGray(boolean isGray){
+        SpfUtils.put(Constant.KEY_IS_GRAY,isGray);
+    }
+    public boolean isGray(){
+        return SpfUtils.get(Constant.KEY_IS_GRAY,false);
+    }
 }

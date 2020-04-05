@@ -12,12 +12,35 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+    signingConfigs{
+        android_key{
+            storeFile file('zsr.jks')
+            storePassword '123456'
+            keyAlias 'zsr'
+            keyPassword '123456'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.android_key
+        }
+        debug{
+            signingConfig signingConfigs.android_key
+
         }
     }
+    //打包改名
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            // 名称_android_版本号.apk
+            outputFileName = "${apkName()}_v${defaultConfig.versionName}_${releaseTime()}.apk"
+        }
+    }
+
+    // Butterknife requires Java 8.
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -27,6 +50,19 @@ android {
         jumboMode true
         javaMaxHeapSize "4g"
     }
+}
+
+// 获取当前系统时间
+def releaseTime() {
+    return new Date().format("yyyy_MM_dd", TimeZone.getTimeZone("UTC"))
+}
+//获取版本信息
+def apkVersion(){
+    return rootProject.ext.android["targetSdkVersion"];
+}
+//apk 名字
+def apkName() {
+    return "WanAndroid"
 }
 
 MobSDK {

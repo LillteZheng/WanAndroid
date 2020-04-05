@@ -15,6 +15,7 @@ public class Constant {
     public static final String KEY_USERNAME = "KEY_USERNAME";
     public static final String KEY_PASSWORD = "KEY_PASSWORD";
     public static final String KEY_IS_NIGHT = "KEY_IS_NIGHT";
+    public static final String KEY_IS_GRAY = "KEY_IS_GRAY";
 
     /**
      * Tab colors
