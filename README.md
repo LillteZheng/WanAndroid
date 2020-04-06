@@ -68,7 +68,7 @@
 <table  align="center">
 
   <tr>
-    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/gray.jpg" align="left"height="900" width="479"></a></td>
+    <td><a href="url"><img src="https://github.com/LillteZheng/WanAndroid/raw/master/gif/gray.jpg" align="left"height="900" width="420"></a></td>
   </tr>
 
 </table>
