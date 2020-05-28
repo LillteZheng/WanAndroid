@@ -4,7 +4,7 @@
 
 
 
-> 感谢鸿洋的wanandroid 网站以及其提供的 api
+> **感谢鸿洋大大的wanandroid 网站以及其提供的 api**
 
 ## Gif 图如下；
 
